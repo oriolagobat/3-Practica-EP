@@ -1,10 +1,13 @@
 package data;
 
+/**
+ * Essential data classes
+ */
 import exceptions.WrongAccredNumbFormatException;
 
 public class AccredNumb {
     // The accreditation number in the Spanish state.
-    private final String accred_num;
+    private final String accredNum;
 
     public AccredNumb(String number) throws WrongAccredNumbFormatException {
         if (number == null) throw new NullPointerException("El nombre d'acreditació és null");
@@ -14,7 +17,8 @@ public class AccredNumb {
 
         if (lettersInAccredNumb(number))
             throw new WrongAccredNumbFormatException("El nombre d'acreditació conté lletres");
-        this.accred_num = number;
+
+        this.accredNum = number;
     }
 
     private boolean lettersInAccredNumb(String accred_num) {
@@ -28,7 +32,7 @@ public class AccredNumb {
     }
 
     public String getAccredNum() {
-        return accred_num;
+        return accredNum;
     }
 
     @Override
@@ -36,16 +40,16 @@ public class AccredNumb {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccredNumb number = (AccredNumb) o;
-        return accred_num.equals(number.accred_num);
+        return accredNum.equals(number.accredNum);
     }
 
     @Override
     public int hashCode() {
-        return accred_num.hashCode();
+        return accredNum.hashCode();
     }
 
     @Override
     public String toString() {
-        return "AccredNum{" + "número acreditación ciudadano='" + accred_num + '\'' + '}';
+        return "AccredNum{" + "número acreditación ciudadano='" + accredNum + '\'' + '}';
     }
 }

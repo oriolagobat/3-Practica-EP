@@ -7,17 +7,17 @@ import testInterfaces.AccredNumbTestInterface;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AccredNumbTest implements AccredNumbTestInterface {
-    AccredNumb accred_num;
+    AccredNumb accredNum;
 
     @BeforeEach
     public void setUp() throws WrongAccredNumbFormatException {
-        String correct_number = "123456789";
-        accred_num = new AccredNumb(correct_number);
+        String correctNumber = "123456789";
+        accredNum = new AccredNumb(correctNumber);
     }
 
     @Override
     public void getAccredNumTest() {
         String correct_number = "123456789";
-        assertEquals(correct_number, accred_num.getAccredNum());
+        assertEquals(correct_number, accredNum.getAccredNum());
     }
 }
