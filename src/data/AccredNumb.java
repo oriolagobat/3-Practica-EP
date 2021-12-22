@@ -1,15 +1,21 @@
 package data;
 
+import exceptions.WrongAccredNumbFormatException;
+
 /**
  * Essential data classes
  */
-import exceptions.WrongAccredNumbFormatException;
-
-public class AccredNumb {
+final public class AccredNumb {
     // The accreditation number in the Spanish state.
     private final String accredNum;
 
     public AccredNumb(String number) throws WrongAccredNumbFormatException {
+        checkAccredNum(number);
+
+        this.accredNum = number;
+    }
+
+    private void checkAccredNum(String number) throws WrongAccredNumbFormatException {
         if (number == null) throw new NullPointerException("El nombre d'acreditació és null");
 
         if (number.length() != 9)
@@ -17,8 +23,6 @@ public class AccredNumb {
 
         if (lettersInAccredNumb(number))
             throw new WrongAccredNumbFormatException("El nombre d'acreditació conté lletres");
-
-        this.accredNum = number;
     }
 
     private boolean lettersInAccredNumb(String accred_num) {

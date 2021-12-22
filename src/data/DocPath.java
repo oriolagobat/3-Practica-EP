@@ -9,15 +9,19 @@ final public class DocPath {
     // Represents the route, path to a directory
     private final String path;
 
-    public DocPath(String doc_path) throws WrongDocPathFormatException {
-        if (doc_path == null) throw new NullPointerException("El path del document és null");
+    public DocPath(String docPath) throws WrongDocPathFormatException {
+        checkDocPath(docPath);
 
-        if (doc_path.length() == 0) throw new WrongDocPathFormatException("La longitud del path és zero");
+        this.path = docPath;
+    }
 
-        if (!slashInDocPath(doc_path))
+    private void checkDocPath(String docPath) throws WrongDocPathFormatException {
+        if (docPath == null) throw new NullPointerException("El path del document és null");
+
+        if (docPath.length() == 0) throw new WrongDocPathFormatException("La longitud del path és zero");
+
+        if (!slashInDocPath(docPath))
             throw new WrongDocPathFormatException("El format del path no és correcte, hauria de contenir al menys una barra");
-
-        this.path = doc_path;
     }
 
     private boolean slashInDocPath(String docPath) {

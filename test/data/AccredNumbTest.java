@@ -17,7 +17,7 @@ public class AccredNumbTest implements AccredNumbTestInterface {
 
     @Override
     public void getAccredNumTest() {
-        String correct_number = "123456789";
-        assertEquals(correct_number, accredNum.getAccredNum());
+        String correctNumber = "123456789";
+        assertEquals(correctNumber, accredNum.getAccredNum());
     }
 }
