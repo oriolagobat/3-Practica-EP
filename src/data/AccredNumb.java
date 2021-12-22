@@ -16,9 +16,11 @@ final public class AccredNumb {
     }
 
     private void checkAccredNum(String number) throws WrongAccredNumbFormatException {
+        int correctAccredNumLength = 9;
+
         if (number == null) throw new NullPointerException("El nombre d'acreditació és null");
 
-        if (number.length() != 9)
+        if (number.length() != correctAccredNumLength)
             throw new WrongAccredNumbFormatException("El nombre d'acreditació no és de la llargada correcta");
 
         if (lettersInAccredNumb(number))
