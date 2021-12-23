@@ -5,7 +5,7 @@ import publicadministration.QuotePeriod;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface QuotePeriodInterface {
+public interface QuotePeriodTestInterface {
     @Test
     void getInitDayTest();
 

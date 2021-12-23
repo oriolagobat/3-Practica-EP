@@ -2,11 +2,11 @@ package data;
 
 import exceptions.WrongPasswordFormatException;
 import org.junit.jupiter.api.BeforeEach;
-import testInterfaces.PasswordInterface;
+import testInterfaces.PasswordTestInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PasswordTest implements PasswordInterface {
+public class PasswordTest implements PasswordTestInterface {
     Password password;
 
     @BeforeEach

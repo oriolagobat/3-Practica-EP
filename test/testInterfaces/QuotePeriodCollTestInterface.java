@@ -2,7 +2,7 @@ package testInterfaces;
 
 import org.junit.jupiter.api.Test;
 
-public interface QuotePeriodCollInterface {
+public interface QuotePeriodCollTestInterface {
     @Test
     void getQuotePeriodsCollTest();
 

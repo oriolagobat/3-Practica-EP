@@ -1,14 +1,12 @@
 package publicadministration;
 
 import org.junit.jupiter.api.BeforeEach;
-import publicadministration.QuotePeriod;
-import publicadministration.QuotePeriodsColl;
-import testInterfaces.QuotePeriodCollInterface;
+import testInterfaces.QuotePeriodCollTestInterface;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class QuotePeriodsCollTest implements QuotePeriodCollInterface {
+public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
     QuotePeriodsColl quotePeriodsColl;
 
     @BeforeEach
