@@ -1,5 +1,7 @@
 package publicadministration;
 
+import data.Nif;
+
 import java.util.Date;
 
 public class QuotePeriod {  // Represents a quote period as a registered worker
@@ -25,6 +27,15 @@ public class QuotePeriod {  // Represents a quote period as a registered worker
         return numDays;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        QuotePeriod qP = (QuotePeriod) o;
+        return (initDay.equals(qP.initDay) && numDays == qP.numDays);
+    }
+
+    @Override
     public String toString() {
         String header = "Quote Period: ";
         String initDayStr = "Day of inisialization - " + initDay.toString() + " , ";
