@@ -2,6 +2,7 @@ package data;
 
 import exceptions.WrongNifFormatException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import testInterfaces.NifTestInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,6 +16,7 @@ public class NifTest implements NifTestInterface {
         nif = new Nif(correctNif);
     }
 
+    @Test
     @Override
     public void getNifTest() {
         String correctNif = "12345678A";

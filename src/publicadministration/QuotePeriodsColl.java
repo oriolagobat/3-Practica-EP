@@ -1,7 +1,6 @@
-package publicadminstration;
+package publicadministration;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class QuotePeriodsColl {  // Represents the total quota periods known as a registered worker

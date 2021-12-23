@@ -1,34 +1,34 @@
-package data;
+package publicadministration;
 
 import org.junit.jupiter.api.BeforeEach;
-import publicadminstration.QuotePeriod;
-import testInterfaces.QuotePeriodInterface;
+import org.junit.jupiter.api.Test;
+import testInterfaces.QuotePeriodTestInterface;
 
 import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class QuotePeriodTest implements QuotePeriodInterface {
+public class QuotePeriodTestTest implements QuotePeriodTestInterface {
     QuotePeriod quotePeriod;
+    Date date;  // Common date
 
     @BeforeEach
     public void setUp() {
         Calendar cal = Calendar.getInstance();
         cal.set(1970, Calendar.JANUARY, 16);
-        Date qPDate = cal.getTime();
+        date = cal.getTime();
         int qPDays = 0;
-        quotePeriod = new QuotePeriod(qPDate, qPDays);
+        quotePeriod = new QuotePeriod(date, qPDays);
     }
 
+    @Test
     @Override
     public void getInitDayTest() {
-        Calendar cal = Calendar.getInstance();
-        cal.set(1970, Calendar.JANUARY, 16);
-        Date qPDate = cal.getTime();
-        assertEquals(qPDate, quotePeriod.getInitDay());
+        assertEquals(date, quotePeriod.getInitDay());
     }
 
+    @Test
     @Override
     public void getNumDaysTest() {
         int qPDays = 0;

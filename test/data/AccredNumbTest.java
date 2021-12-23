@@ -2,6 +2,7 @@ package data;
 
 import exceptions.WrongAccredNumbFormatException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import testInterfaces.AccredNumbTestInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,6 +16,7 @@ public class AccredNumbTest implements AccredNumbTestInterface {
         accredNum = new AccredNumb(correctNumber);
     }
 
+    @Test
     @Override
     public void getAccredNumTest() {
         String correctNumber = "123456789";
