@@ -2,6 +2,7 @@ package data;
 
 import exceptions.WrongPasswordFormatException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import testInterfaces.PasswordTestInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,6 +15,7 @@ public class PasswordTest implements PasswordTestInterface {
         password = new Password("$contrasenya123");
     }
 
+    @Test
     @Override
     public void getPasswordTest() {
         assertEquals("$contrasenya123", password.getPassword());

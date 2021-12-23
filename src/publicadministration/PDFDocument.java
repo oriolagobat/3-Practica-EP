@@ -20,6 +20,18 @@ public class PDFDocument {
         this.file = new File(path.getDocPath());
     }
 
+    public Date getCreatDate() {
+        return creatDate;
+    }
+
+    public DocPath getPath() {
+        return path;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
     public String toString () {
         return "PDFDocument{" + "Creation Date='" + creatDate.toString() + '\'' + ", " + path.toString() + '\'' + '}';
     }
