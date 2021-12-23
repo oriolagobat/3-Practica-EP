@@ -2,6 +2,7 @@ package data;
 
 import exceptions.WrongPINCodeFormatException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import testInterfaces.PINCodeTestInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,6 +16,7 @@ public class PINCodeTest implements PINCodeTestInterface {
         pinCode = new PINcode(correctPINCode);
     }
 
+    @Test
     @Override
     public void getPINCodeTest() {
         String correctPINCode = "123";

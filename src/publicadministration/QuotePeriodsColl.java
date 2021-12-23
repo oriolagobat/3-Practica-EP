@@ -1,7 +1,5 @@
 package publicadministration;
 
-import publicadministration.QuotePeriod;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -21,6 +19,7 @@ public class QuotePeriodsColl {  // Represents the total quota periods known as 
         quotePeriodsCollection.sort(Comparator.comparing(QuotePeriod::getInitDay));  // Sorts array list by date
     }
 
+    @Override
     public String toString() {
         StringBuilder result = new StringBuilder("Quotes periods in the collection: ");
         for (QuotePeriod qPd : quotePeriodsCollection) {
