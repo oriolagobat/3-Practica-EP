@@ -1,4 +1,4 @@
-package publicadminstration;
+package publicadministration;
 
 import java.util.Date;
 

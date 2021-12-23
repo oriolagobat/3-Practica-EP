@@ -1,7 +1,7 @@
 package data;
 
 import org.junit.jupiter.api.BeforeEach;
-import publicadminstration.QuotePeriod;
+import publicadministration.QuotePeriod;
 import testInterfaces.QuotePeriodInterface;
 
 import java.util.Calendar;
