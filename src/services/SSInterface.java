@@ -2,6 +2,8 @@ package services;
 
 import data.Nif;
 import exceptions.NotAffiliatedException;
+import publicadministration.LaboralLifeDoc;
+import publicadministration.MemberAccreditationDoc;
 
 import java.net.ConnectException;
 
