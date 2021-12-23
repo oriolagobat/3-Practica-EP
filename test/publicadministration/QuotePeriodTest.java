@@ -9,7 +9,8 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class QuotePeriodTestTest implements QuotePeriodTestInterface {
+
+public class QuotePeriodTest implements QuotePeriodTestInterface {
     QuotePeriod quotePeriod;
     Date date;  // Common date
 
