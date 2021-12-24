@@ -5,19 +5,20 @@ import data.Password;
 import exceptions.*;
 
 import java.net.ConnectException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
 
 public class UnifiedPlatform {
     HashMap<String, String> aapp;
-    Hashtable<String, String> services;
+    HashMap<String, ArrayList<String>> services;
     String chosenService = null;
 
     public UnifiedPlatform() {
         this.aapp = new HashMap<>();
         setAapp();
-        this.services = new Hashtable<>();
+        this.services = new HashMap<>();
         setServices();
     }
 
@@ -41,20 +42,32 @@ public class UnifiedPlatform {
 
     private void setServices() {
         // Seguridad Social (SS)
-        aapp.put("SS", "Solicitar el informe de vida laboral");
-        aapp.put("SS", "Obtenenr acreditación del número de afiliación a la Seguridad Social");
+        updateServiceMapKey("SS", "Solicitar el informe de vida laboral");
+        updateServiceMapKey("SS", "Obtenenr acreditación del número de afiliación a la Seguridad Social");
 
         // Agència Estatal de la Administración Tributaria (AEAT)
-        aapp.put("Obtener datos fiscales", "AEAT");
-        aapp.put("Tramitar el borrador de la declaración de la renta", "AEAT");
+        updateServiceMapKey("AEAT", "Obtener datos fiscales");
+        updateServiceMapKey("AEAT", "Tramitar el borrador de la declaración de la renta");
 
         // Ministerio de Justícia (MJ)
-        aapp.put("Solicitar el certificado de nacimiento", "MJ");
+        updateServiceMapKey("MJ", "Solicitar el certificado de nacimiento");
 
         // Dirección General de Tráfico (DGT)
-        aapp.put("Consultar los puntos asociados al carnet de conducir", "DGT");
+        updateServiceMapKey("DGT", "Consultar los puntos asociados al carnet de conducir");
 
         // WE COULD ADD MORE SERVICES //
+    }
+
+    private void updateServiceMapKey(String key, String value) {
+        ArrayList<String> values;
+        if (services.get(key) == null) {  // First value
+            values = new ArrayList<>();
+        } else {  // There are already values
+            values = services.get(key);
+            services.remove(key);
+        }
+        // Override it with the new list
+        services.put(key, values);
     }
 
     public void processSearcher() {
@@ -64,6 +77,7 @@ public class UnifiedPlatform {
         String result = aapp.get(keyWord);
         if (result == null) throw new AnyKeyWordProcedureException("El tràmit buscat no és troba...");
         else {
+            chosenService = result;
             switch (result) {
                 case "SS":
                     selectSS();
