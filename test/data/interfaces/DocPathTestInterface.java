@@ -20,8 +20,8 @@ public interface DocPathTestInterface {
     default void getWrongFormatPathException() {
         assertThrows(WrongDocPathFormatException.class,
                 () -> {
-                    String noSlashes = "test.out";
-                    new DocPath(noSlashes);
+                    String tooSmall = "";
+                    new DocPath(tooSmall);
                 });
     }
 }
