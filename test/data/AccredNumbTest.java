@@ -3,7 +3,7 @@ package data;
 import exceptions.WrongAccredNumbFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import testInterfaces.AccredNumbTestInterface;
+import data.Interfaces.AccredNumbTestInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

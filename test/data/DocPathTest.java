@@ -3,7 +3,7 @@ package data;
 import exceptions.WrongDocPathFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import testInterfaces.DocPathTestInterface;
+import data.Interfaces.DocPathTestInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

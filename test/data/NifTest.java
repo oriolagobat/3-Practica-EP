@@ -3,7 +3,7 @@ package data;
 import exceptions.WrongNifFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import testInterfaces.NifTestInterface;
+import data.Interfaces.NifTestInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

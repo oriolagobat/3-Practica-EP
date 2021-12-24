@@ -1,4 +1,4 @@
-package testInterfaces;
+package publicadministration.Interfaces;
 
 import org.junit.jupiter.api.Test;
 

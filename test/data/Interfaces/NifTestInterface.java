@@ -1,4 +1,4 @@
-package testInterfaces;
+package data.Interfaces;
 
 import data.DocPath;
 import data.Nif;
