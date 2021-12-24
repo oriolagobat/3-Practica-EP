@@ -14,7 +14,7 @@ public class PDFDocument {
     private Date creatDate;
     private DocPath path;
     private File file;
-    private final static String defaultPath = "";
+    private final static String defaultPath = "SampleDoc.pdf";
 
     public PDFDocument () throws WrongDocPathFormatException {
         this.creatDate = new Date();

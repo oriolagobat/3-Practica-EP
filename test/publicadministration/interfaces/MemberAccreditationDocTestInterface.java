@@ -1,4 +1,4 @@
-package testInterfaces;
+package publicadministration.interfaces;
 
 import data.AccredNumb;
 import data.Nif;

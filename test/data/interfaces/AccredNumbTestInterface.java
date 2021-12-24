@@ -1,4 +1,4 @@
-package testInterfaces;
+package data.interfaces;
 
 import data.AccredNumb;
 import exceptions.WrongAccredNumbFormatException;

@@ -1,7 +1,8 @@
-package testInterfaces;
+package publicadministration.interfaces;
 
 import data.DocPath;
 import data.Nif;
+import exceptions.WrongDocPathFormatException;
 import exceptions.WrongNifFormatException;
 import org.junit.jupiter.api.Test;
 import publicadministration.PDFDocument;
@@ -13,25 +14,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public interface PDFDocumentTestInterface {
 
     @Test
-    void getCreatDateTest();
-
-    @Test
     void getPathTest();
 
     @Test
     void getFileTest();
 
     @Test
-    void moveDocTest();
+    void moveDocTest() throws WrongDocPathFormatException, IOException;
 
     @Test
-    void openDocTest();
+    void openDocTest() throws IOException;
 
     @Test
     default void moveToNonExistentPathTest() {
         assertThrows(IOException.class,
                 () -> {
-                    DocPath nonExistentPath = new DocPath("aaa");
+                    DocPath nonExistentPath = new DocPath("\\aa/a");
                     PDFDocument pdf = new PDFDocument();
                     pdf.moveDoc(nonExistentPath);
                 });
@@ -41,7 +39,7 @@ public interface PDFDocumentTestInterface {
     default void openNonExistentPathTest() {
         assertThrows(IOException.class,
                 () -> {
-                    DocPath nonExistentPath = new DocPath(".///");
+                    DocPath nonExistentPath = new DocPath("\\aa/a");
                     PDFDocument pdf = new PDFDocument();
                     pdf.openDoc(nonExistentPath);
                 });

@@ -3,7 +3,7 @@ package data;
 import exceptions.WrongPasswordFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import testInterfaces.PasswordTestInterface;
+import data.interfaces.PasswordTestInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

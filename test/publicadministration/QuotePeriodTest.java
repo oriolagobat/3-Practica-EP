@@ -2,7 +2,7 @@ package publicadministration;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import testInterfaces.QuotePeriodTestInterface;
+import publicadministration.interfaces.QuotePeriodTestInterface;
 
 import java.util.Calendar;
 import java.util.Date;

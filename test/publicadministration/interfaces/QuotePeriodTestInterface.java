@@ -1,4 +1,4 @@
-package testInterfaces;
+package publicadministration.interfaces;
 
 import org.junit.jupiter.api.Test;
 import publicadministration.QuotePeriod;

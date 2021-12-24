@@ -3,7 +3,7 @@ package data;
 import exceptions.WrongPINCodeFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import testInterfaces.PINCodeTestInterface;
+import data.interfaces.PINCodeTestInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
