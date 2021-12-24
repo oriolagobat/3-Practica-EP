@@ -21,19 +21,6 @@ final public class DocPath {
         if (docPath == null) throw new NullPointerException("El path del document és null");
 
         if (docPath.length() == incorrectDocPathLength) throw new WrongDocPathFormatException("La longitud del path és zero");
-
-        if (!slashInDocPath(docPath))
-            throw new WrongDocPathFormatException("El format del path no és correcte, hauria de contenir al menys una barra");
-    }
-
-    private boolean slashInDocPath(String docPath) {
-        char[] path = docPath.toCharArray();
-        for (char c : path) {
-            if (c == '/') {
-                return true;
-            }
-        }
-        return false;
     }
 
     public String getDocPath() {
