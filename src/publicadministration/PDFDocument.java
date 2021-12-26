@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.Date;
 
 public class PDFDocument {
-    private Date creatDate;
+    private final Date creatDate;
+    private final File file;
     private DocPath path;
-    private File file;
     private final static String defaultPath = "SampleDoc.pdf";
 
     public PDFDocument () throws WrongDocPathFormatException {

@@ -8,8 +8,8 @@ import java.io.File;
 import java.util.Date;
 
 public class LaboralLifeDoc extends PDFDocument{
-    private Nif nif;
-    private QuotePeriodsColl quotePds;
+    private final Nif nif;
+    private final QuotePeriodsColl quotePds;
 
     public LaboralLifeDoc (Nif nif, QuotePeriodsColl quotePds) throws WrongDocPathFormatException {
         this.nif = nif;

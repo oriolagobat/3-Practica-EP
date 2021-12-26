@@ -5,8 +5,8 @@ import data.Nif;
 import exceptions.WrongDocPathFormatException;
 
 public class MemberAccreditationDoc extends PDFDocument{
-    private Nif nif;
-    private AccredNumb numbAffil;
+    private final Nif nif;
+    private final AccredNumb numbAffil;
 
     public MemberAccreditationDoc (Nif nif, AccredNumb numbAffil) throws WrongDocPathFormatException {
         this.nif = nif;

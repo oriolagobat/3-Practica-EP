@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class QuotePeriodsColl {  // Represents the total quota periods known as a registered worker
-    ArrayList<QuotePeriod> quotePeriodsCollection;
+    private final ArrayList<QuotePeriod> quotePeriodsCollection;
 
     public QuotePeriodsColl() {
         this.quotePeriodsCollection = new ArrayList<>();
