@@ -138,6 +138,7 @@ public class UnifiedPlatform {
     }
 
     public void selectAuthMethod(byte opc) {
+        // ASSUMING THAT AUTH METHODS IN THE DICTIONARY WILL BE ON THE SAME ORDER AS IN THE WEB PAGE
         String selectedAuthMethod = possibleAuthMethods.get(opc);
         System.out.println("Se selecciona el método de autenticación " + selectedAuthMethod);
     }
