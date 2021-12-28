@@ -48,8 +48,10 @@ public class PDFDocument {
         {
             throw new IOException("El path especificat no existeix.");
         }
-        else
+        else {
+            System.out.println("Movent el document de " + path + " a " + destPath);
             path = destPath;
+        }
     }
 
     public void openDoc (DocPath path) throws IOException {
