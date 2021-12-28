@@ -1,13 +1,29 @@
 package data.interfaces;
 
 
+import controller.UnifiedPlatform;
 import data.AccredNumb;
+import exceptions.AnyKeyWordProcedureException;
 import exceptions.WrongAccredNumbFormatException;
 import org.junit.jupiter.api.Test;
+
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface AccredNumbTestInterface {
+
+    UnifiedPlatform platform = new UnifiedPlatform();
+
+    @Test
+    default void searchForEmptyKeyWord() {
+        assertThrows(AnyKeyWordProcedureException.class,
+                () -> {
+                    String emptySearch = null;
+                    platform.processSearcher();
+                    platform.enterKeyWords(emptySearch);
+                });
+    }
+
     @Test
     void getAccredNumTest();
 
