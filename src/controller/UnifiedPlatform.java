@@ -5,7 +5,7 @@ import data.Nif;
 import data.PINcode;
 import data.Password;
 import exceptions.*;
-import services.CertificationAuthority;
+import services.CertificationAuthorityInterface;
 
 import java.net.ConnectException;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class UnifiedPlatform {
     HashMap<String, String> aapp;
     HashMap<String, ArrayList<String>> services;
     ArrayList<String> possibleAuthMethods;
-    CertificationAuthority authMethod;
+    CertificationAuthorityInterface authMethod;
 
     public UnifiedPlatform() {
         this.citz = new Citizen();
@@ -74,6 +74,8 @@ public class UnifiedPlatform {
             values = services.get(key);
             services.remove(key);
         }
+        // Add the value
+        values.add(value);
         // Override it with the new list
         services.put(key, values);
     }

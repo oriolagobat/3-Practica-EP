@@ -67,14 +67,5 @@ public interface UnifiedPlatformTestInterface {
     }
 
     @Test
-    default void selectExistentAuthMethodTest(){
-        System.out.println("a");
-    }
-
-    @Test
-    void enterNIFandPINobtTest();
-
-    @Test
-    void enterPINTest();
-
+    void selectExistentAuthMethodTest();
 }
