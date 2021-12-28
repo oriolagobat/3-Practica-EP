@@ -87,8 +87,8 @@ public class UnifiedPlatform {
     }
 
     public void processSearcher() {
-        System.out.println("És procedeix a usar el buscardor de tràmits");
-        System.out.println("És desplega el buscador");
+        System.out.println("Es procedeix a usar el buscardor de tràmits");
+        System.out.println("Es desplega el buscador");
     }
 
     public void enterKeyWords(String keyWord) throws AnyKeyWordProcedureException {
@@ -97,7 +97,7 @@ public class UnifiedPlatform {
         else {
             switch (result) {
                 case "SS":
-                    selectSS();
+                    System.out.println("Mostrant AAPP: " + result);
                     break;
                 // In other cases
                 case "AEAT":
