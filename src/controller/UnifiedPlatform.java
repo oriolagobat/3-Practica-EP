@@ -134,7 +134,7 @@ public class UnifiedPlatform {
         // Since certifications are only available through SS, we asume citizen is using that AAPP
         ArrayList<String> ssServices = services.get("SS");
         String selectedCertification = ssServices.get(opc);
-        System.out.println("Se selecciona: " + selectedCertification);zº
+        System.out.println("Se selecciona: " + selectedCertification);
     }
 
     public void selectAuthMethod(byte opc) {
