@@ -31,7 +31,7 @@ public class UnifiedPlatform {
     private void setAapp() {
         // Seguridad Social (SS)
         aapp.put("Solicitar el informe de vida laboral", "SS");
-        aapp.put("Obtenenr acreditación del número de afiliación a la Seguridad Social", "SS");
+        aapp.put("Obtener acreditación del número de afiliación a la Seguridad Social", "SS");
 
         // Agència Estatal de la Administración Tributaria (AEAT)
         aapp.put("Obtener datos fiscales", "AEAT");
@@ -49,7 +49,7 @@ public class UnifiedPlatform {
     private void setServices() {
         // Seguridad Social (SS)
         updateServiceMapKey("SS", "Solicitar el informe de vida laboral");
-        updateServiceMapKey("SS", "Obtenenr acreditación del número de afiliación a la Seguridad Social");
+        updateServiceMapKey("SS", "Obtener acreditación del número de afiliación a la Seguridad Social");
 
         // Agència Estatal de la Administración Tributaria (AEAT)
         updateServiceMapKey("AEAT", "Obtener datos fiscales");
@@ -141,8 +141,8 @@ public class UnifiedPlatform {
 
     public void enterNIFandPINobt(Nif nif, Date valDate) throws NifNotRegisteredException, IncorrectValDateException, AnyMobileRegisteredException, ConnectException {
         // Assuming auth method is Cl@ve PIN //
-        citz.setCitizenNif(nif);  // We set the citizen nif to the one we got through parameter
-        citz.setCitizenValDate(valDate);  // We set the citizen validation date to the one we got through parameter
+        citz.setNif(nif);  // We set the citizen nif to the one we got through parameter
+        citz.setValDate(valDate);  // We set the citizen validation date to the one we got through parameter
         authMethod.sendPIN(nif, valDate);
         System.out.println("Se envia el PIN al usuario con DNI: " + nif);
     }
@@ -152,7 +152,10 @@ public class UnifiedPlatform {
     }
 
     public void enterCred(Nif nif, Password passwd) throws NifNotRegisteredException, NotValidCredException, AnyMobileRegisteredException, ConnectException {
-        // OPCIONAL
+        if (!citz.getNif().equals(nif))
+            throw new NifNotRegisteredException("El NIF introduit no és el que s'ha posat en passos anteriors");
+        citz.setPassword(passwd);
+        System.out.println("S'han introduït correctament les dades de l'usuari amb nif: " + nif);
     }
 
     private void printDocument() throws BadPathException, PrintingException {
@@ -164,7 +167,7 @@ public class UnifiedPlatform {
     }
 
     private void selectPath(DocPath path) throws BadPathException {
-        citz.setCitizenSavePath(path);  // We set the citizen save path to the one we got through parameter
+        citz.setSavePath(path);  // We set the citizen save path to the one we got through parameter
         System.out.println("Se ha seleccionado el path: " + path + " para guardar el documento");
     }
 }

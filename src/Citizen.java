@@ -1,5 +1,7 @@
 import data.DocPath;
 import data.Nif;
+import data.Password;
+
 import java.util.Date;
 
 public class Citizen {
@@ -7,33 +9,48 @@ public class Citizen {
     Date valdate;
     DocPath savePath;
 
+    // Optional
+    Password password;
+
     public Citizen() {
         this.nif = null;
         this.valdate = null;
         this.savePath = null;
+
+        // Optional
+        this.password = null;
     }
 
-    public void setCitizenNif(Nif nif) {
+    public void setNif(Nif nif) {
         this.nif = nif;
     }
 
-    public void setCitizenValDate(Date valdate) {
+    public void setValDate(Date valdate) {
         this.valdate = valdate;
     }
 
-    public void setCitizenSavePath(DocPath savePath) {
+    public void setSavePath(DocPath savePath) {
         this.savePath = savePath;
     }
 
-    public Nif getCitizenNif() {
+    public Nif getNif() {
         return this.nif;
     }
 
-    public Date getCitizenValDate() {
+    public Date getValDate() {
         return this.valdate;
     }
 
-    public DocPath getCitizenSavePath() {
+    public DocPath getSavePath() {
         return this.savePath;
+    }
+
+    // Optional
+    public void setPassword(Password passwd) {
+        this.password = passwd;
+    }
+    
+    public Password getPassword() {
+        return this.password;
     }
 }
