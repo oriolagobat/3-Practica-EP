@@ -131,9 +131,10 @@ public class UnifiedPlatform {
         // 1 SS affiliation number
         // We do this to acces through the dictionary
         // ASSUMING THAT SERCIVES IN THE DICTIONARY WILL BE IN THE SAME ORDER AS IN THE WEB PAGE
+        // Since certifications are only available through SS, we asume citizen is using that AAPP
         ArrayList<String> ssServices = services.get("SS");
-        String selectedService = ssServices.get(opc);
-        System.out.println("Se selecciona para obtener el informe " + selectedService);
+        String selectedCertification = ssServices.get(opc);
+        System.out.println("Se selecciona: " + selectedCertification);
     }
 
     public void selectAuthMethod(byte opc) {

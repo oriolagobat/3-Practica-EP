@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,11 +31,11 @@ public interface UnifiedPlatformTestInterface {
 
     @AfterEach
     default void restoreStreams() {
-        System.setOut(originalOut);
+        outContent.reset();
     }
 
     @Test
-    default void searchForNonExistentAAPP() {
+    default void searchForNonExistentAAPPTest() {
         assertThrows(AnyKeyWordProcedureException.class,
                 () -> {
                     String emptySearch = "Ajuntament";
@@ -44,10 +45,36 @@ public interface UnifiedPlatformTestInterface {
     }
 
     @Test
-    default void searchForExistentAAPP() throws AnyKeyWordProcedureException {
+    default void searchForExistentAAPPTest() throws AnyKeyWordProcedureException {
         String emptySearch = "Solicitar el informe de vida laboral";
         String expectedResult = "Mostrant AAPP: SS";
+        platform.processSearcher();
+        restoreStreams();  // Per a eliminar l'output que genera la crida a processSearcher
         platform.enterKeyWords(emptySearch);
         assertEquals(expectedResult.strip(), outContent.toString().strip());
     }
+
+    @Test
+    default void selectExistentCertificationTest() {
+        byte report = 0;
+        String expectedResult = "Se selecciona: Solicitar el informe de vida laboral";
+        platform.selectSS();
+        platform.selectCitizens();
+        platform.selectReports();
+        restoreStreams();  // Per a eliminar l'output que genera la crida a processSearcher
+        platform.selectCertificationReport(report);
+        assertEquals(expectedResult.strip(), outContent.toString().strip());
+    }
+
+    @Test
+    default void selectExistentAuthMethodTest(){
+        System.out.println("a");
+    }
+
+    @Test
+    void enterNIFandPINobtTest();
+
+    @Test
+    void enterPINTest();
+
 }
