@@ -1,5 +1,4 @@
 package data.interfaces;
-
 import data.Password;
 import exceptions.WrongPasswordFormatException;
 import org.junit.jupiter.api.Test;

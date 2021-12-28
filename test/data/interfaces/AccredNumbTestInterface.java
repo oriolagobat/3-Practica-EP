@@ -1,5 +1,6 @@
 package data.interfaces;
 
+
 import data.AccredNumb;
 import exceptions.WrongAccredNumbFormatException;
 import org.junit.jupiter.api.Test;
