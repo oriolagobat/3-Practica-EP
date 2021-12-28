@@ -130,7 +130,7 @@ public class UnifiedPlatform {
         // 0 is Laboral Life Doc
         // 1 SS affiliation number
         // We do this to acces through the dictionary
-        // ASSUMING THAT SERCIVES IN THE DICTIONARY WILL BE IN THE SAME ORDER AS IN THE WEB PAGE
+        // ASSUMING THAT SERVICES IN THE DICTIONARY WILL BE IN THE SAME ORDER AS IN THE WEB PAGE
         ArrayList<String> ssServices = services.get("SS");
         String selectedService = ssServices.get(opc);
         System.out.println("Se selecciona para obtener el informe " + selectedService);
@@ -150,14 +150,30 @@ public class UnifiedPlatform {
     }
 
     public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, ConnectException {
-        authMethod.checkPIN(citz.nif, pin);
+        boolean res = authMethod.checkPIN(citz.nif, pin);
+        if (res) {
+            System.out.println("El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent");
+        } else {
+            System.out.println("El PIN introduït no correspon al generat pel sistema per aquest ciutadà o ja no està vigent");
+        }
     }
 
     public void enterCred(Nif nif, Password passwd) throws NifNotRegisteredException, NotValidCredException, AnyMobileRegisteredException, ConnectException {
         if (!citz.getNif().equals(nif))
             throw new NifNotRegisteredException("El NIF introduit no és el que s'ha posat en passos anteriors");
         citz.setPassword(passwd);
-        System.out.println("S'han introduït correctament les dades de l'usuari amb nif: " + nif);
+        int res = authMethod.ckeckCredent(nif, passwd);
+        switch (res) {
+            case 0 -> throw new NifNotRegisteredException("El ciutadà no està registrat en el sistema Cl@u");
+            case 1 -> {
+                System.out.println("S'han introduït correctament les dades de l'usuari amb nif: " + nif);
+                System.out.println("El usuari ha triat no usar el mètode d'autenticació no reforçat");
+            }
+            case 2 -> {
+                System.out.println("S'han introduït correctament les dades de l'usuari amb nif: " + nif);
+                System.out.println("El usuari ha triat usar el mètode d'autenticació no reforçat");
+            }
+        }
     }
 
     private void printDocument() throws BadPathException, PrintingException {
