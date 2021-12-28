@@ -11,8 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class UnifiedPlatform {
-    Nif citizenNif;
-    DocPath savePath;
+    Citizen citz;
 
     HashMap<String, String> aapp;
     HashMap<String, ArrayList<String>> services;
@@ -20,6 +19,7 @@ public class UnifiedPlatform {
     CertificationAuthority authMethod;
 
     public UnifiedPlatform() {
+        this.citz = new Citizen();
         this.aapp = new HashMap<>();
         setAapp();
         this.services = new HashMap<>();
@@ -141,14 +141,14 @@ public class UnifiedPlatform {
 
     public void enterNIFandPINobt(Nif nif, Date valDate) throws NifNotRegisteredException, IncorrectValDateException, AnyMobileRegisteredException, ConnectException {
         // Assuming auth method is Cl@ve PIN //
-        this.citizenNif = nif;  // We set the class's nif to the one we got through parameter
+        citz.setCitizenNif(nif);  // We set the citizen nif to the one we got through parameter
+        citz.setCitizenValDate(valDate);  // We set the citizen validation date to the one we got through parameter
         authMethod.sendPIN(nif, valDate);
         System.out.println("Se envia el PIN al usuario con DNI: " + nif);
-        // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA FALTE VALIDAR LA DATA COM ÉS FA AIXÒ AAAAAAAAAAAAAA
     }
 
     public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, ConnectException {
-        authMethod.checkPIN(citizenNif, pin);
+        authMethod.checkPIN(citz.nif, pin);
     }
 
     public void enterCred(Nif nif, Password passwd) throws NifNotRegisteredException, NotValidCredException, AnyMobileRegisteredException, ConnectException {
@@ -164,7 +164,7 @@ public class UnifiedPlatform {
     }
 
     private void selectPath(DocPath path) throws BadPathException {
-        this.savePath = path;
+        citz.setCitizenSavePath(path);  // We set the citizen save path to the one we got through parameter
         System.out.println("Se ha seleccionado el path: " + path + " para guardar el documento");
     }
 }
