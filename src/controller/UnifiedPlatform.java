@@ -4,6 +4,7 @@ import data.DocPath;
 import data.Nif;
 import data.PINcode;
 import data.Password;
+import dummies.ClavePINCertificationAuthority;
 import exceptions.*;
 import services.CertificationAuthorityInterface;
 
@@ -145,16 +146,20 @@ public class UnifiedPlatform {
         System.out.println("Se selecciona el método de autenticación " + selectedAuthMethod);
     }
 
+    public void injectAuthenticationMethod(CertificationAuthorityInterface method){
+        this.authMethod = method;
+    }
+
     public void enterNIFandPINobt(Nif nif, Date valDate) throws NifNotRegisteredException, IncorrectValDateException, AnyMobileRegisteredException, ConnectException {
         // Assuming auth method is Cl@ve PIN //
         citz.setNif(nif);  // We set the citizen nif to the one we got through parameter
         citz.setValDate(valDate);  // We set the citizen validation date to the one we got through parameter
         authMethod.sendPIN(nif, valDate);
-        System.out.println("Se envia el PIN al usuario con DNI: " + nif);
+        System.out.println("Se envia el PIN al usuario con DNI: " + nif.getNif());
     }
 
     public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, ConnectException {
-        boolean res = authMethod.checkPIN(citz.nif, pin);
+        boolean res = authMethod.checkPIN(citz.getNif(), pin);
         if (res) {
             System.out.println("El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent");
         } else {

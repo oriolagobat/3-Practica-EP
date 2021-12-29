@@ -2,17 +2,24 @@ package controller;
 
 import data.DocPath;
 import data.Nif;
+import data.PINcode;
 import data.Password;
 
 import java.util.Date;
 
 public class Citizen {
-    Nif nif;
-    Date valdate;
-    DocPath savePath;
+    private Nif nif;
+    private Date valdate;
+    private DocPath savePath;
+
 
     // Optional
-    Password password;
+    private Password password;
+    private String phoneNumber;
+    private PINcode PIN;
+
+
+    private boolean reinforcedPINActivated = false;
 
     public Citizen() {
         this.nif = null;
@@ -21,6 +28,7 @@ public class Citizen {
 
         // Optional
         this.password = null;
+        this.phoneNumber = null;
     }
 
     public void setNif(Nif nif) {
@@ -51,8 +59,29 @@ public class Citizen {
     public void setPassword(Password passwd) {
         this.password = passwd;
     }
-    
+
     public Password getPassword() {
         return this.password;
+    }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneNumber() { return this.phoneNumber; }
+
+    public PINcode getPIN() {
+        return PIN;
+    }
+
+    public void setPIN(PINcode PIN) {
+        this.PIN = PIN;
+    }
+
+    public boolean hasReinforcedPINActivated() {
+        return reinforcedPINActivated;
+    }
+
+    public void setReinforcedPINActivated(boolean reinforcedPINActivated) {
+        this.reinforcedPINActivated = reinforcedPINActivated;
     }
 }
