@@ -1,6 +1,6 @@
 package data.interfaces;
 import data.Password;
-import exceptions.WrongPasswordFormatException;
+import data.exceptions.WrongPasswordFormatException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

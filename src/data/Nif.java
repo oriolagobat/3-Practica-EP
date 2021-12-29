@@ -1,6 +1,6 @@
 package data;
 
-import exceptions.WrongNifFormatException;
+import data.exceptions.WrongNifFormatException;
 
 /**
  * Essential data classes

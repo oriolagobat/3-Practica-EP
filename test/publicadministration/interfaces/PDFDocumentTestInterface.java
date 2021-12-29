@@ -1,9 +1,7 @@
 package publicadministration.interfaces;
 
 import data.DocPath;
-import data.Nif;
-import exceptions.WrongDocPathFormatException;
-import exceptions.WrongNifFormatException;
+import data.exceptions.WrongDocPathFormatException;
 import org.junit.jupiter.api.Test;
 import publicadministration.PDFDocument;
 

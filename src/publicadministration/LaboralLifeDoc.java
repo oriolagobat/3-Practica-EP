@@ -1,11 +1,7 @@
 package publicadministration;
 
-import data.DocPath;
 import data.Nif;
-import exceptions.WrongDocPathFormatException;
-
-import java.io.File;
-import java.util.Date;
+import data.exceptions.WrongDocPathFormatException;
 
 public class LaboralLifeDoc extends PDFDocument{
     private final Nif nif;

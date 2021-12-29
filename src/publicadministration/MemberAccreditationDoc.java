@@ -2,7 +2,7 @@ package publicadministration;
 
 import data.AccredNumb;
 import data.Nif;
-import exceptions.WrongDocPathFormatException;
+import data.exceptions.WrongDocPathFormatException;
 
 public class MemberAccreditationDoc extends PDFDocument{
     private final Nif nif;

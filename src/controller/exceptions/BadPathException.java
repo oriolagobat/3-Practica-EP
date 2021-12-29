@@ -1,4 +1,4 @@
-package exceptions;
+package controller.exceptions;
 
 public class BadPathException extends Exception {
     public BadPathException(String message) {

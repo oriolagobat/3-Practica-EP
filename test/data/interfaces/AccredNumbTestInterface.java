@@ -1,10 +1,8 @@
 package data.interfaces;
 
 
-import controller.UnifiedPlatform;
 import data.AccredNumb;
-import exceptions.AnyKeyWordProcedureException;
-import exceptions.WrongAccredNumbFormatException;
+import data.exceptions.WrongAccredNumbFormatException;
 import org.junit.jupiter.api.Test;
 
 

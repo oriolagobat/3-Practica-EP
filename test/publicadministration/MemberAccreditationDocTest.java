@@ -2,9 +2,9 @@ package publicadministration;
 
 import data.AccredNumb;
 import data.Nif;
-import exceptions.WrongAccredNumbFormatException;
-import exceptions.WrongDocPathFormatException;
-import exceptions.WrongNifFormatException;
+import data.exceptions.WrongAccredNumbFormatException;
+import data.exceptions.WrongDocPathFormatException;
+import data.exceptions.WrongNifFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import publicadministration.interfaces.MemberAccreditationDocTestInterface;

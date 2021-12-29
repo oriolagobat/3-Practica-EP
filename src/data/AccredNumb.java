@@ -1,6 +1,6 @@
 package data;
 
-import exceptions.WrongAccredNumbFormatException;
+import data.exceptions.WrongAccredNumbFormatException;
 
 /**
  * Essential data classes

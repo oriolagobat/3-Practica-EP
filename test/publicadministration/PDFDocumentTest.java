@@ -1,7 +1,7 @@
 package publicadministration;
 
 import data.DocPath;
-import exceptions.WrongDocPathFormatException;
+import data.exceptions.WrongDocPathFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import publicadministration.interfaces.PDFDocumentTestInterface;

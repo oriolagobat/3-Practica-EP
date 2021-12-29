@@ -1,6 +1,6 @@
 package data;
 
-import exceptions.WrongPINCodeFormatException;
+import data.exceptions.WrongPINCodeFormatException;
 
 /**
  * Essential data classes

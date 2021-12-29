@@ -1,7 +1,7 @@
 package services;
 
 import data.Nif;
-import exceptions.NotAffiliatedException;
+import controller.exceptions.NotAffiliatedException;
 import publicadministration.LaboralLifeDoc;
 import publicadministration.MemberAccreditationDoc;
 

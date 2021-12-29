@@ -1,6 +1,6 @@
 package data;
 
-import exceptions.WrongDocPathFormatException;
+import data.exceptions.WrongDocPathFormatException;
 
 /**
  * Essential data classes

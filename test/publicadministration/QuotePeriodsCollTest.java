@@ -2,6 +2,7 @@ package publicadministration;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import publicadministration.exceptions.DuplicatedQuotePeriodException;
 import publicadministration.interfaces.QuotePeriodCollTestInterface;
 
 import java.util.ArrayList;
@@ -13,20 +14,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
     QuotePeriodsColl quotePeriodsColl;
-    Date date;  // Common date to test
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws DuplicatedQuotePeriodException {
         quotePeriodsColl = new QuotePeriodsColl();
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(1970, Calendar.JANUARY, 16);
-        date = cal.getTime();
-        int qPDays = 0;
+        for (int i = 0; i < 5; i++) {
+            Calendar cal = Calendar.getInstance();
+            cal.set(1975, Calendar.JANUARY, i);
+            Date date = cal.getTime();
 
-        QuotePeriod qP = new QuotePeriod(date, qPDays);
+            QuotePeriod qP = new QuotePeriod(date, i);
 
-        for (int i = 0; i < 5; i++) {  // Add five quotePeriods to Test
             quotePeriodsColl.addQuotePeriod(qP);
         }
     }
@@ -36,13 +35,16 @@ public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
     public void getQuotePeriodsCollTest() {
         ArrayList<QuotePeriod> correctQPC = new ArrayList<>();
 
-        int qPDays = 0;
-        QuotePeriod qP = new QuotePeriod(date, qPDays);
+        for (int i = 0; i < 5; i++) {
+            Calendar cal = Calendar.getInstance();
+            cal.set(1975, Calendar.JANUARY, i);
+            Date date = cal.getTime();
 
-        for (int i = 0; i < 5; i++) {  // Add five quotePeriods to Test
+            QuotePeriod qP = new QuotePeriod(date, i);
+
             correctQPC.add(qP);
-            correctQPC.sort(Comparator.comparing(QuotePeriod::getInitDay));  // Sorts array list by date
         }
+        correctQPC.sort(Comparator.comparing(QuotePeriod::getInitDay));
 
         assertEquals(correctQPC, quotePeriodsColl.getQuotePeriodsCollection());
     }
@@ -50,33 +52,48 @@ public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
     @Test
     @Override
     public void checkLengthTest() {
-        int currentLength = 5;
-        assertEquals(currentLength, quotePeriodsColl.getQuotePeriodsCollection().size());
+        int correctQuotePeriodsNumb = 5;
+        assertEquals(correctQuotePeriodsNumb, quotePeriodsColl.getQuotePeriodsCollection().size());
     }
 
     @Test
     @Override
-    public void addAndCheckLengthTest() {
-        int correctLength = 5 + 1;
-        int qPDays = 0;
-        QuotePeriod qpDummy = new QuotePeriod(date, qPDays);
-        quotePeriodsColl.addQuotePeriod(qpDummy);
+    public void addAndCheckLengthTest() throws DuplicatedQuotePeriodException {
+        int correctQuotePeriodsNumb = 6;
+        QuotePeriod qP = new QuotePeriod(new Date(), 0);
+        quotePeriodsColl.addQuotePeriod(qP);
 
-        assertEquals(correctLength, quotePeriodsColl.getQuotePeriodsCollection().size());
+        assertEquals(correctQuotePeriodsNumb, quotePeriodsColl.getQuotePeriodsCollection().size());
     }
 
     @Test
     @Override
-    public void checkSortTest() {
+    public void checkOlderSortTest() throws DuplicatedQuotePeriodException {
         Calendar cal = Calendar.getInstance();
-        cal.set(1950, Calendar.DECEMBER, 25);  // Create older quote period
-        Date qPDate = cal.getTime();
-        int qPDays = 0;
-        QuotePeriod olderQP = new QuotePeriod(qPDate, qPDays);
+        cal.set(1970, Calendar.JANUARY, 0);
+        Date date = cal.getTime();
+        int days = 0;
 
+        QuotePeriod olderQP = new QuotePeriod(date, days);
         quotePeriodsColl.addQuotePeriod(olderQP);
 
-        // Check if last quote period in the array list is the newer one
+        // Check if first quote period in the array list is the older one just created
         assertEquals(olderQP, quotePeriodsColl.getQuotePeriodsCollection().get(0));
+    }
+
+    @Test
+    @Override
+    public void checkNewerSortTest() throws DuplicatedQuotePeriodException {
+        Calendar cal = Calendar.getInstance();
+        cal.set(2020, Calendar.DECEMBER, 31);
+        Date date = cal.getTime();
+        int days = 0;
+
+        QuotePeriod newerQP = new QuotePeriod(date, days);
+        quotePeriodsColl.addQuotePeriod(newerQP);
+
+        // Check if last quote period in the array list is the newer one just created
+        int lastIndex = quotePeriodsColl.getQuotePeriodsCollection().size() - 1;
+        assertEquals(newerQP, quotePeriodsColl.getQuotePeriodsCollection().get(lastIndex));
     }
 }

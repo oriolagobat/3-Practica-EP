@@ -1,5 +1,7 @@
 package publicadministration;
 
+import publicadministration.exceptions.DuplicatedQuotePeriodException;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -14,7 +16,16 @@ public class QuotePeriodsColl {  // Represents the total quota periods known as 
         return quotePeriodsCollection;
     }
 
-    public void addQuotePeriod (QuotePeriod qPd) {
+    public void addQuotePeriod(QuotePeriod qPd) throws DuplicatedQuotePeriodException {
+        if (qPd == null) {
+            throw new NullPointerException("El periòde de cotització que s'intenta afegir és null");
+        }
+        for (QuotePeriod quotePeriod : quotePeriodsCollection) {
+            if (qPd.equals(quotePeriod)) {
+                throw new DuplicatedQuotePeriodException("El període de cotització que s'intenta afegir ja està afegit");
+            }
+        }
+
         quotePeriodsCollection.add(qPd);
         quotePeriodsCollection.sort(Comparator.comparing(QuotePeriod::getInitDay));  // Sorts array list by date
     }

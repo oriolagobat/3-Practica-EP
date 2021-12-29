@@ -1,7 +1,7 @@
 package publicadministration;
 
 import data.DocPath;
-import exceptions.WrongDocPathFormatException;
+import data.exceptions.WrongDocPathFormatException;
 
 import java.awt.*;
 import java.io.File;

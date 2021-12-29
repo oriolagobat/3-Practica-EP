@@ -1,4 +1,4 @@
-package exceptions;
+package data.exceptions;
 
 public class WrongNifFormatException extends Exception {
     public WrongNifFormatException(String message) {

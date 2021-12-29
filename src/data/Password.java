@@ -1,6 +1,6 @@
 package data;
 
-import exceptions.WrongPasswordFormatException;
+import data.exceptions.WrongPasswordFormatException;
 
 /**
  * Essential data classes

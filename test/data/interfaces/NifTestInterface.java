@@ -1,8 +1,7 @@
 package data.interfaces;
 
-import data.DocPath;
 import data.Nif;
-import exceptions.WrongNifFormatException;
+import data.exceptions.WrongNifFormatException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

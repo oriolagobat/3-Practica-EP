@@ -1,6 +1,6 @@
 package data;
 
-import exceptions.WrongPINCodeFormatException;
+import data.exceptions.WrongPINCodeFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import data.interfaces.PINCodeTestInterface;
