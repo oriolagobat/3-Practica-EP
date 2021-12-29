@@ -1,9 +1,9 @@
 package dummies;
 
+import controller.exceptions.*;
 import data.Nif;
 import data.PINcode;
 import data.Password;
-import exceptions.*;
 import services.CertificationAuthorityInterface;
 
 import java.net.ConnectException;

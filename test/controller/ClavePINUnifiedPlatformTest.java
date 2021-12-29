@@ -1,11 +1,12 @@
 package controller;
 
+import controller.exceptions.*;
 import controller.interfaces.UnifiedPlatformTestInterface;
 import data.Nif;
 import data.PINcode;
 import data.Password;
+import data.exceptions.*;
 import dummies.ClavePINCertificationAuthority;
-import exceptions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
