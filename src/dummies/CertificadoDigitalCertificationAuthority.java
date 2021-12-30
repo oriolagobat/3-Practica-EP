@@ -8,13 +8,14 @@ import services.CertificationAuthorityInterface;
 
 import javax.xml.crypto.dsig.keyinfo.X509IssuerSerial;
 import java.net.ConnectException;
+import java.nio.charset.Charset;
 import java.util.Date;
 
 public class CertificadoDigitalCertificationAuthority implements CertificationAuthorityInterface {
 
     Citizen citizen = new Citizen();
 
-    public CertificadoDigitalCertificationAuthority(Citizen citizen){
+    public CertificadoDigitalCertificationAuthority(Citizen citizen) {
         this.citizen = citizen;
     }
 
@@ -35,6 +36,14 @@ public class CertificadoDigitalCertificationAuthority implements CertificationAu
 
     @Override
     public EncryptedData sendCertfAuth(EncryptingKey pubKey) throws NotValidCertificateException, ConnectException {
-        return null;
+
+        byte[] data = citizen.getNif().getNif().getBytes(Charset.defaultCharset());
+        for (int i = 0; i < data.length; i++) {
+            int tmp = data[i];
+            tmp += pubKey.getEncryptingKey().intValue();
+            data[i] = (byte) tmp;
+        }
+
+        return new EncryptedData(data);
     }
 }

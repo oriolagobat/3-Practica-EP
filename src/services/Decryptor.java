@@ -9,8 +9,11 @@ import services.exceptions.DecryptationException;
 import java.nio.charset.Charset;
 
 public class Decryptor {
-    Nif decryptIDdata(EncryptedData encrypData, EncryptingKey privKey)
+    public static Nif decryptIDdata(EncryptedData encrypData, EncryptingKey privKey)
             throws DecryptationException, WrongNifFormatException {
+
+        if (encrypData == null || privKey == null)
+            throw new DecryptationException("Error en el desxifratge");
 
         byte[] data = encrypData.getEncryptedData();
         for(int i = 0; i < data.length; i++){

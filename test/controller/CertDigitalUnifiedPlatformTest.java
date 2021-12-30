@@ -7,11 +7,15 @@ import data.Nif;
 import data.PINcode;
 import data.Password;
 import data.exceptions.*;
+import dummies.CertificadoDigitalCertificationAuthority;
 import dummies.ClavePermanenteCertificationAuthority;
+import dummies.SS;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import services.exceptions.DecryptationException;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,7 +39,7 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
 
         citizen.setValDate(cal.getTime());
 
-        platform.injectAuthenticationMethod(new ClavePermanenteCertificationAuthority(citizen));
+        platform.injectAuthenticationMethod(new CertificadoDigitalCertificationAuthority(citizen));
     }
 
     @Test
@@ -49,17 +53,36 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
 
     @Test
     @Override
-    public void getLaboralLifeDoc() throws IncorrectValDateException, NifNotRegisteredException,
-            AnyMobileRegisteredException, IOException, NotValidPINException,
-            NotAffiliatedException, WrongDocPathFormatException {
+    public void getLaboralLifeDoc() throws IOException, NotAffiliatedException, WrongDocPathFormatException,
+            NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
+        byte report = 1;
+        String expectedResult = "Se envía para su desencriptación los datos\n" +
+                "Mostrant informe de la vida laboral...";
+
+        platform.injectSS(new SS(citizen));
+        platform.selectCertificationReport(report);
+
+        outContent.reset();
+        platform.enterPassw(citizen.getPassword());
+
+        assertEquals(expectedResult.replaceAll("[^a-zA-Z0-9]", ""), outContent.toString().replaceAll("[^a-zA-Z0-9]", ""));
     }
 
     @Test
     @Override
-    public void getMemberAccredDoc() throws IncorrectValDateException, NifNotRegisteredException,
-            AnyMobileRegisteredException, IOException, NotValidPINException,
-            NotAffiliatedException, WrongDocPathFormatException {
+    public void getMemberAccredDoc() throws IOException, NotAffiliatedException, WrongDocPathFormatException,
+            NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
+        byte report = 2;
+        String expectedResult = "Se envía para su desencriptación los datos\n" +
+                "Mostrant nombre d'acreditació de la SS...";
 
+        platform.injectSS(new SS(citizen));
+        platform.selectCertificationReport(report);
+
+        outContent.reset();
+        platform.enterPassw(citizen.getPassword());
+
+        assertEquals(expectedResult.replaceAll("[^a-zA-Z0-9]", ""), outContent.toString().replaceAll("[^a-zA-Z0-9]", ""));
     }
 
     @Test
@@ -70,7 +93,7 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     }
 
     @Test
-    public void enterPasswTest() throws WrongPasswordFormatException, NotValidPasswordException {
+    public void enterPasswTest() throws WrongPasswordFormatException, NotValidPasswordException, NotValidCertificateException, IOException, NotAffiliatedException, WrongDocPathFormatException, DecryptationException, WrongNifFormatException {
         Password password = new Password("contrasenya123$");
         platform.enterPassw(password);
         assertEquals(password, platform.citz.getPassword());

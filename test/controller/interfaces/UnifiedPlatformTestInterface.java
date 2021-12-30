@@ -3,14 +3,23 @@ package controller.interfaces;
 import controller.UnifiedPlatform;
 import controller.exceptions.*;
 
+import data.EncryptedData;
+import data.EncryptingKey;
+import data.exceptions.NotValidCertificateException;
 import data.exceptions.WrongDocPathFormatException;
+import data.exceptions.WrongNifFormatException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import services.Decryptor;
+import services.exceptions.DecryptationException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.math.BigInteger;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -36,12 +45,12 @@ public interface UnifiedPlatformTestInterface {
     @Test
     public void getLaboralLifeDoc() throws IncorrectValDateException, NifNotRegisteredException,
             AnyMobileRegisteredException, IOException, NotValidPINException,
-            NotAffiliatedException, WrongDocPathFormatException, NotValidCredException;
+            NotAffiliatedException, WrongDocPathFormatException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException;
 
     @Test
     public void getMemberAccredDoc() throws IncorrectValDateException, NifNotRegisteredException,
             AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException,
-            WrongDocPathFormatException, NotValidCredException;
+            WrongDocPathFormatException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException;
 
     @Test
     void selectExistentAuthMethodTest();
@@ -76,5 +85,21 @@ public interface UnifiedPlatformTestInterface {
         restoreStreams();  // Per a eliminar l'output que genera la crida a processSearcher
         platform.selectCertificationReport(report);
         assertEquals(expectedResult.strip(), outContent.toString().strip());
+    }
+
+    @Test
+    default void nullEncryptedDataTest(){
+        assertThrows(DecryptationException.class,
+                () -> {
+                    Decryptor.decryptIDdata(null, new EncryptingKey(BigInteger.ONE));
+                });
+    }
+
+    @Test
+    default void nullEncryptingKeyTest(){
+        assertThrows(DecryptationException.class,
+                () -> {
+                    Decryptor.decryptIDdata(new EncryptedData("sampleNIF".getBytes(Charset.defaultCharset())), null);
+                });
     }
 }

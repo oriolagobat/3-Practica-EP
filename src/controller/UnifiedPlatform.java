@@ -3,11 +3,15 @@ package controller;
 import controller.exceptions.*;
 import data.*;
 
+import data.exceptions.NotValidCertificateException;
+import data.exceptions.WrongNifFormatException;
 import jdk.jshell.spi.ExecutionControl;
 import data.exceptions.WrongDocPathFormatException;
 import publicadministration.PDFDocument;
 import services.CertificationAuthorityInterface;
+import services.Decryptor;
 import services.SSInterface;
+import services.exceptions.DecryptationException;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -262,16 +266,37 @@ public class UnifiedPlatform {
         System.out.println("Se ha seleccionado el certificado digital: " + selectedCertification);
     }
 
-    public void enterPassw (Password pas) throws NotValidPasswordException {
+    public void enterPassw (Password pas) throws NotValidPasswordException, NotValidCertificateException, IOException, DecryptationException, WrongNifFormatException, NotAffiliatedException, WrongDocPathFormatException {
         if (pas == null) {
             throw new NotValidPasswordException("El password introduït no és valid, és null");
         }
         // If this line is called, the enterPIN from Cl@ve Permanente won't be, they're mutually exclusive
         citz.setPassword(pas);
+
+        EncryptedData encryptedData = authMethod.sendCertfAuth(this.publicKey);
+        Nif nif = decryptData(encryptedData);
+
+        if (this.administration != null) {
+            switch (this.selectedCertification) {
+
+                case "Solicitar el informe de vida laboral" -> {
+                    PDFDocument pdf = administration.getLaboralLife(nif);
+                    pdf.openDoc(pdf.getPath());
+                    System.out.println("Mostrant informe de la vida laboral...");
+                }
+
+                case "Obtener acreditación del número de afiliación a la Seguridad Social" -> {
+                    PDFDocument pdf = administration.getMembAccred(nif);
+                    pdf.openDoc(pdf.getPath());
+                    System.out.println("Mostrant nombre d'acreditació de la SS...");
+
+                }
+            }
+        }
     }
 
-    private Nif decryptData (EncryptedData encrypdata) {
-        System.out.println("TO BE IMPLEMENTED");
-        return null;
+    private Nif decryptData(EncryptedData encrypdata) throws DecryptationException, WrongNifFormatException {
+        System.out.println("Se envía para su desencriptación los datos");
+        return Decryptor.decryptIDdata(encrypdata, this.privateKey);
     }
 }
