@@ -10,7 +10,9 @@ import services.CertificationAuthorityInterface;
 import services.SSInterface;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.ConnectException;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,20 +27,29 @@ public class UnifiedPlatform {
     HashMap<String, ArrayList<String>> services;
     ArrayList<String> possibleAuthMethods;
 
+
     // Optional - Digital Certificate
     String selectedCertification = null;
     ArrayList<String> possibleDigitalCertificates;
+
+    EncryptingKey publicKey;
+    EncryptingKey privateKey;
 
     public UnifiedPlatform() {
         this.citz = new Citizen();
         this.aapp = new HashMap<>();
         setAapp();
+
         this.services = new HashMap<>();
         setServices();
+
         this.possibleAuthMethods = new ArrayList<>();
         setAuthMethods();
+
         this.possibleDigitalCertificates = new ArrayList<>();
         setDigitalCertificates();
+
+        setEncryptingKeys();
     }
 
     private void setAapp() {
@@ -105,6 +116,12 @@ public class UnifiedPlatform {
         possibleDigitalCertificates.add("Certificados electrónicos cualificados de Empleado Público");
         possibleDigitalCertificates.add("Certificados cualificados de Sede electrónica de la Administración Pública");
         possibleDigitalCertificates.add("Certificados cualificados de Sello electrónico de la Administración Pública");
+    }
+
+    // They will have the same value because we're just emulating the process of encryption and decryption
+    public void setEncryptingKeys(){
+        this.privateKey = new EncryptingKey(new BigInteger("1234"));
+        this.publicKey = new EncryptingKey(new BigInteger("1234"));
     }
 
     public void processSearcher() {

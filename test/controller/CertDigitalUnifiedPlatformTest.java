@@ -52,7 +52,6 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     public void getLaboralLifeDoc() throws IncorrectValDateException, NifNotRegisteredException,
             AnyMobileRegisteredException, IOException, NotValidPINException,
             NotAffiliatedException, WrongDocPathFormatException {
-
     }
 
     @Test
