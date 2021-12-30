@@ -147,18 +147,22 @@ public class UnifiedPlatform {
         // ASSUMING THAT SERCIVES IN THE DICTIONARY WILL BE IN THE SAME ORDER AS IN THE WEB PAGE
         // Since certifications are only available through SS, we asume citizen is using that AAPP
         ArrayList<String> ssServices = services.get("SS");
-        String selectedCertification = ssServices.get(opc);
+        this.selectedCertification = ssServices.get(opc - 1);
         System.out.println("Se selecciona: " + selectedCertification);
     }
 
     public void selectAuthMethod(byte opc) {
         // ASSUMING THAT AUTH METHODS IN THE DICTIONARY WILL BE ON THE SAME ORDER AS IN THE WEB PAGE
-        String selectedAuthMethod = possibleAuthMethods.get(opc);
+        String selectedAuthMethod = possibleAuthMethods.get(opc - 1);
         System.out.println("Se selecciona el método de autenticación " + selectedAuthMethod);
     }
 
     public void injectAuthenticationMethod(CertificationAuthorityInterface method){
         this.authMethod = method;
+    }
+
+    public void injectSS(SSInterface administration){
+        this.administration = administration;
     }
 
     public void enterNIFandPINobt(Nif nif, Date valDate) throws NifNotRegisteredException, IncorrectValDateException, AnyMobileRegisteredException, ConnectException {
@@ -169,29 +173,44 @@ public class UnifiedPlatform {
         System.out.println("Se envia el PIN al usuario con DNI: " + nif.getNif());
     }
 
-    public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, ConnectException {
+    public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, IOException, WrongDocPathFormatException {
         boolean res = authMethod.checkPIN(citz.getNif(), pin);
         if (res) {
             System.out.println("El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent");
+
+            if (this.administration != null) {
+                switch (this.selectedCertification) {
+
+                    case "Solicitar el informe de vida laboral" -> {
+                        PDFDocument pdf = administration.getLaboralLife(citz.getNif());
+                        pdf.openDoc(pdf.getPath());
+                        System.out.println("Mostrant informe de la vida laboral...");
+                    }
+
+                    case "Obtener acreditación del número de afiliación a la Seguridad Social" -> {
+                        PDFDocument pdf = administration.getMembAccred(citz.getNif());
+                        pdf.openDoc(pdf.getPath());
+                        System.out.println("Mostrant nombre d'acreditació de la SS...");
+
+                    }
+                }
+            }
         } else {
             System.out.println("El PIN introduït no correspon al generat pel sistema per aquest ciutadà o ja no està vigent");
         }
     }
 
     public void enterCred(Nif nif, Password passwd) throws NifNotRegisteredException, NotValidCredException, AnyMobileRegisteredException, ConnectException {
-        if (!citz.getNif().equals(nif))
-            throw new NifNotRegisteredException("El NIF introduit no és el que s'ha posat en passos anteriors");
+        citz.setNif(nif);
         citz.setPassword(passwd);
         int res = authMethod.ckeckCredent(nif, passwd);
         switch (res) {
             case 0 -> throw new NifNotRegisteredException("El ciutadà no està registrat en el sistema Cl@u");
             case 1 -> {
-                System.out.println("S'han introduït correctament les dades de l'usuari amb nif: " + nif);
-                System.out.println("El usuari ha triat no usar el mètode d'autenticació no reforçat");
+                System.out.println("Les dades de l'usuari són correctes, no s'ha escollit el mètode reforçat");
             }
             case 2 -> {
-                System.out.println("S'han introduït correctament les dades de l'usuari amb nif: " + nif);
-                System.out.println("El usuari ha triat usar el mètode d'autenticació no reforçat");
+                System.out.println("Les dades de l'usuari són correctes, s'ha escollit el mètode reforçat");
             }
         }
     }

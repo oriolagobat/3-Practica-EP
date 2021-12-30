@@ -106,7 +106,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
             AnyMobileRegisteredException, IOException, NotValidPINException,
             NotAffiliatedException, WrongDocPathFormatException {
 
-        byte report = 0;
+        byte report = 1;
         String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n" +
                 "Mostrant informe de la vida laboral...";
 
@@ -126,7 +126,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
             AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException,
             WrongDocPathFormatException {
 
-        byte report = 1;
+        byte report = 2;
         String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n" +
                 "Mostrant nombre d'acreditació de la SS...";
 

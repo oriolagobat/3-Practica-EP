@@ -116,7 +116,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     public void getLaboralLifeDoc() throws NifNotRegisteredException, AnyMobileRegisteredException, IOException,
             NotValidPINException, NotAffiliatedException, WrongDocPathFormatException, NotValidCredException {
 
-        byte report = 0;
+        byte report = 1;
         String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n" +
                 "Mostrant informe de la vida laboral...";
 
@@ -135,7 +135,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     @Override
     public void getMemberAccredDoc() throws NifNotRegisteredException, AnyMobileRegisteredException, IOException,
             NotValidPINException, NotAffiliatedException, WrongDocPathFormatException, NotValidCredException {
-        byte report = 1;
+        byte report = 2;
         String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n" +
                 "Mostrant nombre d'acreditació de la SS...";
 
