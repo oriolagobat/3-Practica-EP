@@ -10,7 +10,7 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     @Test
     @Override
     public void selectExistentAuthMethodTest() {
-        byte method = 2;
+        byte method = 3;
         String expectedResult = "Se selecciona el método de autenticación Certificado digital";
         platform.selectAuthMethod(method);
         assertEquals(expectedResult.strip(), outContent.toString().strip());

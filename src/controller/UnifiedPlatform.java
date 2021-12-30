@@ -6,6 +6,7 @@ import data.Nif;
 import data.PINcode;
 import data.Password;
 
+import jdk.jshell.spi.ExecutionControl;
 import services.CertificationAuthorityInterface;
 
 import java.net.ConnectException;
@@ -136,13 +137,13 @@ public class UnifiedPlatform {
         // ASSUMING THAT SERCIVES IN THE DICTIONARY WILL BE IN THE SAME ORDER AS IN THE WEB PAGE
         // Since certifications are only available through SS, we asume citizen is using that AAPP
         ArrayList<String> ssServices = services.get("SS");
-        String selectedCertification = ssServices.get(opc);
+        String selectedCertification = ssServices.get(opc - 1);
         System.out.println("Se selecciona: " + selectedCertification);
     }
 
     public void selectAuthMethod(byte opc) {
         // ASSUMING THAT AUTH METHODS IN THE DICTIONARY WILL BE ON THE SAME ORDER AS IN THE WEB PAGE
-        String selectedAuthMethod = possibleAuthMethods.get(opc);
+        String selectedAuthMethod = possibleAuthMethods.get(opc - 1);
         System.out.println("Se selecciona el método de autenticación " + selectedAuthMethod);
     }
 
@@ -196,5 +197,15 @@ public class UnifiedPlatform {
     private void selectPath(DocPath path) throws BadPathException {
         citz.setSavePath(path);  // We set the citizen save path to the one we got through parameter
         System.out.println("Se ha seleccionado el path: " + path + " para guardar el documento");
+    }
+
+
+    // Optional - Digital certificate
+    public void selectCertificate(byte opc) {
+        System.out.println("Se");
+    }
+
+    public void enterPassw() {
+
     }
 }

@@ -14,15 +14,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
     QuotePeriodsColl quotePeriodsColl;
+    ArrayList<Date> dateList;
 
     @BeforeEach
     public void setUp() throws DuplicatedQuotePeriodException {
         quotePeriodsColl = new QuotePeriodsColl();
+        dateList = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
             Calendar cal = Calendar.getInstance();
             cal.set(1975, Calendar.JANUARY, i);
             Date date = cal.getTime();
+            // For the collections test
+            dateList.add(date);
 
             QuotePeriod qP = new QuotePeriod(date, i);
 
@@ -36,10 +40,7 @@ public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
         ArrayList<QuotePeriod> correctQPC = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
-            Calendar cal = Calendar.getInstance();
-            cal.set(1975, Calendar.JANUARY, i);
-            Date date = cal.getTime();
-
+            Date date = dateList.get(i);
             QuotePeriod qP = new QuotePeriod(date, i);
 
             correctQPC.add(qP);

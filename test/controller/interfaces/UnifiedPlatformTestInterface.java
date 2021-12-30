@@ -53,7 +53,7 @@ public interface UnifiedPlatformTestInterface {
 
     @Test
     default void selectExistentCertificationTest() {
-        byte report = 0;
+        byte report = 1;
         String expectedResult = "Se selecciona: Solicitar el informe de vida laboral";
         platform.selectSS();
         platform.selectCitizens();

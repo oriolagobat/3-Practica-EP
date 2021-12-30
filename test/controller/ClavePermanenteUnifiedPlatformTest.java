@@ -10,7 +10,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     @Test
     @Override
     public void selectExistentAuthMethodTest() {
-        byte method = 1;
+        byte method = 2;
         String expectedResult = "Se selecciona el método de autenticación Cl@ve Permanente";
         platform.selectAuthMethod(method);
         assertEquals(expectedResult.strip(), outContent.toString().strip());
