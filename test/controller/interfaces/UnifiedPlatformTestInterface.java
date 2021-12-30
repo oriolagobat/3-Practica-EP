@@ -36,12 +36,12 @@ public interface UnifiedPlatformTestInterface {
     @Test
     public void getLaboralLifeDoc() throws IncorrectValDateException, NifNotRegisteredException,
             AnyMobileRegisteredException, IOException, NotValidPINException,
-            NotAffiliatedException, WrongDocPathFormatException;
+            NotAffiliatedException, WrongDocPathFormatException, NotValidCredException;
 
     @Test
     public void getMemberAccredDoc() throws IncorrectValDateException, NifNotRegisteredException,
             AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException,
-            WrongDocPathFormatException;
+            WrongDocPathFormatException, NotValidCredException;
 
     @Test
     void selectExistentAuthMethodTest();

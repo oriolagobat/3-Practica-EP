@@ -198,19 +198,16 @@ public class UnifiedPlatform {
     }
 
     public void enterCred(Nif nif, Password passwd) throws NifNotRegisteredException, NotValidCredException, AnyMobileRegisteredException, ConnectException {
-        if (!citz.getNif().equals(nif))
-            throw new NifNotRegisteredException("El NIF introduit no és el que s'ha posat en passos anteriors");
+        citz.setNif(nif);
         citz.setPassword(passwd);
         int res = authMethod.ckeckCredent(nif, passwd);
         switch (res) {
             case 0 -> throw new NifNotRegisteredException("El ciutadà no està registrat en el sistema Cl@u");
             case 1 -> {
-                System.out.println("S'han introduït correctament les dades de l'usuari amb nif: " + nif);
-                System.out.println("El usuari ha triat no usar el mètode d'autenticació no reforçat");
+                System.out.println("Les dades de l'usuari són correctes, no s'ha escollit el mètode reforçat");
             }
             case 2 -> {
-                System.out.println("S'han introduït correctament les dades de l'usuari amb nif: " + nif);
-                System.out.println("El usuari ha triat usar el mètode d'autenticació no reforçat");
+                System.out.println("Les dades de l'usuari són correctes, s'ha escollit el mètode reforçat");
             }
         }
     }
