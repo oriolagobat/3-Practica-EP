@@ -1,14 +1,23 @@
 package dummies;
 
+import controller.Citizen;
 import controller.exceptions.*;
 import data.*;
 import data.exceptions.NotValidCertificateException;
 import services.CertificationAuthorityInterface;
 
+import javax.xml.crypto.dsig.keyinfo.X509IssuerSerial;
 import java.net.ConnectException;
 import java.util.Date;
 
 public class CertificadoDigitalCertificationAuthority implements CertificationAuthorityInterface {
+
+    Citizen citizen = new Citizen();
+
+    public CertificadoDigitalCertificationAuthority(Citizen citizen){
+        this.citizen = citizen;
+    }
+
     @Override
     public boolean sendPIN(Nif nif, Date date) throws NifNotRegisteredException, IncorrectValDateException, AnyMobileRegisteredException, ConnectException {
         return false;

@@ -6,6 +6,7 @@ import data.exceptions.WrongDocPathFormatException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,7 +26,6 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     public void getLaboralLifeDoc() throws IncorrectValDateException, NifNotRegisteredException,
             AnyMobileRegisteredException, IOException, NotValidPINException,
             NotAffiliatedException, WrongDocPathFormatException {
-
     }
 
     @Test
