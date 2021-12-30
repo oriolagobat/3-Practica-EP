@@ -2,9 +2,8 @@ package dummies;
 
 import controller.Citizen;
 import controller.exceptions.*;
-import data.Nif;
-import data.PINcode;
-import data.Password;
+import data.*;
+import data.exceptions.NotValidCertificateException;
 import services.CertificationAuthorityInterface;
 
 import java.net.ConnectException;
@@ -44,5 +43,10 @@ public class ClavePINCertificationAuthority implements CertificationAuthorityInt
     @Override
     public byte ckeckCredent(Nif nif, Password passw) throws NifNotRegisteredException, NotValidCredException, AnyMobileRegisteredException, ConnectException {
         return 0;
+    }
+
+    @Override
+    public EncryptedData sendCertfAuth(EncryptingKey pubKey) throws NotValidCertificateException, ConnectException {
+        return null;
     }
 }

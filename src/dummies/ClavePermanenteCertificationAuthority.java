@@ -2,9 +2,8 @@ package dummies;
 
 import controller.Citizen;
 import controller.exceptions.*;
-import data.Nif;
-import data.PINcode;
-import data.Password;
+import data.*;
+import data.exceptions.NotValidCertificateException;
 import services.CertificationAuthorityInterface;
 
 import java.net.ConnectException;
@@ -47,5 +46,10 @@ public class ClavePermanenteCertificationAuthority implements CertificationAutho
             return 2;
 
         return 1;
+    }
+
+    @Override
+    public EncryptedData sendCertfAuth(EncryptingKey pubKey) throws NotValidCertificateException, ConnectException {
+        return null;
     }
 }

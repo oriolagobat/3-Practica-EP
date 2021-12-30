@@ -20,16 +20,15 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class UnifiedPlatform {
-    CertificationAuthorityInterface authMethod;
-    SSInterface administration;
     Citizen citz;
+    SSInterface administration;
+    CertificationAuthorityInterface authMethod;
 
     HashMap<String, String> aapp;
     HashMap<String, ArrayList<String>> services;
     ArrayList<String> possibleAuthMethods;
 
     // Optional - Digital Certificate
-    String digitalCertificate;
     String selectedCertification = null;
     ArrayList<String> possibleDigitalCertificates;
 
@@ -41,6 +40,8 @@ public class UnifiedPlatform {
         setServices();
         this.possibleAuthMethods = new ArrayList<>();
         setAuthMethods();
+        this.possibleDigitalCertificates = new ArrayList<>();
+        setDigitalCertificates();
     }
 
     private void setAapp() {
@@ -99,6 +100,14 @@ public class UnifiedPlatform {
         possibleAuthMethods.add("Certificado digital");
 
         // WE COULD ADD MORE METHODS //
+    }
+
+    private void setDigitalCertificates() {
+        // We've set the possible digital certificate to those qualified for the AAPP's,
+        // as found on https://redtrust.com/tipos-de-certificados-digitales/
+        possibleDigitalCertificates.add("Certificados electrónicos cualificados de Empleado Público");
+        possibleDigitalCertificates.add("Certificados cualificados de Sede electrónica de la Administración Pública");
+        possibleDigitalCertificates.add("Certificados cualificados de Sello electrónico de la Administración Pública");
     }
 
     public void processSearcher() {
@@ -231,5 +240,19 @@ public class UnifiedPlatform {
     private void selectPath(DocPath path) throws BadPathException {
         citz.setSavePath(path);  // We set the citizen save path to the one we got through parameter
         System.out.println("Se ha seleccionado el path: " + path + " para guardar el documento");
+    }
+
+    // Optional - Digital Certificate
+    public void selectCertificate(byte opc) {
+        selectedCertification = possibleDigitalCertificates.get(opc - 1);
+        System.out.println("Se ha seleccionado el certificado digital: " + selectedCertification);
+    }
+
+    public void enterPassw (Password pas) throws NotValidPasswordException {
+        if (pas == null) {
+            throw new NotValidPasswordException("El password introduït no és valid, és null");
+        }
+        // If this line is called, the enterPIN won't be, they're mutually exclusive
+        citz.setPassword(pas);
     }
 }

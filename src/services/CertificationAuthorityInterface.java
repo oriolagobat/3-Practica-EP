@@ -1,9 +1,8 @@
 package services;
 
 import controller.exceptions.*;
-import data.Nif;
-import data.PINcode;
-import data.Password;
+import data.*;
+import data.exceptions.NotValidCertificateException;
 
 import java.net.ConnectException;
 import java.util.Date;
@@ -15,4 +14,6 @@ public interface CertificationAuthorityInterface {
             ConnectException;
     byte ckeckCredent (Nif nif, Password passw) throws NifNotRegisteredException,
             NotValidCredException, AnyMobileRegisteredException, ConnectException;
+
+    EncryptedData sendCertfAuth(EncryptingKey pubKey) throws NotValidCertificateException, ConnectException;
 }
