@@ -1,10 +1,7 @@
 package controller;
 
 import controller.exceptions.*;
-import data.DocPath;
-import data.Nif;
-import data.PINcode;
-import data.Password;
+import data.*;
 
 import jdk.jshell.spi.ExecutionControl;
 import data.exceptions.WrongDocPathFormatException;
@@ -254,5 +251,10 @@ public class UnifiedPlatform {
         }
         // If this line is called, the enterPIN won't be, they're mutually exclusive
         citz.setPassword(pas);
+    }
+
+    private Nif decryptData (EncryptedData encrypdata) {
+        System.out.println("TO BE IMPLEMENTED");
+        return null;
     }
 }
