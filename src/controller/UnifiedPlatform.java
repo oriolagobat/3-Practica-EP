@@ -7,23 +7,29 @@ import data.PINcode;
 import data.Password;
 
 import jdk.jshell.spi.ExecutionControl;
+import data.exceptions.WrongDocPathFormatException;
+import publicadministration.PDFDocument;
 import services.CertificationAuthorityInterface;
+import services.SSInterface;
 
+import java.io.IOException;
 import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 public class UnifiedPlatform {
-    Citizen citz;
     CertificationAuthorityInterface authMethod;
-
-    // Optional - Digital Certificate
-    String digitalCertificate;
+    SSInterface administration;
+    Citizen citz;
 
     HashMap<String, String> aapp;
     HashMap<String, ArrayList<String>> services;
     ArrayList<String> possibleAuthMethods;
+
+    // Optional - Digital Certificate
+    String digitalCertificate;
+    String selectedCertification = null;
     ArrayList<String> possibleDigitalCertificates;
 
     public UnifiedPlatform() {
@@ -34,10 +40,6 @@ public class UnifiedPlatform {
         setServices();
         this.possibleAuthMethods = new ArrayList<>();
         setAuthMethods();
-        this.possibleDigitalCertificates = new ArrayList<>();
-        setDigitalCertificates();
-
-        // Optional - Digital Certificate
     }
 
     private void setAapp() {
@@ -98,15 +100,6 @@ public class UnifiedPlatform {
         // WE COULD ADD MORE METHODS //
     }
 
-    // Optional - Digital Certificate
-    // We set as possible digital certificates those cualified for the AAPP's,
-    // as found on https://redtrust.com/tipos-de-certificados-digitales/
-    private void setDigitalCertificates() {
-        possibleDigitalCertificates.add("Certificados electrónicos cualificados de Empleado Público");
-        possibleDigitalCertificates.add("Certificados cualificados de Sede electrónica de la Administración Pública");
-        possibleDigitalCertificates.add("Certificados cualificados de Sello electrónico de la Administración Pública");
-    }
-
     public void processSearcher() {
         System.out.println("Es procedeix a usar el buscardor de tràmits");
         System.out.println("Es desplega el buscador");
@@ -154,13 +147,13 @@ public class UnifiedPlatform {
         // ASSUMING THAT SERCIVES IN THE DICTIONARY WILL BE IN THE SAME ORDER AS IN THE WEB PAGE
         // Since certifications are only available through SS, we asume citizen is using that AAPP
         ArrayList<String> ssServices = services.get("SS");
-        String selectedCertification = ssServices.get(opc - 1);
+        String selectedCertification = ssServices.get(opc);
         System.out.println("Se selecciona: " + selectedCertification);
     }
 
     public void selectAuthMethod(byte opc) {
         // ASSUMING THAT AUTH METHODS IN THE DICTIONARY WILL BE ON THE SAME ORDER AS IN THE WEB PAGE
-        String selectedAuthMethod = possibleAuthMethods.get(opc - 1);
+        String selectedAuthMethod = possibleAuthMethods.get(opc);
         System.out.println("Se selecciona el método de autenticación " + selectedAuthMethod);
     }
 
@@ -214,21 +207,5 @@ public class UnifiedPlatform {
     private void selectPath(DocPath path) throws BadPathException {
         citz.setSavePath(path);  // We set the citizen save path to the one we got through parameter
         System.out.println("Se ha seleccionado el path: " + path + " para guardar el documento");
-    }
-
-
-    // Optional - Digital certificate
-    public void selectCertificate(byte opc) {
-        digitalCertificate = possibleDigitalCertificates.get(opc - 1);
-        System.out.println("Se ha seleccionado el certificado digital: " + digitalCertificate);
-    }
-
-    public void enterPassw(Password pas) throws NotValidPasswordException {
-        if (pas == null) {
-            throw new NotValidPasswordException("El password introduït no és valid, és null");
-        } else {
-            // We can set this one here because if this one is set, we won't be using Cl@ve Permanente
-            citz.setPassword(pas);
-        }
     }
 }
