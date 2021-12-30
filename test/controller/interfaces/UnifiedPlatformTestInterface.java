@@ -1,13 +1,15 @@
 package controller.interfaces;
 
 import controller.UnifiedPlatform;
-import controller.exceptions.AnyKeyWordProcedureException;
+import controller.exceptions.*;
 
+import data.exceptions.WrongDocPathFormatException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,6 +32,19 @@ public interface UnifiedPlatformTestInterface {
     default void restoreStreams() {
         outContent.reset();
     }
+
+    @Test
+    public void getLaboralLifeDoc() throws IncorrectValDateException, NifNotRegisteredException,
+            AnyMobileRegisteredException, IOException, NotValidPINException,
+            NotAffiliatedException, WrongDocPathFormatException;
+
+    @Test
+    public void getMemberAccredDoc() throws IncorrectValDateException, NifNotRegisteredException,
+            AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException,
+            WrongDocPathFormatException;
+
+    @Test
+    void selectExistentAuthMethodTest();
 
     @Test
     default void searchForNonExistentAAPPTest() {
@@ -62,7 +77,4 @@ public interface UnifiedPlatformTestInterface {
         platform.selectCertificationReport(report);
         assertEquals(expectedResult.strip(), outContent.toString().strip());
     }
-
-    @Test
-    void selectExistentAuthMethodTest();
 }

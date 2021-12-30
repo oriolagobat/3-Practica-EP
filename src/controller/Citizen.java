@@ -1,9 +1,6 @@
 package controller;
 
-import data.DocPath;
-import data.Nif;
-import data.PINcode;
-import data.Password;
+import data.*;
 
 import java.util.Date;
 
@@ -17,9 +14,9 @@ public class Citizen {
     private Password password;
     private String phoneNumber;
     private PINcode PIN;
-
-
+    private AccredNumb accredNumb;
     private boolean reinforcedPINActivated = false;
+
 
     public Citizen() {
         this.nif = null;
@@ -83,5 +80,13 @@ public class Citizen {
 
     public void setReinforcedPINActivated(boolean reinforcedPINActivated) {
         this.reinforcedPINActivated = reinforcedPINActivated;
+    }
+
+    public AccredNumb getAccredNumb() {
+        return accredNumb;
+    }
+
+    public void setAccredNumb(AccredNumb accredNumb) {
+        this.accredNumb = accredNumb;
     }
 }

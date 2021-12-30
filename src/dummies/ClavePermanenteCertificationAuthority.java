@@ -14,7 +14,6 @@ public class ClavePermanenteCertificationAuthority implements CertificationAutho
 
     Citizen citizen = new Citizen();
 
-
     public ClavePermanenteCertificationAuthority(Citizen citizen) {
         this.citizen = citizen;
     }

@@ -6,8 +6,12 @@ import data.Nif;
 import data.PINcode;
 import data.Password;
 
+import data.exceptions.WrongDocPathFormatException;
+import publicadministration.PDFDocument;
 import services.CertificationAuthorityInterface;
+import services.SSInterface;
 
+import java.io.IOException;
 import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,11 +19,13 @@ import java.util.HashMap;
 
 public class UnifiedPlatform {
     Citizen citz;
+    String selectedCertification = null;
 
     HashMap<String, String> aapp;
     HashMap<String, ArrayList<String>> services;
     ArrayList<String> possibleAuthMethods;
     CertificationAuthorityInterface authMethod;
+    SSInterface administration;
 
     public UnifiedPlatform() {
         this.citz = new Citizen();
@@ -136,7 +142,7 @@ public class UnifiedPlatform {
         // ASSUMING THAT SERCIVES IN THE DICTIONARY WILL BE IN THE SAME ORDER AS IN THE WEB PAGE
         // Since certifications are only available through SS, we asume citizen is using that AAPP
         ArrayList<String> ssServices = services.get("SS");
-        String selectedCertification = ssServices.get(opc);
+        this.selectedCertification = ssServices.get(opc);
         System.out.println("Se selecciona: " + selectedCertification);
     }
 
@@ -150,6 +156,10 @@ public class UnifiedPlatform {
         this.authMethod = method;
     }
 
+    public void injectSS(SSInterface administration){
+        this.administration = administration;
+    }
+
     public void enterNIFandPINobt(Nif nif, Date valDate) throws NifNotRegisteredException, IncorrectValDateException, AnyMobileRegisteredException, ConnectException {
         // Assuming auth method is Cl@ve PIN //
         citz.setNif(nif);  // We set the citizen nif to the one we got through parameter
@@ -158,11 +168,31 @@ public class UnifiedPlatform {
         System.out.println("Se envia el PIN al usuario con DNI: " + nif.getNif());
     }
 
-    public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, ConnectException {
+
+    public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, IOException, WrongDocPathFormatException {
         boolean res = authMethod.checkPIN(citz.getNif(), pin);
         if (res) {
             System.out.println("El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent");
-        } else {
+
+            if (this.administration != null) {
+                switch (this.selectedCertification) {
+
+                    case "Solicitar el informe de vida laboral" -> {
+                        PDFDocument pdf = administration.getLaboralLife(citz.getNif());
+                        pdf.openDoc(pdf.getPath());
+                        System.out.println("Mostrant informe de la vida laboral...");
+                    }
+
+                    case "Obtener acreditación del número de afiliación a la Seguridad Social" -> {
+                        PDFDocument pdf = administration.getMembAccred(citz.getNif());
+                        pdf.openDoc(pdf.getPath());
+                        System.out.println("Mostrant nombre d'acreditació de la SS...");
+
+                    }
+                }
+            }
+        }
+        else {
             System.out.println("El PIN introduït no correspon al generat pel sistema per aquest ciutadà o ja no està vigent");
         }
     }

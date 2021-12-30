@@ -14,7 +14,6 @@ public class ClavePINCertificationAuthority implements CertificationAuthorityInt
 
     Citizen citizen = new Citizen();
 
-
     public ClavePINCertificationAuthority(Citizen citizen) {
         this.citizen = citizen;
     }
