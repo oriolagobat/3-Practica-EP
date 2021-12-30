@@ -170,8 +170,12 @@ public class UnifiedPlatform {
         // Assuming auth method is Cl@ve PIN //
         citz.setNif(nif);  // We set the citizen nif to the one we got through parameter
         citz.setValDate(valDate);  // We set the citizen validation date to the one we got through parameter
-        authMethod.sendPIN(nif, valDate);
-        System.out.println("Se envia el PIN al usuario con DNI: " + nif.getNif());
+        boolean res = authMethod.sendPIN(nif, valDate);
+        if (res) {
+            System.out.println("Se envia el PIN al usuario con DNI: " + nif.getNif());
+        } else {
+            throw new ConnectException("Error en l'enviament del SMS");
+        }
     }
 
     public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, IOException, WrongDocPathFormatException {
