@@ -249,7 +249,7 @@ public class UnifiedPlatform {
         if (pas == null) {
             throw new NotValidPasswordException("El password introduït no és valid, és null");
         }
-        // If this line is called, the enterPIN won't be, they're mutually exclusive
+        // If this line is called, the enterPIN from Cl@ve Permanente won't be, they're mutually exclusive
         citz.setPassword(pas);
     }
 
