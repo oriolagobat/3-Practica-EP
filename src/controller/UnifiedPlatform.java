@@ -16,11 +16,15 @@ import java.util.HashMap;
 
 public class UnifiedPlatform {
     Citizen citz;
+    CertificationAuthorityInterface authMethod;
+
+    // Optional - Digital Certificate
+    String digitalCertificate;
 
     HashMap<String, String> aapp;
     HashMap<String, ArrayList<String>> services;
     ArrayList<String> possibleAuthMethods;
-    CertificationAuthorityInterface authMethod;
+    ArrayList<String> possibleDigitalCertificates;
 
     public UnifiedPlatform() {
         this.citz = new Citizen();
@@ -30,6 +34,10 @@ public class UnifiedPlatform {
         setServices();
         this.possibleAuthMethods = new ArrayList<>();
         setAuthMethods();
+        this.possibleDigitalCertificates = new ArrayList<>();
+        setDigitalCertificates();
+
+        // Optional - Digital Certificate
     }
 
     private void setAapp() {
@@ -88,6 +96,15 @@ public class UnifiedPlatform {
         possibleAuthMethods.add("Certificado digital");
 
         // WE COULD ADD MORE METHODS //
+    }
+
+    // Optional - Digital Certificate
+    // We set as possible digital certificates those cualified for the AAPP's,
+    // as found on https://redtrust.com/tipos-de-certificados-digitales/
+    private void setDigitalCertificates() {
+        possibleDigitalCertificates.add("Certificados electrónicos cualificados de Empleado Público");
+        possibleDigitalCertificates.add("Certificados cualificados de Sede electrónica de la Administración Pública");
+        possibleDigitalCertificates.add("Certificados cualificados de Sello electrónico de la Administración Pública");
     }
 
     public void processSearcher() {
@@ -202,10 +219,16 @@ public class UnifiedPlatform {
 
     // Optional - Digital certificate
     public void selectCertificate(byte opc) {
-        System.out.println("Se");
+        digitalCertificate = possibleDigitalCertificates.get(opc - 1);
+        System.out.println("Se ha seleccionado el certificado digital: " + digitalCertificate);
     }
 
-    public void enterPassw() {
-
+    public void enterPassw(Password pas) throws NotValidPasswordException {
+        if (pas == null) {
+            throw new NotValidPasswordException("El password introduït no és valid, és null");
+        } else {
+            // We can set this one here because if this one is set, we won't be using Cl@ve Permanente
+            citz.setPassword(pas);
+        }
     }
 }
