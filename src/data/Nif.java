@@ -20,7 +20,8 @@ final public class Nif {
 
         if (code == null) throw new NullPointerException("El nif és null");
 
-        if (code.length() != correctNifLength) throw new WrongNifFormatException("La longitud del DNI no és la correcta");
+        if (code.length() != correctNifLength)
+            throw new WrongNifFormatException("La longitud del DNI no és la correcta");
 
         if (wrongNifFormat(code))
             throw new WrongNifFormatException("El format números/lletres no és el correcte. Recorda, 8 números i una lletra majúscula");

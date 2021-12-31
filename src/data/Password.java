@@ -27,28 +27,28 @@ final public class Password {
             throw new WrongPasswordFormatException("La contrasenya a de contenir com a mínim un caràcter especial");
     }
 
-    private boolean passwordHasDigit(String pass){
+    private boolean passwordHasDigit(String pass) {
         char[] passwd = pass.toCharArray();
-        for(char c : passwd){
-            if(Character.isDigit(c))
+        for (char c : passwd) {
+            if (Character.isDigit(c))
                 return true;
         }
         return false;
     }
 
-    private boolean passwordHasChar(String pass){
+    private boolean passwordHasChar(String pass) {
         char[] passwd = pass.toCharArray();
-        for(char c : passwd){
-            if(Character.isAlphabetic(c))
+        for (char c : passwd) {
+            if (Character.isAlphabetic(c))
                 return true;
         }
         return false;
     }
 
-    private boolean passwordHasSpecialChar(String pass){
+    private boolean passwordHasSpecialChar(String pass) {
         char[] passwd = pass.toCharArray();
-        for(char c : passwd){
-            if(!Character.isAlphabetic(c) && !Character.isDigit(c) && !Character.isSpaceChar(c))
+        for (char c : passwd) {
+            if (!Character.isAlphabetic(c) && !Character.isDigit(c) && !Character.isSpaceChar(c))
                 return true;
         }
         return false;

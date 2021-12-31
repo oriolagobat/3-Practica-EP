@@ -21,12 +21,12 @@ public class SS implements SSInterface {
     }
 
     @Override
-    public LaboralLifeDoc getLaboralLife(Nif nif) throws NotAffiliatedException, ConnectException, WrongDocPathFormatException {
+    public LaboralLifeDoc getLaboralLife(Nif nif) throws NotAffiliatedException, ConnectException {
         return new LaboralLifeDoc(citizen.getNif(), new QuotePeriodsColl());
     }
 
     @Override
-    public MemberAccreditationDoc getMembAccred(Nif nif) throws NotAffiliatedException, ConnectException, WrongDocPathFormatException {
+    public MemberAccreditationDoc getMembAccred(Nif nif) throws NotAffiliatedException, ConnectException {
         return new MemberAccreditationDoc(citizen.getNif(), citizen.getAccredNumb());
 
     }

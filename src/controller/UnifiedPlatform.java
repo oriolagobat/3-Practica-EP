@@ -316,7 +316,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
     }
 
     private Nif decryptData(EncryptedData encrypdata) throws DecryptationException, WrongNifFormatException {
-        System.out.println("Se envía para su desencriptación los datos");
+        System.out.println("Se envían para su desencriptación los datos");
         return Decryptor.decryptIDdata(encrypdata, this.privateKey);
     }
 }
