@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class UnifiedPlatform {
+public class UnifiedPlatform implements UnifiedPlatformInterface {
     Citizen citz;
     SSInterface administration;
     CertificationAuthorityInterface authMethod;
@@ -121,10 +121,12 @@ public class UnifiedPlatform {
     }
 
     // They will have the same value because we're just emulating the process of encryption and decryption
-    public void setEncryptingKeys() {
+    private void setEncryptingKeys() {
         this.privateKey = new EncryptingKey(new BigInteger("1234"));
         this.publicKey = new EncryptingKey(new BigInteger("1234"));
     }
+
+    // School tasks
 
     public void processSearcher() {
         System.out.println("Es procedeix a usar el buscardor de tràmits");
@@ -132,25 +134,22 @@ public class UnifiedPlatform {
     }
 
     public void enterKeyWords(String keyWord) throws AnyKeyWordProcedureException {
-        String result = aapp.get(keyWord);
-        if (result == null) throw new AnyKeyWordProcedureException("El tràmit buscat no és troba...");
-        else {
-            switch (result) {
-                case "SS":
-                    System.out.println("Mostrant AAPP: " + result);
-                    break;
-                // In other cases
-                case "AEAT":
-                    // selectAEAT();
-                    break;
-                case "MJ":
-                    // selectMJ();
-                    break;
-                case "DGT":
-                    // selectDGT();
-                    break;
-                // OTHER AAPP'S WOULD ALSO BE ADDED HERE //
-            }
+        String result = searchKeyWords(keyWord);
+        switch (result) {
+            case "SS":
+                System.out.println("Mostrant AAPP: " + result);
+                break;
+            // In other cases
+            case "AEAT":
+                // selectAEAT();
+                break;
+            case "MJ":
+                // selectMJ();
+                break;
+            case "DGT":
+                // selectDGT();
+                break;
+            // OTHER AAPP'S WOULD ALSO BE ADDED HERE //
         }
     }
 
@@ -183,14 +182,6 @@ public class UnifiedPlatform {
         System.out.println("Se selecciona el método de autenticación " + selectedAuthMethod);
     }
 
-    public void injectAuthenticationMethod(CertificationAuthorityInterface method) {
-        this.authMethod = method;
-    }
-
-    public void injectSS(SSInterface administration) {
-        this.administration = administration;
-    }
-
     public void enterNIFandPINobt(Nif nif, Date valDate) throws NifNotRegisteredException, IncorrectValDateException, AnyMobileRegisteredException, ConnectException {
         // Assuming auth method is Cl@ve PIN //
         citz.setNif(nif);  // We set the citizen nif to the one we got through parameter
@@ -203,25 +194,20 @@ public class UnifiedPlatform {
         }
     }
 
-    public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, IOException, WrongDocPathFormatException {
+    public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, ConnectException {
         boolean res = authMethod.checkPIN(citz.getNif(), pin);
         if (res) {
             System.out.println("El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent");
 
-            if (this.administration != null) {
-                switch (this.selectedCertification) {
+            if (selectedCertification != null) {
+                switch (selectedCertification) {
 
                     case "Solicitar el informe de vida laboral" -> {
-                        PDFDocument pdf = administration.getLaboralLife(citz.getNif());
-                        pdf.openDoc(pdf.getPath());
-                        System.out.println("Mostrant informe de la vida laboral...");
+                        citz.setPDFDocument(administration.getLaboralLife(citz.getNif()));
                     }
 
                     case "Obtener acreditación del número de afiliación a la Seguridad Social" -> {
-                        PDFDocument pdf = administration.getMembAccred(citz.getNif());
-                        pdf.openDoc(pdf.getPath());
-                        System.out.println("Mostrant nombre d'acreditació de la SS...");
-
+                        citz.setPDFDocument(administration.getMembAccred(citz.getNif()));
                     }
                 }
             }
@@ -245,17 +231,53 @@ public class UnifiedPlatform {
         }
     }
 
-    private void printDocument() throws BadPathException, PrintingException {
-        System.out.println("Se envia el documento para su impresión");
+    private void openDocument() throws BadPathException {
+        openDocument(citz.getPDFDocument().getPath());
     }
 
-    private void downloadDocument() throws BadPathException, PrintingException {
-        System.out.println("Se descarga el documento");
+    private void printDocument() throws BadPathException, PrintingException {
+        printDocument(citz.getPDFDocument().getPath());
+    }
+
+    private void downloadDocument() throws BadPathException {
+        downloadDocument(citz.getPDFDocument().getPath());
     }
 
     private void selectPath(DocPath path) throws BadPathException {
-        citz.setSavePath(path);  // We set the citizen save path to the one we got through parameter
         System.out.println("Se ha seleccionado el path: " + path + " para guardar el documento");
+    }
+
+    // Other operations
+    private String searchKeyWords(String keyWord) throws AnyKeyWordProcedureException {
+        String result = aapp.get(keyWord);
+        if (result == null) throw new AnyKeyWordProcedureException("El tràmit buscat no és troba...");
+        return result;
+    }
+
+    private void openDocument(DocPath path) throws BadPathException {
+        try {
+            citz.getPDFDocument().openDoc(path);
+        } catch (IOException e) {
+            throw new BadPathException("El path proporcionat no és valid");
+        }
+    }
+
+    private void printDocument(DocPath path) throws BadPathException, PrintingException {
+        System.out.println("Se envia el documento para su impresión");
+    }
+
+    private void downloadDocument(DocPath path) throws BadPathException {
+        System.out.println("Se descarga el documento");
+    }
+
+    // More operations
+
+    public void injectAuthenticationMethod(CertificationAuthorityInterface method) {
+        this.authMethod = method;
+    }
+
+    public void injectSS(SSInterface administration) {
+        this.administration = administration;
     }
 
     // Optional - Digital Certificate

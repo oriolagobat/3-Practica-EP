@@ -5,23 +5,13 @@ import data.DocPath;
 import data.Nif;
 import data.PINcode;
 import data.Password;
+import services.CertificationAuthorityInterface;
+import services.SSInterface;
 
 import java.net.ConnectException;
 import java.util.Date;
 
 public interface UnifiedPlatformInterface {
-
-    // Setters of needed data structures
-    void setAAPP();
-
-    void setServices();
-
-    void updateServiceMapKey();
-
-    void setDigitalCertificates();
-
-    void setEncryptingKeys();
-
     // School tasks
     void processSearcher();
 
@@ -43,21 +33,12 @@ public interface UnifiedPlatformInterface {
 
     void enterCred(Nif nif, Password passw) throws NifNotRegisteredException, NotValidCredException, AnyMobileRegisteredException, ConnectException;
 
-    void printDocument() throws BadPathException, PrintingException;
+    // Missing functions implemented in the class due to privacity
 
-    void downloadDocument();
-
-    void selectPath(DocPath path) throws BadPathException;
-
-    // Other operations
-    String searchKeyWords(String keyWord) throws AnyKeyWordProcedureException;
-
-    void openDocument(DocPath path) throws BadPathException;
-
-    void printDocument(DocPath path) throws BadPathException, PrintingException;
-
-    void downloadDocument(DocPath path) throws BadPathException;
+    // Other operations implemented in the class due to privacity
 
     // More operations
+    void injectAuthenticationMethod(CertificationAuthorityInterface method);
 
+    void injectSS(SSInterface administration);
 }

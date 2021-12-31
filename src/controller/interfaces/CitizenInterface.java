@@ -1,6 +1,7 @@
 package controller.interfaces;
 
 import data.*;
+import publicadministration.PDFDocument;
 
 import java.util.Date;
 
@@ -13,7 +14,9 @@ public interface CitizenInterface {
 
     Date getValDate();
 
-    void setSavePath(DocPath savepath);
+    void setPDFDocument(PDFDocument document);
+
+    PDFDocument getPDFDocument();
 
     // Optional
 

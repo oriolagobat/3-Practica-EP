@@ -2,13 +2,14 @@ package controller;
 
 import controller.interfaces.CitizenInterface;
 import data.*;
+import publicadministration.PDFDocument;
 
 import java.util.Date;
 
 public class Citizen implements CitizenInterface {
     private Nif nif;
     private Date valdate;
-    private DocPath savePath;
+    private PDFDocument document;
 
 
     // Optional
@@ -22,7 +23,7 @@ public class Citizen implements CitizenInterface {
     public Citizen() {
         this.nif = null;
         this.valdate = null;
-        this.savePath = null;
+        this.document = null;
 
         // Optional
         this.password = null;
@@ -45,9 +46,12 @@ public class Citizen implements CitizenInterface {
         return this.valdate;
     }
 
-    public void setSavePath(DocPath savePath) {
-        this.savePath = savePath;
+    public void setPDFDocument(PDFDocument document) {
+        this.document = document;
     }
+
+    public PDFDocument getPDFDocument() {
+        return this.document;}
 
     // Optional
     public void setPassword(Password passwd) {
