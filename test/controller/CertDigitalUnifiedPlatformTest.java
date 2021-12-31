@@ -54,7 +54,7 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     public void getLaboralLifeDoc() throws IOException, NotAffiliatedException,
             NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
         byte report = 1;
-        String expectedResult = "Se envía para su desencriptación los datos\n" +
+        String expectedResult = "Se envían para su desencriptación los datos\n" +
                 "Mostrant informe de la vida laboral...";
 
         platform.injectSS(new SS(citizen));
@@ -71,7 +71,7 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     public void getMemberAccredDoc() throws IOException, NotAffiliatedException,
             NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
         byte report = 2;
-        String expectedResult = "Se envía para su desencriptación los datos\n" +
+        String expectedResult = "Se envían para su desencriptación los datos\n" +
                 "Mostrant nombre d'acreditació de la SS...";
 
         platform.injectSS(new SS(citizen));

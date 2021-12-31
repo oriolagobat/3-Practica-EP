@@ -62,17 +62,13 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
     @Test
     public void notRegisteredNif() {
         assertThrows(NifNotRegisteredException.class,
-                () -> {
-                    platform.enterNIFandPINobt(new Nif("00112233Q"), citizen.getValDate());
-                });
+                () -> platform.enterNIFandPINobt(new Nif("00112233Q"), citizen.getValDate()));
     }
 
     @Test
     public void incorrectValDate() {
         assertThrows(IncorrectValDateException.class,
-                () -> {
-                    platform.enterNIFandPINobt(citizen.getNif(), new Date());
-                });
+                () -> platform.enterNIFandPINobt(citizen.getNif(), new Date()));
     }
 
     @Test
@@ -98,9 +94,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
     @Test
     public void incorrectPINTest() {
         assertThrows(NotValidPINException.class,
-                () -> {
-                    platform.enterPIN(new PINcode("978"));
-                });
+                () -> platform.enterPIN(new PINcode("978")));
     }
 
     @Test

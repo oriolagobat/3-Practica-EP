@@ -24,8 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface UnifiedPlatformTestInterface {
 
-    final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    final PrintStream originalOut = System.out;
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     UnifiedPlatform platform = new UnifiedPlatform();
 
@@ -41,12 +40,12 @@ public interface UnifiedPlatformTestInterface {
     }
 
     @Test
-    public void getLaboralLifeDoc() throws IncorrectValDateException, NifNotRegisteredException,
+    void getLaboralLifeDoc() throws IncorrectValDateException, NifNotRegisteredException,
             AnyMobileRegisteredException, IOException, NotValidPINException,
             NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException;
 
     @Test
-    public void getMemberAccredDoc() throws IncorrectValDateException, NifNotRegisteredException,
+    void getMemberAccredDoc() throws IncorrectValDateException, NifNotRegisteredException,
             AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException,
             NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException;
 
@@ -86,18 +85,14 @@ public interface UnifiedPlatformTestInterface {
     }
 
     @Test
-    default void nullEncryptedDataTest(){
+    default void nullEncryptedDataTest() {
         assertThrows(DecryptationException.class,
-                () -> {
-                    Decryptor.decryptIDdata(null, new EncryptingKey(BigInteger.ONE));
-                });
+                () -> Decryptor.decryptIDdata(null, new EncryptingKey(BigInteger.ONE)));
     }
 
     @Test
-    default void nullEncryptingKeyTest(){
+    default void nullEncryptingKeyTest() {
         assertThrows(DecryptationException.class,
-                () -> {
-                    Decryptor.decryptIDdata(new EncryptedData("sampleNIF".getBytes(Charset.defaultCharset())), null);
-                });
+                () -> Decryptor.decryptIDdata(new EncryptedData("sampleNIF".getBytes(Charset.defaultCharset())), null));
     }
 }

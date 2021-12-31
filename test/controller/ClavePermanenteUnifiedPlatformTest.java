@@ -71,9 +71,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     @Test
     public void notRegisteredNif() {
         assertThrows(NifNotRegisteredException.class,
-                () -> {
-                    platform.enterCred(new Nif("12345678A"), citizen.getPassword());
-                });
+                () -> platform.enterCred(new Nif("12345678A"), citizen.getPassword()));
     }
 
     @Test
@@ -88,9 +86,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     @Test
     public void notValidCred() {
         assertThrows(NotValidCredException.class,
-                () -> {
-                    platform.enterCred(citizen.getNif(), new Password("contrasenya1234$$"));
-                });
+                () -> platform.enterCred(citizen.getNif(), new Password("contrasenya1234$$")));
     }
 
     @Test
@@ -105,9 +101,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     @Test
     public void incorrectPINTest() {
         assertThrows(NotValidPINException.class,
-                () -> {
-                    platform.enterPIN(new PINcode("978"));
-                });
+                () -> platform.enterPIN(new PINcode("978")));
     }
 
     @Test
