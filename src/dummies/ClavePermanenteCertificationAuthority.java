@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class ClavePermanenteCertificationAuthority implements CertificationAuthorityInterface {
 
-    Citizen citizen = new Citizen();
+    Citizen citizen;
 
     public ClavePermanenteCertificationAuthority(Citizen citizen) {
         this.citizen = citizen;
@@ -24,7 +24,7 @@ public class ClavePermanenteCertificationAuthority implements CertificationAutho
 
     @Override
     public boolean checkPIN(Nif nif, PINcode pin) throws NotValidPINException, ConnectException {
-        if(!pin.equals(citizen.getPIN()))
+        if (!pin.equals(citizen.getPIN()))
             throw new NotValidPINException("PIN incorrecte");
 
         return true;

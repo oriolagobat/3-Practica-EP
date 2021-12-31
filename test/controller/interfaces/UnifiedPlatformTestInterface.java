@@ -6,7 +6,6 @@ import controller.exceptions.*;
 import data.EncryptedData;
 import data.EncryptingKey;
 import data.exceptions.NotValidCertificateException;
-import data.exceptions.WrongDocPathFormatException;
 import data.exceptions.WrongNifFormatException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

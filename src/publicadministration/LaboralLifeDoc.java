@@ -1,13 +1,12 @@
 package publicadministration;
 
 import data.Nif;
-import data.exceptions.WrongDocPathFormatException;
 
-public class LaboralLifeDoc extends PDFDocument{
+public class LaboralLifeDoc extends PDFDocument {
     private final Nif nif;
     private final QuotePeriodsColl quotePds;
 
-    public LaboralLifeDoc (Nif nif, QuotePeriodsColl quotePds) throws WrongDocPathFormatException {
+    public LaboralLifeDoc(Nif nif, QuotePeriodsColl quotePds) {
         this.nif = nif;
         this.quotePds = quotePds;
     }

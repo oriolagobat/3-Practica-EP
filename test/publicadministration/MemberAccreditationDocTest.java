@@ -3,7 +3,6 @@ package publicadministration;
 import data.AccredNumb;
 import data.Nif;
 import data.exceptions.WrongAccredNumbFormatException;
-import data.exceptions.WrongDocPathFormatException;
 import data.exceptions.WrongNifFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

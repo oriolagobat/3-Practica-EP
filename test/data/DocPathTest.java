@@ -1,6 +1,5 @@
 package data;
 
-import data.exceptions.WrongDocPathFormatException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import data.interfaces.DocPathTestInterface;

@@ -6,7 +6,6 @@ import data.*;
 
 import data.exceptions.NotValidCertificateException;
 import data.exceptions.WrongNifFormatException;
-import data.exceptions.WrongDocPathFormatException;
 import publicadministration.PDFDocument;
 import services.CertificationAuthorityInterface;
 import services.Decryptor;

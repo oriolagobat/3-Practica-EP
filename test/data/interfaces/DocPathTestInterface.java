@@ -1,7 +1,6 @@
 package data.interfaces;
 
 import data.DocPath;
-import data.exceptions.WrongDocPathFormatException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

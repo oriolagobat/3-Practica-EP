@@ -2,9 +2,7 @@ package dummies;
 
 import controller.Citizen;
 import controller.exceptions.NotAffiliatedException;
-import data.AccredNumb;
 import data.Nif;
-import data.exceptions.WrongDocPathFormatException;
 import publicadministration.LaboralLifeDoc;
 import publicadministration.MemberAccreditationDoc;
 import publicadministration.QuotePeriodsColl;
@@ -14,7 +12,7 @@ import java.net.ConnectException;
 
 public class SS implements SSInterface {
 
-    Citizen citizen = new Citizen();
+    Citizen citizen;
 
     public SS(Citizen citizen) {
         this.citizen = citizen;

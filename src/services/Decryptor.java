@@ -16,7 +16,7 @@ public class Decryptor {
             throw new DecryptationException("Error en el desxifratge");
 
         byte[] data = encrypData.getEncryptedData();
-        for(int i = 0; i < data.length; i++){
+        for (int i = 0; i < data.length; i++) {
             int tmp = data[i];
             tmp -= privKey.getEncryptingKey().intValue();
             data[i] = (byte) tmp;

@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class CertificadoDigitalCertificationAuthority implements CertificationAuthorityInterface {
 
-    Citizen citizen = new Citizen();
+    Citizen citizen;
 
     public CertificadoDigitalCertificationAuthority(Citizen citizen) {
         this.citizen = citizen;

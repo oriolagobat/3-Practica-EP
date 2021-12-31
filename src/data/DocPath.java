@@ -1,7 +1,5 @@
 package data;
 
-import data.exceptions.WrongDocPathFormatException;
-
 /**
  * Essential data classes
  */
@@ -9,19 +7,14 @@ final public class DocPath {
     // Represents the route, path to a directory
     private final String path;
 
-    public DocPath(String docPath) throws WrongDocPathFormatException {
+    public DocPath(String docPath) {
         checkDocPath(docPath);
 
         this.path = docPath;
     }
 
-    private void checkDocPath(String docPath) throws WrongDocPathFormatException {
-        int incorrectDocPathLength = 0;
-
+    private void checkDocPath(String docPath) {
         if (docPath == null) throw new NullPointerException("El path del document és null");
-
-        if (docPath.length() == incorrectDocPathLength)
-            throw new WrongDocPathFormatException("La longitud del path és zero");
     }
 
     public String getDocPath() {

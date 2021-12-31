@@ -1,7 +1,6 @@
 package publicadministration;
 
 import data.DocPath;
-import data.exceptions.WrongDocPathFormatException;
 
 import java.awt.*;
 import java.io.File;
@@ -14,13 +13,13 @@ public class PDFDocument {
     private DocPath path;
     private final static String defaultPath = "SampleDoc.pdf";
 
-    public PDFDocument () throws WrongDocPathFormatException {
+    public PDFDocument() {
         this.creatDate = new Date();
         this.path = new DocPath(defaultPath);
         this.file = new File(path.getDocPath());
     }
 
-    public PDFDocument (Date creatDate, DocPath path, File file) throws WrongDocPathFormatException {
+    public PDFDocument(Date creatDate, DocPath path, File file) {
         this.creatDate = creatDate;
         this.path = path;
         this.file = file;
@@ -38,30 +37,26 @@ public class PDFDocument {
         return file;
     }
 
-    public String toString () {
+    public String toString() {
         return "PDFDocument{" + "Creation Date='" + creatDate.toString() + '\'' + ", " + path.toString() + '\'' + '}';
     }
 
     // To implement only optionally
-    public void moveDoc (DocPath destPath) throws IOException {
-        if (!new File(destPath.getDocPath()).exists())
-        {
+    public void moveDoc(DocPath destPath) throws IOException {
+        if (!new File(destPath.getDocPath()).exists()) {
             throw new IOException("El path especificat no existeix.");
-        }
-        else {
+        } else {
             System.out.println("Movent el document de " + path + " a " + destPath);
             path = destPath;
         }
     }
 
-    public void openDoc (DocPath path) throws IOException {
-        if (!new File(path.getDocPath()).exists())
-        {
+    public void openDoc(DocPath path) throws IOException {
+        if (!new File(path.getDocPath()).exists()) {
             throw new IOException("El document especificat no existeix.");
-        }
-        else{
+        } else {
             try {
-                File file = new File (path.getDocPath());
+                File file = new File(path.getDocPath());
                 Desktop.getDesktop().open(file);
             } catch (IOException ex) {
                 ex.printStackTrace();
