@@ -7,7 +7,6 @@ import data.Nif;
 import data.PINcode;
 import data.Password;
 import data.exceptions.*;
-import dummies.ClavePINCertificationAuthority;
 import dummies.ClavePermanenteCertificationAuthority;
 import dummies.SS;
 import org.junit.jupiter.api.BeforeEach;

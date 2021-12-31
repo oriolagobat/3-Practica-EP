@@ -1,10 +1,11 @@
 package controller;
 
+import controller.interfaces.CitizenInterface;
 import data.*;
 
 import java.util.Date;
 
-public class Citizen {
+public class Citizen implements CitizenInterface {
     private Nif nif;
     private Date valdate;
     private DocPath savePath;
@@ -32,24 +33,20 @@ public class Citizen {
         this.nif = nif;
     }
 
-    public void setValDate(Date valdate) {
-        this.valdate = valdate;
-    }
-
-    public void setSavePath(DocPath savePath) {
-        this.savePath = savePath;
-    }
-
     public Nif getNif() {
         return this.nif;
+    }
+
+    public void setValDate(Date valdate) {
+        this.valdate = valdate;
     }
 
     public Date getValDate() {
         return this.valdate;
     }
 
-    public DocPath getSavePath() {
-        return this.savePath;
+    public void setSavePath(DocPath savePath) {
+        this.savePath = savePath;
     }
 
     // Optional
@@ -60,33 +57,36 @@ public class Citizen {
     public Password getPassword() {
         return this.password;
     }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getPhoneNumber() { return this.phoneNumber; }
-
-    public PINcode getPIN() {
-        return PIN;
+    public String getPhoneNumber() {
+        return this.phoneNumber;
     }
 
     public void setPIN(PINcode PIN) {
         this.PIN = PIN;
     }
 
-    public boolean hasReinforcedPINActivated() {
-        return reinforcedPINActivated;
+    public PINcode getPIN() {
+        return PIN;
     }
 
-    public void setReinforcedPINActivated(boolean reinforcedPINActivated) {
-        this.reinforcedPINActivated = reinforcedPINActivated;
+    public void setAccredNumb(AccredNumb accredNumb) {
+        this.accredNumb = accredNumb;
     }
 
     public AccredNumb getAccredNumb() {
         return accredNumb;
     }
 
-    public void setAccredNumb(AccredNumb accredNumb) {
-        this.accredNumb = accredNumb;
+    public void setReinforcedPINActivated(boolean reinforcedPINActivated) {
+        this.reinforcedPINActivated = reinforcedPINActivated;
+    }
+
+    public boolean hasReinforcedPINActivated() {
+        return reinforcedPINActivated;
     }
 }

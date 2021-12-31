@@ -5,7 +5,6 @@ import data.*;
 
 import data.exceptions.NotValidCertificateException;
 import data.exceptions.WrongNifFormatException;
-import jdk.jshell.spi.ExecutionControl;
 import data.exceptions.WrongDocPathFormatException;
 import publicadministration.PDFDocument;
 import services.CertificationAuthorityInterface;
@@ -16,8 +15,6 @@ import services.exceptions.DecryptationException;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.ConnectException;
-import java.nio.charset.StandardCharsets;
-import java.security.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -123,7 +120,7 @@ public class UnifiedPlatform {
     }
 
     // They will have the same value because we're just emulating the process of encryption and decryption
-    public void setEncryptingKeys(){
+    public void setEncryptingKeys() {
         this.privateKey = new EncryptingKey(new BigInteger("1234"));
         this.publicKey = new EncryptingKey(new BigInteger("1234"));
     }
@@ -185,11 +182,11 @@ public class UnifiedPlatform {
         System.out.println("Se selecciona el método de autenticación " + selectedAuthMethod);
     }
 
-    public void injectAuthenticationMethod(CertificationAuthorityInterface method){
+    public void injectAuthenticationMethod(CertificationAuthorityInterface method) {
         this.authMethod = method;
     }
 
-    public void injectSS(SSInterface administration){
+    public void injectSS(SSInterface administration) {
         this.administration = administration;
     }
 
@@ -266,7 +263,7 @@ public class UnifiedPlatform {
         System.out.println("Se ha seleccionado el certificado digital: " + selectedCertification);
     }
 
-    public void enterPassw (Password pas) throws NotValidPasswordException, NotValidCertificateException, IOException, DecryptationException, WrongNifFormatException, NotAffiliatedException, WrongDocPathFormatException {
+    public void enterPassw(Password pas) throws NotValidPasswordException, NotValidCertificateException, IOException, DecryptationException, WrongNifFormatException, NotAffiliatedException, WrongDocPathFormatException {
         if (pas == null) {
             throw new NotValidPasswordException("El password introduït no és valid, és null");
         }

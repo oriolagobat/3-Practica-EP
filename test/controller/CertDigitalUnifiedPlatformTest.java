@@ -8,14 +8,12 @@ import data.PINcode;
 import data.Password;
 import data.exceptions.*;
 import dummies.CertificadoDigitalCertificationAuthority;
-import dummies.ClavePermanenteCertificationAuthority;
 import dummies.SS;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import services.exceptions.DecryptationException;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
