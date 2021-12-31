@@ -11,18 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public interface PDFDocumentTestInterface {
 
     @Test
-    void getPathTest();
-
-    @Test
-    void getFileTest();
-
-    @Test
-    void moveDocTest() throws IOException;
-
-    @Test
-    void openDocTest() throws IOException;
-
-    @Test
     default void moveToNonExistentPathTest() {
         assertThrows(IOException.class,
                 () -> {
@@ -41,4 +29,16 @@ public interface PDFDocumentTestInterface {
                     pdf.openDoc(nonExistentPath);
                 });
     }
+
+    @Test
+    void getPathTest();
+
+    @Test
+    void getFileTest();
+
+    @Test
+    void moveDocTest() throws IOException;
+
+    @Test
+    void openDocTest() throws IOException;
 }
