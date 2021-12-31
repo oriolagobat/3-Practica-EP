@@ -1,6 +1,7 @@
 package controller;
 
 import controller.exceptions.*;
+import controller.interfaces.UnifiedPlatformInterface;
 import data.*;
 
 import data.exceptions.NotValidCertificateException;
@@ -39,7 +40,7 @@ public class UnifiedPlatform {
     public UnifiedPlatform() {
         this.citz = new Citizen();
         this.aapp = new HashMap<>();
-        setAapp();
+        setAAPP();
 
         this.services = new HashMap<>();
         setServices();
@@ -53,7 +54,7 @@ public class UnifiedPlatform {
         setEncryptingKeys();
     }
 
-    private void setAapp() {
+    private void setAAPP() {
         // Seguridad Social (SS)
         aapp.put("Solicitar el informe de vida laboral", "SS");
         aapp.put("Obtener acreditación del número de afiliación a la Seguridad Social", "SS");
