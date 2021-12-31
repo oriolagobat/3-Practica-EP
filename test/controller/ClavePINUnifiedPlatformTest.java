@@ -9,6 +9,7 @@ import data.Password;
 import data.exceptions.*;
 import dummies.ClavePINCertificationAuthority;
 import dummies.SS;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,6 +41,11 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
         citizen.setValDate(cal.getTime());
 
         platform.injectAuthenticationMethod(new ClavePINCertificationAuthority(citizen));
+    }
+
+    @AfterEach
+    public void unSetAdministration(){
+        platform.injectSS(null);
     }
 
     @Test
@@ -80,7 +86,6 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
                 });
     }
 
-    // TODO: Arreglar el test aquet que falla per tena null.
     @Test
     public void correctEnterPINTest() throws NotValidPINException, NotAffiliatedException,
             IOException {
@@ -131,6 +136,5 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
         platform.enterPIN(citizen.getPIN());
 
         assertEquals(expectedResult.replaceAll("[^a-zA-Z0-9]", ""), outContent.toString().replaceAll("[^a-zA-Z0-9]", ""));
-
     }
 }

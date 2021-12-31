@@ -198,7 +198,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         if (res) {
             System.out.println("El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent");
 
-            if (selectedCertification != null) {
+            if (administration != null) {
                 switch (selectedCertification) {
 
                     case "Solicitar el informe de vida laboral" -> {

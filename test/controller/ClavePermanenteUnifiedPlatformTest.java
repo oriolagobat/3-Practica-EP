@@ -9,6 +9,7 @@ import data.Password;
 import data.exceptions.*;
 import dummies.ClavePermanenteCertificationAuthority;
 import dummies.SS;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +40,11 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
         citizen.setValDate(cal.getTime());
 
         platform.injectAuthenticationMethod(new ClavePermanenteCertificationAuthority(citizen));
+    }
+    
+    @AfterEach
+    public void unSetAdministration(){
+        platform.injectSS(null);
     }
 
     @Test
