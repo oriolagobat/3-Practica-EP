@@ -285,7 +285,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         System.out.println("Se ha seleccionado el certificado digital: " + selectedCertification);
     }
 
-    public void enterPassw(Password pas) throws NotValidPasswordException, NotValidCertificateException, IOException, DecryptationException, WrongNifFormatException, NotAffiliatedException, WrongDocPathFormatException {
+    public void enterPassw(Password pas) throws NotValidPasswordException, NotValidCertificateException, IOException, DecryptationException, WrongNifFormatException, NotAffiliatedException {
         if (pas == null) {
             throw new NotValidPasswordException("El password introduït no és valid, és null");
         }

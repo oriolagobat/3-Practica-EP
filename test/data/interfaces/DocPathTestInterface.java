@@ -14,13 +14,4 @@ public interface DocPathTestInterface {
         assertThrows(NullPointerException.class,
                 () -> new DocPath(null));
     }
-
-    @Test
-    default void getWrongFormatPathException() {
-        assertThrows(WrongDocPathFormatException.class,
-                () -> {
-                    String tooShort = "";
-                    new DocPath(tooShort);
-                });
-    }
 }

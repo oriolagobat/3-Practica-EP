@@ -17,7 +17,7 @@ public class PDFDocumentTest implements PDFDocumentTestInterface {
     private File file;
 
     @BeforeEach
-    public void setUp() throws WrongDocPathFormatException {
+    public void setUp() {
         pdf = new PDFDocument();
         defaultPath = "SampleDoc.pdf";
         file = new File(defaultPath);
@@ -38,7 +38,7 @@ public class PDFDocumentTest implements PDFDocumentTestInterface {
 
     @Test
     @Override
-    public void moveDocTest() throws WrongDocPathFormatException, IOException {
+    public void moveDocTest() throws IOException {
         DocPath newPath = new DocPath("test");
         pdf.moveDoc(newPath);
         assertEquals(newPath, pdf.getPath());

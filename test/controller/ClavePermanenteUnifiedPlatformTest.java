@@ -95,7 +95,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
 
     @Test
     public void correctEnterPINTest() throws NotValidPINException, NotAffiliatedException,
-            IOException, WrongDocPathFormatException {
+            IOException {
         String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent";
         platform.injectSS(null);
         platform.enterPIN(citizen.getPIN());
@@ -113,7 +113,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     @Test
     @Override
     public void getLaboralLifeDoc() throws NifNotRegisteredException, AnyMobileRegisteredException, IOException,
-            NotValidPINException, NotAffiliatedException, WrongDocPathFormatException, NotValidCredException {
+            NotValidPINException, NotAffiliatedException, NotValidCredException {
 
         byte report = 1;
         String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n" +
@@ -133,7 +133,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     @Test
     @Override
     public void getMemberAccredDoc() throws NifNotRegisteredException, AnyMobileRegisteredException, IOException,
-            NotValidPINException, NotAffiliatedException, WrongDocPathFormatException, NotValidCredException {
+            NotValidPINException, NotAffiliatedException, NotValidCredException {
         byte report = 2;
         String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n" +
                 "Mostrant nombre d'acreditació de la SS...";

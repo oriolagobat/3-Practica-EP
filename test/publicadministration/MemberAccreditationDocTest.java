@@ -20,7 +20,7 @@ public class MemberAccreditationDocTest implements MemberAccreditationDocTestInt
 
 
     @BeforeEach
-    void setUp() throws WrongNifFormatException, WrongDocPathFormatException, WrongAccredNumbFormatException {
+    void setUp() throws WrongNifFormatException, WrongAccredNumbFormatException {
         nif = new Nif(nifValue);
         accredNum = new AccredNumb(accredNumValue);
         doc = new MemberAccreditationDoc(nif, accredNum);

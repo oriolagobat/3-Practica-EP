@@ -18,7 +18,7 @@ public class LaboralLifeDocTest implements LaboralLifeDocTestInterface {
     private final String nifValue = "44488877F";
 
     @BeforeEach
-    void setUp() throws WrongNifFormatException, WrongDocPathFormatException {
+    void setUp() throws WrongNifFormatException {
         nif = new Nif(nifValue);
         qPds = new QuotePeriodsColl();
         doc = new LaboralLifeDoc(nif, qPds);

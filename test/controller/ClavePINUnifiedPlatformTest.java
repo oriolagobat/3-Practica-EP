@@ -87,7 +87,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
     // TODO: Arreglar el test aquet que falla per tena null.
     @Test
     public void correctEnterPINTest() throws NotValidPINException, NotAffiliatedException,
-            IOException, WrongDocPathFormatException {
+            IOException {
         String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n" +
                 "Mostrant informe de la vida laboral...";
         platform.enterPIN(citizen.getPIN());
@@ -107,7 +107,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
     @Override
     public void getLaboralLifeDoc() throws IncorrectValDateException, NifNotRegisteredException,
             AnyMobileRegisteredException, IOException, NotValidPINException,
-            NotAffiliatedException, WrongDocPathFormatException {
+            NotAffiliatedException {
 
         byte report = 1;
         String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n" +
@@ -126,8 +126,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
     @Test
     @Override
     public void getMemberAccredDoc() throws IncorrectValDateException, NifNotRegisteredException,
-            AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException,
-            WrongDocPathFormatException {
+            AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException {
 
         byte report = 2;
         String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n" +

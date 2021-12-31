@@ -51,7 +51,7 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
 
     @Test
     @Override
-    public void getLaboralLifeDoc() throws IOException, NotAffiliatedException, WrongDocPathFormatException,
+    public void getLaboralLifeDoc() throws IOException, NotAffiliatedException,
             NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
         byte report = 1;
         String expectedResult = "Se envía para su desencriptación los datos\n" +
@@ -68,7 +68,7 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
 
     @Test
     @Override
-    public void getMemberAccredDoc() throws IOException, NotAffiliatedException, WrongDocPathFormatException,
+    public void getMemberAccredDoc() throws IOException, NotAffiliatedException,
             NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
         byte report = 2;
         String expectedResult = "Se envía para su desencriptación los datos\n" +
@@ -91,7 +91,7 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     }
 
     @Test
-    public void enterPasswTest() throws WrongPasswordFormatException, NotValidPasswordException, NotValidCertificateException, IOException, NotAffiliatedException, WrongDocPathFormatException, DecryptationException, WrongNifFormatException {
+    public void enterPasswTest() throws WrongPasswordFormatException, NotValidPasswordException, NotValidCertificateException, IOException, NotAffiliatedException, DecryptationException, WrongNifFormatException {
         Password password = new Password("contrasenya123$");
         platform.enterPassw(password);
         assertEquals(password, platform.citz.getPassword());

@@ -10,7 +10,7 @@ public class DocPathTest implements DocPathTestInterface {
     DocPath docPath;
 
     @BeforeEach
-    public void setUp() throws WrongDocPathFormatException {
+    public void setUp() {
         String correctDocPath = "/home/oriolagobat/git/result.out";
         docPath = new DocPath(correctDocPath);
     }
