@@ -1,7 +1,5 @@
 package publicadministration.interfaces;
 
-import data.AccredNumb;
-import data.Nif;
 import org.junit.jupiter.api.Test;
 
 public interface MemberAccreditationDocTestInterface {

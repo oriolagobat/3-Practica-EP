@@ -33,6 +33,6 @@ public class LaboralLifeDocTest implements LaboralLifeDocTestInterface {
     @Test
     @Override
     public void getQuotePdsTest() {
-        assertEquals(new ArrayList<>(),doc.getQuotePds().getQuotePeriodsCollection());
+        assertEquals(new ArrayList<>(), doc.getQuotePds().getQuotePeriodsCollection());
     }
 }

@@ -15,14 +15,16 @@ public class MemberAccreditationDocTest implements MemberAccreditationDocTestInt
     MemberAccreditationDoc doc;
     Nif nif;
     AccredNumb accredNum;
-    private final String nifValue = "44488877F";
-    private final String accredNumValue = "444888777";
 
 
     @BeforeEach
     void setUp() throws WrongNifFormatException, WrongAccredNumbFormatException {
+        String nifValue = "44488877F";
         nif = new Nif(nifValue);
+
+        String accredNumValue = "444888777";
         accredNum = new AccredNumb(accredNumValue);
+
         doc = new MemberAccreditationDoc(nif, accredNum);
     }
 

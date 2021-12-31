@@ -17,7 +17,7 @@ public interface PDFDocumentTestInterface {
     void getFileTest();
 
     @Test
-    void moveDocTest() throws  IOException;
+    void moveDocTest() throws IOException;
 
     @Test
     void openDocTest() throws IOException;
