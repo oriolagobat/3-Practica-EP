@@ -1,21 +1,42 @@
 package publicadministration;
 
+import publicadministration.exceptions.WrongQuotePeriodFormatException;
+
+import java.util.Calendar;
 import java.util.Date;
 
 public class QuotePeriod {  // Represents a quote period as a registered worker
     private final Date initDay;
     private final int numDays;
 
-    public QuotePeriod(Date date, int nDays) {  // Initializes attributes
-        checkNull(date);
+    public QuotePeriod(Date date, int nDays) throws WrongQuotePeriodFormatException {  // Initializes attributes
+        checkQuotePeriod(date, nDays);
 
         this.initDay = date;
         this.numDays = nDays;
     }
 
-    private void checkNull(Date date) {
-        if (date == null) throw new NullPointerException("");
+    private void checkQuotePeriod(Date date, int nDays) throws WrongQuotePeriodFormatException {
+        if (date == null) throw new NullPointerException("La data és null a l'hora d'instanciar un QuotePeriod");
+
+        if (wrongFormat(date, nDays)) throw new WrongQuotePeriodFormatException("La dada passada més els dies passats són superiors a la data actual");
     }
+
+    //TODO: Test
+    //TODO: Put in memory
+    private boolean wrongFormat(Date date, int nDays) {
+        // Set calendar to date + ndays time
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DAY_OF_MONTH, nDays);
+
+        // Get actual date
+        Calendar actual = Calendar.getInstance();
+
+        // Return true if date +ndays is greater than actual date
+        return cal.compareTo(actual) > 0;
+    }
+
 
     public Date getInitDay() {
         return initDay;

@@ -3,6 +3,7 @@ package publicadministration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import publicadministration.exceptions.DuplicatedQuotePeriodException;
+import publicadministration.exceptions.WrongQuotePeriodFormatException;
 import publicadministration.interfaces.QuotePeriodCollTestInterface;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
     ArrayList<Date> dateList;
 
     @BeforeEach
-    public void setUp() throws DuplicatedQuotePeriodException {
+    public void setUp() throws DuplicatedQuotePeriodException, WrongQuotePeriodFormatException {
         quotePeriodsColl = new QuotePeriodsColl();
         dateList = new ArrayList<>();
 
@@ -36,7 +37,7 @@ public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
 
     @Test
     @Override
-    public void getQuotePeriodsCollTest() {
+    public void getQuotePeriodsCollTest() throws WrongQuotePeriodFormatException {
         ArrayList<QuotePeriod> correctQPC = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
@@ -59,7 +60,7 @@ public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
 
     @Test
     @Override
-    public void addAndCheckLengthTest() throws DuplicatedQuotePeriodException {
+    public void addAndCheckLengthTest() throws DuplicatedQuotePeriodException, WrongQuotePeriodFormatException {
         int correctQuotePeriodsNumb = 6;
         QuotePeriod qP = new QuotePeriod(new Date(), 0);
         quotePeriodsColl.addQuotePeriod(qP);
@@ -69,7 +70,7 @@ public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
 
     @Test
     @Override
-    public void checkOlderSortTest() throws DuplicatedQuotePeriodException {
+    public void checkOlderSortTest() throws DuplicatedQuotePeriodException, WrongQuotePeriodFormatException {
         Calendar cal = Calendar.getInstance();
         cal.set(1970, Calendar.JANUARY, 0);
         Date date = cal.getTime();
@@ -84,7 +85,7 @@ public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
 
     @Test
     @Override
-    public void checkNewerSortTest() throws DuplicatedQuotePeriodException {
+    public void checkNewerSortTest() throws DuplicatedQuotePeriodException, WrongQuotePeriodFormatException {
         Calendar cal = Calendar.getInstance();
         cal.set(2020, Calendar.DECEMBER, 31);
         Date date = cal.getTime();

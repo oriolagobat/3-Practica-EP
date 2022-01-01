@@ -128,7 +128,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
     // School tasks
 
     public void processSearcher() {
-        System.out.println("Es procedeix a usar el buscardor de tràmits");
+        System.out.println("Es procedeix a usar el buscador de tràmits");
         System.out.println("Es desplega el buscador");
     }
 
@@ -160,10 +160,12 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         System.out.println("Se hace click en el enlace Ciudadanos de la sección de la SS");
     }
 
+    //TODO: Mostra el menú d'informes
     public void selectReports() {
         System.out.println("Se hace click en el enlace Informes y certificados del apartado Ciudadanos de la SS");
     }
 
+    //TODO: Mostra el menú d'autenticació
     public void selectCertificationReport(byte opc) {
         // 0 is Laboral Life Doc
         // 1 SS affiliation number
@@ -175,6 +177,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         System.out.println("Se selecciona: " + selectedCertification);
     }
 
+    // TODO: Mirar si és millor crear una instància
     public void selectAuthMethod(byte opc) {
         // ASSUMING THAT AUTH METHODS IN THE DICTIONARY WILL BE ON THE SAME ORDER AS IN THE WEB PAGE
         String selectedAuthMethod = possibleAuthMethods.get(opc - 1);

@@ -2,6 +2,7 @@ package publicadministration;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import publicadministration.exceptions.WrongQuotePeriodFormatException;
 import publicadministration.interfaces.QuotePeriodTestInterface;
 
 import java.util.Calendar;
@@ -15,7 +16,7 @@ public class QuotePeriodTest implements QuotePeriodTestInterface {
     Date date;  // Common date
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws WrongQuotePeriodFormatException {
         Calendar cal = Calendar.getInstance();
         cal.set(1970, Calendar.JANUARY, 16);
         date = cal.getTime();

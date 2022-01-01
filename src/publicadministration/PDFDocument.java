@@ -41,6 +41,7 @@ public class PDFDocument {
         }
     }
 
+    //TODO: No try catch, open already throws IOException
     public void openDoc(DocPath path) throws IOException {
         if (!new File(path.getDocPath()).exists()) {
             throw new IOException("El document especificat no existeix.");

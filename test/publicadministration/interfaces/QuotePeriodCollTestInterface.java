@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import publicadministration.QuotePeriod;
 import publicadministration.QuotePeriodsColl;
 import publicadministration.exceptions.DuplicatedQuotePeriodException;
+import publicadministration.exceptions.WrongQuotePeriodFormatException;
 
 import java.util.Date;
 
@@ -33,17 +34,17 @@ public interface QuotePeriodCollTestInterface {
     }
 
     @Test
-    void getQuotePeriodsCollTest();
+    void getQuotePeriodsCollTest() throws WrongQuotePeriodFormatException;
 
     @Test
     void checkLengthTest();
 
     @Test
-    void addAndCheckLengthTest() throws DuplicatedQuotePeriodException;
+    void addAndCheckLengthTest() throws DuplicatedQuotePeriodException, WrongQuotePeriodFormatException;
 
     @Test
-    void checkOlderSortTest() throws DuplicatedQuotePeriodException;
+    void checkOlderSortTest() throws DuplicatedQuotePeriodException, WrongQuotePeriodFormatException;
 
     @Test
-    void checkNewerSortTest() throws DuplicatedQuotePeriodException;
+    void checkNewerSortTest() throws DuplicatedQuotePeriodException, WrongQuotePeriodFormatException;
 }
