@@ -30,6 +30,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
 
 
     // Optional - Digital Certificate
+    public String selectedAapp = null;
     String selectedCertification = null;
     ArrayList<String> possibleDigitalCertificates;
 
@@ -134,20 +135,18 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
 
     public void enterKeyWords(String keyWord) throws AnyKeyWordProcedureException {
         String result = searchKeyWords(keyWord);
+        selectedAapp = result;
         switch (result) {
-            case "SS":
-                System.out.println("Mostrant AAPP: " + result);
-                break;
+            case "SS" -> System.out.println("S'envia a mostrar l'AAPP: " + result);
+
             // In other cases
-            case "AEAT":
-                // selectAEAT();
-                break;
-            case "MJ":
-                // selectMJ();
-                break;
-            case "DGT":
-                // selectDGT();
-                break;
+
+            case "AEAT" -> System.out.println("Per ser implementat encara");
+
+            case "MJ" -> System.out.println("Per ser implementat encara");
+
+            case "DGT" -> System.out.println("Per ser implementat encara");
+
             // OTHER AAPP'S WOULD ALSO BE ADDED HERE //
         }
     }
@@ -205,11 +204,11 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
             if (administration != null) {
                 switch (selectedCertification) {
 
-                    case "Solicitar el informe de vida laboral" -> {
+                    case "Solicitar el informe de vida laboral": {
                         citz.setPDFDocument(administration.getLaboralLife(citz.getNif()));
                     }
 
-                    case "Obtener acreditación del número de afiliación a la Seguridad Social" -> {
+                    case "Obtener acreditación del número de afiliación a la Seguridad Social": {
                         citz.setPDFDocument(administration.getMembAccred(citz.getNif()));
                     }
                 }
