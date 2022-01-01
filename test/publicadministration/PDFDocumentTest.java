@@ -39,9 +39,9 @@ public class PDFDocumentTest implements PDFDocumentTestInterface {
     @Test
     @Override
     public void moveDocTest() throws IOException {
-        DocPath newPath = new DocPath("test");
+        DocPath newPath = new DocPath("out");
         pdf.moveDoc(newPath);
-        assertEquals(newPath, pdf.getPath());
+        assertEquals(newPath.getDocPath(), pdf.getPath().getDocPath());
     }
 
     @Test

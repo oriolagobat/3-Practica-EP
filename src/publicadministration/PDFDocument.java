@@ -36,7 +36,7 @@ public class PDFDocument {
         return "PDFDocument{" + "Creation Date='" + creatDate.toString() + '\'' + ", " + path.toString() + '\'' + '}';
     }
 
-    // TODO: Yet to be implemented
+    // TODO: Yet to be tested
     public void moveDoc(DocPath destPath) throws IOException {
         // IOException is only thrown if there's an I/O Error,
         // We also throw it if the path doesn't exist
