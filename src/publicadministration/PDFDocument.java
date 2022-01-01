@@ -32,6 +32,7 @@ public class PDFDocument {
     }
 
     // To implement only optionally
+    // TODO: Yet to be implemented
     public void moveDoc(DocPath destPath) throws IOException {
         if (!new File(destPath.getDocPath()).exists()) {
             throw new IOException("El path especificat no existeix.");
@@ -43,15 +44,13 @@ public class PDFDocument {
 
     //TODO: No try catch, open already throws IOException
     public void openDoc(DocPath path) throws IOException {
+        // IOException is only thrown if there's no application to open the file,
+        // We also throw it if the path doesn't exist
         if (!new File(path.getDocPath()).exists()) {
             throw new IOException("El document especificat no existeix.");
         } else {
-            try {
-                File file = new File(path.getDocPath());
-                Desktop.getDesktop().open(file);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            File file = new File(path.getDocPath());
+            Desktop.getDesktop().open(file);
         }
     }
 }

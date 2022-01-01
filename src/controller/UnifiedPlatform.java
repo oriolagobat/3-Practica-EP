@@ -177,7 +177,8 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         System.out.println("Se selecciona: " + selectedCertification);
     }
 
-    // TODO: Mirar si és millor crear una instància
+    // TODO: Mirar si és millor crear una instància, tot i que crec que no, però hi ha d'haver alguna manera clena. Si no, per que ens està fent guardar aquest string??
+    // FIXME: Canvi de string a byte
     public void selectAuthMethod(byte opc) {
         // ASSUMING THAT AUTH METHODS IN THE DICTIONARY WILL BE ON THE SAME ORDER AS IN THE WEB PAGE
         String selectedAuthMethod = possibleAuthMethods.get(opc - 1);
