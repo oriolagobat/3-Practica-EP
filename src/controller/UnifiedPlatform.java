@@ -25,8 +25,8 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
     CertificationAuthorityInterface authMethod;
 
     HashMap<String, String> aapp;
-    HashMap<String, ArrayList<String>> services;
-    ArrayList<String> possibleAuthMethods;
+    public HashMap<String, ArrayList<String>> services;
+    public ArrayList<String> possibleAuthMethods;
 
 
     // Optional - Digital Certificate
