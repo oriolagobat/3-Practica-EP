@@ -5,7 +5,12 @@ import data.DocPath;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class PDFDocument {
     private final Date creatDate;
@@ -31,26 +36,23 @@ public class PDFDocument {
         return "PDFDocument{" + "Creation Date='" + creatDate.toString() + '\'' + ", " + path.toString() + '\'' + '}';
     }
 
-    // To implement only optionally
     // TODO: Yet to be implemented
     public void moveDoc(DocPath destPath) throws IOException {
-        if (!new File(destPath.getDocPath()).exists()) {
-            throw new IOException("El path especificat no existeix.");
-        } else {
-            System.out.println("Movent el document de " + path + " a " + destPath);
-            path = destPath;
-        }
+        // IOException is only thrown if there's an I/O Error,
+        // We also throw it if the path doesn't exist
+        if (!new File(destPath.getDocPath()).exists()) throw new IOException("El path especificat no existeix.");
+        Path sourcePath = Paths.get(path.getDocPath());
+        Path targetPath = Paths.get(defaultPath);
+        Files.move(sourcePath, targetPath, REPLACE_EXISTING);
+        System.out.println("Movent el document de " + path + " a " + destPath);
+        path = destPath;
     }
 
-    //TODO: No try catch, open already throws IOException
     public void openDoc(DocPath path) throws IOException {
         // IOException is only thrown if there's no application to open the file,
         // We also throw it if the path doesn't exist
-        if (!new File(path.getDocPath()).exists()) {
-            throw new IOException("El document especificat no existeix.");
-        } else {
-            File file = new File(path.getDocPath());
-            Desktop.getDesktop().open(file);
-        }
+        if (!new File(path.getDocPath()).exists()) throw new IOException("El document especificat no existeix.");
+        File file = new File(path.getDocPath());
+        Desktop.getDesktop().open(file);
     }
 }

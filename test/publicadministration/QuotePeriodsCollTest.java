@@ -22,7 +22,7 @@ public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
         quotePeriodsColl = new QuotePeriodsColl();
         dateList = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 1; i < 6; i++) {
             Calendar cal = Calendar.getInstance();
             cal.set(1975, Calendar.JANUARY, i);
             Date date = cal.getTime();
@@ -42,7 +42,7 @@ public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
 
         for (int i = 0; i < 5; i++) {
             Date date = dateList.get(i);
-            QuotePeriod qP = new QuotePeriod(date, i);
+            QuotePeriod qP = new QuotePeriod(date, i + 1);
 
             correctQPC.add(qP);
         }
@@ -61,8 +61,11 @@ public class QuotePeriodsCollTest implements QuotePeriodCollTestInterface {
     @Test
     @Override
     public void addAndCheckLengthTest() throws DuplicatedQuotePeriodException, WrongQuotePeriodFormatException {
+        Calendar cal = Calendar.getInstance();
+        cal.set(1970, Calendar.JUNE, 6);
+        Date date = cal.getTime();
         int correctQuotePeriodsNumb = 6;
-        QuotePeriod qP = new QuotePeriod(new Date(), 0);
+        QuotePeriod qP = new QuotePeriod(date, 6);
         quotePeriodsColl.addQuotePeriod(qP);
 
         assertEquals(correctQuotePeriodsNumb, quotePeriodsColl.getQuotePeriodsCollection().size());

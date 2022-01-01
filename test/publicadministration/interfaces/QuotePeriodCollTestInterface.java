@@ -6,6 +6,7 @@ import publicadministration.QuotePeriodsColl;
 import publicadministration.exceptions.DuplicatedQuotePeriodException;
 import publicadministration.exceptions.WrongQuotePeriodFormatException;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -24,8 +25,12 @@ public interface QuotePeriodCollTestInterface {
     default void getDuplicatedQuotePeriodTest() {
         assertThrows(DuplicatedQuotePeriodException.class,
                 () -> {
+                    Calendar cal = Calendar.getInstance();
+                    cal.set(1970, Calendar.JUNE, 6);
+                    Date date = cal.getTime();
+
                     QuotePeriodsColl quotePeriodsColl = new QuotePeriodsColl();
-                    QuotePeriod duplicateQuotePeriod = new QuotePeriod(new Date(), 0);
+                    QuotePeriod duplicateQuotePeriod = new QuotePeriod(date, 6);
                     quotePeriodsColl.addQuotePeriod(duplicateQuotePeriod);
 
                     // We should get the exception here
