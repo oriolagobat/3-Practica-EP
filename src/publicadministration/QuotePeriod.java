@@ -34,7 +34,7 @@ public class QuotePeriod {  // Represents a quote period as a registered worker
         Calendar actual = Calendar.getInstance();
 
         // Return true if date +ndays is greater than actual date
-        return cal.compareTo(actual) > 0;
+        return cal.compareTo(actual) >= 0;
     }
 
 
