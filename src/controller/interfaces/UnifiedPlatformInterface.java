@@ -43,8 +43,6 @@ public interface UnifiedPlatformInterface {
 
     void injectSS(SSInterface administration);
 
-    void setTelephoneNumber(String phoneNumber);
-
     void getServiceFromString(String service);
 
     void getCertfAuthFromByte(byte opc, Citizen citizen);

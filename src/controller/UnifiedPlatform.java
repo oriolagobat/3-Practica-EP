@@ -290,10 +290,6 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         this.administration = administration;
     }
 
-    public void setTelephoneNumber(String phoneNumber) {
-        citz.setPhoneNumber(phoneNumber);
-    }
-
     public void getServiceFromString(String service) {
         switch (service) {
             case "SS" -> administration = new SS(citz);
