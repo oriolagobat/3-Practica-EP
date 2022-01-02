@@ -116,7 +116,8 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
             NotValidPINException, NotAffiliatedException, NotValidCredException {
 
         byte report = 1;
-        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n";
+        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
+                + "Mostrant informe de la vida laboral...";
 
         platform.enterCred(citizen.getNif(), citizen.getPassword());
         platform.injectSS(new SS(citizen));
@@ -134,7 +135,8 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     public void getMemberAccredDoc() throws NifNotRegisteredException, AnyMobileRegisteredException, IOException,
             NotValidPINException, NotAffiliatedException, NotValidCredException {
         byte report = 2;
-        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n";
+        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
+                + "Mostrant nombre d'acreditació de la SS...";
 
         platform.enterCred(citizen.getNif(), citizen.getPassword());
         platform.injectSS(new SS(citizen));

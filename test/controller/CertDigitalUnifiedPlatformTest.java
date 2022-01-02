@@ -15,8 +15,10 @@ import services.exceptions.DecryptationException;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterface {
 
@@ -50,6 +52,21 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     }
 
     @Test
+    public void selectCertificateTest() {
+        String correctCertification = "Certificados cualificados de Sede electrónica de la Administración Pública";
+        platform.selectCertificate((byte) 2);
+        assertEquals(correctCertification, platform.selectedCertification);
+    }
+
+    @Test
+    public void enterPasswTest() throws WrongPasswordFormatException, NotValidPasswordException, NotValidCertificateException, IOException, NotAffiliatedException, DecryptationException, WrongNifFormatException {
+        Password password = new Password("contrasenya123$");
+        platform.enterPassw(password);
+        assertEquals(password, platform.citz.getPassword());
+    }
+
+
+    @Test
     @Override
     public void getLaboralLifeDoc() throws IOException, NotAffiliatedException,
             NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
@@ -81,19 +98,5 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
         platform.enterPassw(citizen.getPassword());
 
         assertEquals(expectedResult.replaceAll("[^a-zA-Z0-9]", ""), outContent.toString().replaceAll("[^a-zA-Z0-9]", ""));
-    }
-
-    @Test
-    public void selectCertificateTest() {
-        String correctCertification = "Certificados cualificados de Sede electrónica de la Administración Pública";
-        platform.selectCertificate((byte) 2);
-        assertEquals(correctCertification, platform.selectedCertification);
-    }
-
-    @Test
-    public void enterPasswTest() throws WrongPasswordFormatException, NotValidPasswordException, NotValidCertificateException, IOException, NotAffiliatedException, DecryptationException, WrongNifFormatException {
-        Password password = new Password("contrasenya123$");
-        platform.enterPassw(password);
-        assertEquals(password, platform.citz.getPassword());
     }
 }
