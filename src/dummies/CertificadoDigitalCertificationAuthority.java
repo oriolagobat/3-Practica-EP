@@ -37,6 +37,8 @@ public class CertificadoDigitalCertificationAuthority implements CertificationAu
     @Override
     public EncryptedData sendCertfAuth(EncryptingKey pubKey) throws NotValidCertificateException, ConnectException {
 
+        if (pubKey == null) throw new NotValidCertificateException("No s'a reconegut cap clau pública.");
+
         byte[] data = citizen.getNif().getNif().getBytes(Charset.defaultCharset());
         for (int i = 0; i < data.length; i++) {
             int tmp = data[i];
