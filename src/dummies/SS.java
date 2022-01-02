@@ -26,6 +26,5 @@ public class SS implements SSInterface {
     @Override
     public MemberAccreditationDoc getMembAccred(Nif nif) throws NotAffiliatedException, ConnectException {
         return new MemberAccreditationDoc(citizen.getNif(), citizen.getAccredNumb());
-
     }
 }

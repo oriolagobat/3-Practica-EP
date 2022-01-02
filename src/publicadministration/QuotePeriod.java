@@ -19,10 +19,10 @@ public class QuotePeriod {  // Represents a quote period as a registered worker
     private void checkQuotePeriod(Date date, int nDays) throws WrongQuotePeriodFormatException {
         if (date == null) throw new NullPointerException("La data és null a l'hora d'instanciar un QuotePeriod");
 
-        if (wrongFormat(date, nDays)) throw new WrongQuotePeriodFormatException("La dada passada més els dies passats són superiors a la data actual");
+        if (wrongFormat(date, nDays))
+            throw new WrongQuotePeriodFormatException("La dada passada més els dies passats són superiors a la data actual");
     }
 
-    //TODO: Put in el informe
     private boolean wrongFormat(Date date, int nDays) {
         // Set calendar to date + ndays time
         Calendar cal = Calendar.getInstance();
