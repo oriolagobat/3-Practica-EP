@@ -22,7 +22,7 @@ public class QuotePeriod {  // Represents a quote period as a registered worker
         if (wrongFormat(date, nDays)) throw new WrongQuotePeriodFormatException("La dada passada més els dies passats són superiors a la data actual");
     }
 
-    //TODO: Put in memory
+    //TODO: Put in el informe
     private boolean wrongFormat(Date date, int nDays) {
         // Set calendar to date + ndays time
         Calendar cal = Calendar.getInstance();

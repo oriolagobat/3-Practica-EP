@@ -41,4 +41,10 @@ public interface UnifiedPlatformInterface {
     void injectAuthenticationMethod(CertificationAuthorityInterface method);
 
     void injectSS(SSInterface administration);
+
+    void getServiceFromString(String service);
+
+    void getCertfAuthFromByte(byte opc);
+
+    void managePrintSave(byte opc) throws BadPathException, PrintingException;
 }

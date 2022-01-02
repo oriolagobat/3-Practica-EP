@@ -6,6 +6,10 @@ import data.*;
 
 import data.exceptions.NotValidCertificateException;
 import data.exceptions.WrongNifFormatException;
+import dummies.CertificadoDigitalCertificationAuthority;
+import dummies.ClavePINCertificationAuthority;
+import dummies.ClavePermanenteCertificationAuthority;
+import dummies.SS;
 import publicadministration.PDFDocument;
 import services.CertificationAuthorityInterface;
 import services.Decryptor;
@@ -159,12 +163,10 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         System.out.println("Se hace click en el enlace Ciudadanos de la sección de la SS");
     }
 
-    //TODO: Mostra el menú d'informes
     public void selectReports() {
         System.out.println("Se hace click en el enlace Informes y certificados del apartado Ciudadanos de la SS");
     }
 
-    //TODO: Mostra el menú d'autenticació
     public void selectCertificationReport(byte opc) {
         // 0 is Laboral Life Doc
         // 1 SS affiliation number
@@ -176,8 +178,6 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         System.out.println("Se selecciona: " + selectedCertification);
     }
 
-    // TODO: Mirar si és millor crear una instància, tot i que crec que no, però hi ha d'haver alguna manera clena. Si no, per que ens està fent guardar aquest string??
-    // FIXME: Canvi de string a byte
     public void selectAuthMethod(byte opc) {
         // ASSUMING THAT AUTH METHODS IN THE DICTIONARY WILL BE ON THE SAME ORDER AS IN THE WEB PAGE
         String selectedAuthMethod = possibleAuthMethods.get(opc - 1);
@@ -280,6 +280,34 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
 
     public void injectSS(SSInterface administration) {
         this.administration = administration;
+    }
+
+    public void getServiceFromString(String service) {
+        switch(service) {
+            case "SS" -> administration = new SS(citz);
+
+            default -> System.out.println("No hay más opciones de momento");
+        }
+    }
+
+    public void getCertfAuthFromByte(byte opc) {
+        switch (opc) {
+            case 1 -> authMethod = new ClavePINCertificationAuthority(citz);
+
+            case 2 -> authMethod = new ClavePermanenteCertificationAuthority(citz);
+
+            case 3 -> authMethod = new CertificadoDigitalCertificationAuthority(citz);
+
+            default -> System.out.println("No hay más opciones de momento");
+        }
+    }
+
+    public void managePrintSave(byte opc) throws BadPathException, PrintingException {
+        switch (opc) {
+            case 1 -> printDocument();
+
+            case 2 -> downloadDocument();
+        }
     }
 
     // Optional - Digital Certificate
