@@ -302,13 +302,13 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         }
     }
 
-    public void getCertfAuthFromByte(byte opc) {
+    public void getCertfAuthFromByte(byte opc, Citizen citizen) {
         switch (opc) {
-            case 1 -> authMethod = new ClavePINCertificationAuthority(citz);
+            case 1 -> authMethod = new ClavePINCertificationAuthority(citizen);
 
-            case 2 -> authMethod = new ClavePermanenteCertificationAuthority(citz);
+            case 2 -> authMethod = new ClavePermanenteCertificationAuthority(citizen);
 
-            case 3 -> authMethod = new CertificadoDigitalCertificationAuthority(citz);
+            case 3 -> authMethod = new CertificadoDigitalCertificationAuthority(citizen);
 
             default -> System.out.println("[P] No hi ha més opcions de moment");
         }

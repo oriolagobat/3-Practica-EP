@@ -169,7 +169,7 @@ public class Main {
         }
         byte answer = scanner.nextByte();
         platform.selectAuthMethod(answer);
-        platform.getCertfAuthFromByte(answer);
+        platform.getCertfAuthFromByte(answer, citizen);
         manageAuth(answer);
         manageFinalOptions();
     }
@@ -177,8 +177,8 @@ public class Main {
     private static void manageAuth(byte answer) throws IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
         switch (answer) {
             case 1 -> {  // Cl@ve PIN
-                platform.enterNIFandPINobt(citizen.getNif(), citizen.getValDate());
                 platform.setTelephoneNumber(citizen.getPhoneNumber());
+                platform.enterNIFandPINobt(citizen.getNif(), citizen.getValDate());
                 platform.enterPIN(citizen.getPIN());
             }
 

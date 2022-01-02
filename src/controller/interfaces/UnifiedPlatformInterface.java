@@ -1,5 +1,6 @@
 package controller.interfaces;
 
+import controller.Citizen;
 import controller.exceptions.*;
 import data.Nif;
 import data.PINcode;
@@ -46,7 +47,7 @@ public interface UnifiedPlatformInterface {
 
     void getServiceFromString(String service);
 
-    void getCertfAuthFromByte(byte opc);
+    void getCertfAuthFromByte(byte opc, Citizen citizen);
 
     void managePrintSave(byte opc) throws BadPathException, PrintingException;
 }
