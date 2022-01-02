@@ -8,6 +8,7 @@ import data.Password;
 import services.CertificationAuthorityInterface;
 import services.SSInterface;
 
+import java.io.IOException;
 import java.net.ConnectException;
 import java.util.Date;
 
@@ -29,7 +30,7 @@ public interface UnifiedPlatformInterface {
 
     void enterNIFandPINobt(Nif nif, Date valDate) throws NifNotRegisteredException, IncorrectValDateException, AnyMobileRegisteredException, ConnectException;
 
-    void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, ConnectException;
+    void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, IOException;
 
     void enterCred(Nif nif, Password passw) throws NifNotRegisteredException, NotValidCredException, AnyMobileRegisteredException, ConnectException;
 

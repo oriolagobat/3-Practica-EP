@@ -196,7 +196,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         }
     }
 
-    public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, ConnectException {
+    public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, IOException {
         boolean res = authMethod.checkPIN(citz.getNif(), pin);
         if (res) {
             System.out.println("El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent");
@@ -204,12 +204,18 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
             if (administration != null) {
                 switch (selectedCertification) {
 
-                    case "Solicitar el informe de vida laboral": {
-                        citz.setPDFDocument(administration.getLaboralLife(citz.getNif()));
+                    case "Solicitar el informe de vida laboral" -> {
+                        PDFDocument pdf = administration.getLaboralLife(citz.getNif());
+                        citz.setPDFDocument(pdf);
+                        pdf.openDoc(pdf.getPath());
+                        System.out.println("Mostrant informe de la vida laboral...");
                     }
 
-                    case "Obtener acreditación del número de afiliación a la Seguridad Social": {
-                        citz.setPDFDocument(administration.getMembAccred(citz.getNif()));
+                    case "Obtener acreditación del número de afiliación a la Seguridad Social" -> {
+                        PDFDocument pdf = administration.getMembAccred(citz.getNif());
+                        citz.setPDFDocument(pdf);
+                        pdf.openDoc(pdf.getPath());
+                        System.out.println("Mostrant nombre d'acreditació de la SS...");
                     }
                 }
             }
@@ -311,7 +317,6 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
                     PDFDocument pdf = administration.getMembAccred(nif);
                     pdf.openDoc(pdf.getPath());
                     System.out.println("Mostrant nombre d'acreditació de la SS...");
-
                 }
             }
         }

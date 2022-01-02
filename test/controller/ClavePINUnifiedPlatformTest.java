@@ -108,7 +108,8 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
             NotAffiliatedException {
 
         byte report = 1;
-        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n";
+        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
+                + "Mostrant informe de la vida laboral...";
 
         platform.enterNIFandPINobt(citizen.getNif(), citizen.getValDate());
         platform.injectSS(new SS(citizen));
@@ -126,7 +127,8 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
             AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException {
 
         byte report = 2;
-        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n";
+        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
+                + "Mostrant nombre d'acreditació de la SS...";
 
         platform.enterNIFandPINobt(citizen.getNif(), citizen.getValDate());
         platform.injectSS(new SS(citizen));
