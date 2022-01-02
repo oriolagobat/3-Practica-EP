@@ -59,7 +59,7 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     }
 
     @Test
-    public void enterPasswTest() throws WrongPasswordFormatException, NotValidPasswordException, NotValidCertificateException, IOException, NotAffiliatedException, DecryptationException, WrongNifFormatException {
+    public void enterPasswTest() throws WrongPasswordFormatException, NotValidPasswordException, NotValidCertificateException, IOException, NotAffiliatedException, DecryptationException, WrongNifFormatException, BadPathException {
         Password password = new Password("contrasenya123$");
         platform.enterPassw(password);
         assertEquals(password, platform.citz.getPassword());
@@ -75,7 +75,7 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     @Test
     @Override
     public void getLaboralLifeDoc() throws IOException, NotAffiliatedException,
-            NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
+            NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException, BadPathException {
         byte report = 1;
         String expectedResult = "[P] S'envïen per a la seva desencriptació les dades" +
                 "[P] Mostrant informe de la vida laboral...";
@@ -92,7 +92,7 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     @Test
     @Override
     public void getMemberAccredDoc() throws IOException, NotAffiliatedException,
-            NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
+            NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException, BadPathException {
         byte report = 2;
         String expectedResult = "[P] S'envïen per a la seva desencriptació les dades" +
                 "[P] Mostrant nombre d'acreditació de la SS...";

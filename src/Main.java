@@ -268,7 +268,7 @@ public class Main {
         manageFinalOptions();
     }
 
-    private static void manageAuth(byte answer) throws IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
+    private static void manageAuth(byte answer) throws IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException, BadPathException {
         switch (answer) {
             case 1 -> {  // Cl@ve PIN
                 platform.enterNIFandPINobt(citizen.getNif(), citizen.getValDate());

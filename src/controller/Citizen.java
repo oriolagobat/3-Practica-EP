@@ -51,7 +51,8 @@ public class Citizen implements CitizenInterface {
     }
 
     public PDFDocument getPDFDocument() {
-        return this.document;}
+        return this.document;
+    }
 
     // Optional
     public void setPassword(Password passwd) {

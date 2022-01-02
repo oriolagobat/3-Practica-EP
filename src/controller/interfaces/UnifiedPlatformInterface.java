@@ -25,12 +25,10 @@ public interface UnifiedPlatformInterface {
     void selectReports();
 
     void selectCertificationReport(byte opc);
-
-    void selectAuthMethod(byte opc);
-
+    
     void enterNIFandPINobt(Nif nif, Date valDate) throws NifNotRegisteredException, IncorrectValDateException, AnyMobileRegisteredException, ConnectException;
 
-    void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, IOException;
+    void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, IOException, BadPathException;
 
     void enterCred(Nif nif, Password passw) throws NifNotRegisteredException, NotValidCredException, AnyMobileRegisteredException, ConnectException;
 
