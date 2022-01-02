@@ -51,7 +51,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     @Override
     public void selectExistentAuthMethodTest() {
         byte method = 2;
-        String expectedResult = "Se selecciona el método de autenticación Cl@ve Permanente";
+        String expectedResult = "[P] Es selecciona el mètode d'autenticació Cl@ve Permanente";
         platform.selectAuthMethod(method);
         assertEquals(expectedResult.strip(), outContent.toString().strip());
     }
@@ -59,7 +59,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     @Test
     public void correctCredReinforced() throws NifNotRegisteredException, AnyMobileRegisteredException,
             ConnectException, NotValidCredException {
-        String expectedResult = "Les dades de l'usuari són correctes, no s'ha escollit el mètode reforçat";
+        String expectedResult = "[P] Les dades de l'usuari són correctes, no s'ha escollit el mètode reforçat";
         citizen.setReinforcedPINActivated(false);
         platform.enterCred(citizen.getNif(), citizen.getPassword());
         assertEquals(expectedResult.strip(), outContent.toString().strip());
@@ -68,7 +68,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     @Test
     public void correctCredNoReinforced() throws NifNotRegisteredException, AnyMobileRegisteredException,
             ConnectException, NotValidCredException {
-        String expectedResult = "Les dades de l'usuari són correctes, s'ha escollit el mètode reforçat";
+        String expectedResult = "[P] Les dades de l'usuari són correctes, s'ha escollit el mètode reforçat";
         citizen.setReinforcedPINActivated(true);
         platform.enterCred(citizen.getNif(), citizen.getPassword());
         assertEquals(expectedResult.strip(), outContent.toString().strip());
@@ -98,7 +98,7 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     @Test
     public void correctEnterPINTest() throws NotValidPINException, NotAffiliatedException,
             IOException {
-        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent";
+        String expectedResult = "[P] El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent";
         platform.injectSS(null);
         platform.enterPIN(citizen.getPIN());
         assertEquals(expectedResult.strip(), outContent.toString().strip());
@@ -116,8 +116,8 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
             NotValidPINException, NotAffiliatedException, NotValidCredException {
 
         byte report = 1;
-        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
-                + "Mostrant informe de la vida laboral...";
+        String expectedResult = "[P] El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
+                + "[P] Mostrant informe de la vida laboral...";
 
         platform.enterCred(citizen.getNif(), citizen.getPassword());
         platform.injectSS(new SS(citizen));
@@ -135,8 +135,8 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
     public void getMemberAccredDoc() throws NifNotRegisteredException, AnyMobileRegisteredException, IOException,
             NotValidPINException, NotAffiliatedException, NotValidCredException {
         byte report = 2;
-        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
-                + "Mostrant nombre d'acreditació de la SS...";
+        String expectedResult = "[P] El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
+                + "[P] Mostrant nombre d'acreditació de la SS...";
 
         platform.enterCred(citizen.getNif(), citizen.getPassword());
         platform.injectSS(new SS(citizen));

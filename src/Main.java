@@ -40,7 +40,7 @@ public class Main {
     }
 
     private static void startSearch() throws AnyKeyWordProcedureException, IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException, BadPathException, PrintingException {
-        System.out.println("Desitja usar el buscador? [S/n]");
+        System.out.println("[UI] Desitja usar el buscador? [S/n]");
         String answer = scanner.nextLine();
         switch (answer) {
             case "S", "s" -> manageSearch();
@@ -48,7 +48,7 @@ public class Main {
             case "N", "n" -> showAAPP();
 
             default -> {
-                System.out.println("Entrada no reconeguda, siusplau torni a intentar-ho.");
+                System.out.println("[UI] Entrada no reconeguda, siusplau torni a intentar-ho.");
                 startSearch();
             }
         }
@@ -56,8 +56,8 @@ public class Main {
 
     private static void manageSearch() throws AnyKeyWordProcedureException, IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException, BadPathException, PrintingException {
         platform.processSearcher();
-        System.out.println("Introdueixi el tràmit a buscar");
-        System.out.println("Ara per ara, només és suporta buscar tot el tràmit, tal i com surt en l'enunciat");
+        System.out.println("[UI] Introdueixi el tràmit a buscar");
+        System.out.println("[UI] Ara per ara, només és suporta buscar tot el tràmit, tal i com surt en l'enunciat");
         String answer = scanner.nextLine();
         platform.enterKeyWords(answer);
         showAAPP();
@@ -74,25 +74,25 @@ public class Main {
 
             // In other cases
 
-            case "AEAT" -> System.out.println("Per ser implementat encara");
+            case "AEAT" -> System.out.println("[UI] Per ser implementat encara");
 
-            case "MJ" -> System.out.println("Per ser implementat encara");
+            case "MJ" -> System.out.println("[UI] Per ser implementat encara");
 
-            case "DGT" -> System.out.println("Per ser implementat encara");
+            case "DGT" -> System.out.println("[UI] Per ser implementat encara");
         }
     }
 
     private static void showMosaic() {
-        System.out.println("Per a accedir a la Seguretat Social premi 1");
+        System.out.println("[UI] Per a accedir a la Seguretat Social premi 1");
 
 
-        System.out.println("Per a accedir a l'Agència Estatal de Administración Tributária premi 2");
+        System.out.println("[UI] Per a accedir a l'Agència Estatal de Administración Tributária premi 2");
 
 
-        System.out.println("Per a accedir al Ministeri de Justícia premi 3");
+        System.out.println("[UI] Per a accedir al Ministeri de Justícia premi 3");
 
 
-        System.out.println("Per a accedir a la Dirección General de Tráfico premi 4");
+        System.out.println("[UI] Per a accedir a la Dirección General de Tráfico premi 4");
 
         manageMosaicAnswer();
     }
@@ -109,7 +109,7 @@ public class Main {
             case 4 -> platform.selectedAapp = "DGT";
 
             default -> {
-                System.out.println("No s'ha detectat l'opció, torni a intentar-ho");
+                System.out.println("[UI] No s'ha detectat l'opció, torni a intentar-ho");
                 showMosaic();
             }
         }
@@ -122,7 +122,7 @@ public class Main {
     }
 
     private static void SSFirstLevel() throws IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException, BadPathException, PrintingException {
-        System.out.println("Per a entrar en la secció Ciutadans premi 1");
+        System.out.println("[UI] Per a entrar en la secció Ciutadans premi 1");
         int answer = scanner.nextInt();
         switch (answer) {
             case 1 -> {
@@ -131,14 +131,14 @@ public class Main {
             }
 
             default -> {
-                System.out.println("No hi ha més opcions de moment");
+                System.out.println("[UI] No hi ha més opcions de moment");
                 SSFirstLevel();
             }
         }
     }
 
     private static void SSSecondLevel() throws IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException, BadPathException, PrintingException {
-        System.out.println("Per a entrar en la secció Informes y certificados premi 1");
+        System.out.println("[UI] Per a entrar en la secció Informes y certificados premi 1");
         int answer = scanner.nextInt();
         switch (answer) {
             case 1 -> {
@@ -147,7 +147,7 @@ public class Main {
             }
 
             default -> {
-                System.out.println("No hi ha més opcions de moment");
+                System.out.println("[UI] No hi ha més opcions de moment");
                 SSSecondLevel();
             }
         }
@@ -156,7 +156,7 @@ public class Main {
     private static void SSSelectReport() throws IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException, BadPathException, PrintingException {
         ArrayList<String> possibleReports = platform.services.get("SS");
         for (int i = 0; i < possibleReports.size(); i++) {
-            System.out.println("Per a seleccionar " + possibleReports.get(i) + " premi " + (i + 1));
+            System.out.println("[UI] Per a seleccionar " + possibleReports.get(i) + " premi " + (i + 1));
         }
         byte answer = scanner.nextByte();
         platform.selectCertificationReport(answer);
@@ -165,7 +165,7 @@ public class Main {
 
     private static void selectAuthMethod() throws IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException, BadPathException, PrintingException {
         for (int i = 0; i < platform.possibleAuthMethods.size(); i++) {
-            System.out.println("Per a autenticar-te amb " + platform.possibleAuthMethods.get(i) + " premi " + (i + 1));
+            System.out.println("[UI] Per a autenticar-te amb " + platform.possibleAuthMethods.get(i) + " premi " + (i + 1));
         }
         byte answer = scanner.nextByte();
         platform.selectAuthMethod(answer);
@@ -178,6 +178,7 @@ public class Main {
         switch (answer) {
             case 1 -> {  // Cl@ve PIN
                 platform.enterNIFandPINobt(citizen.getNif(), citizen.getValDate());
+                platform.setTelephoneNumber(citizen.getPhoneNumber());
                 platform.enterPIN(citizen.getPIN());
             }
 
@@ -185,6 +186,7 @@ public class Main {
                 platform.enterCred(citizen.getNif(), citizen.getPassword());
                 // If citizen has reinforced the reinforced PIN activated, enter its PIN
                 if (citizen.hasReinforcedPINActivated()) {
+                    platform.setTelephoneNumber(citizen.getPhoneNumber());
                     platform.enterPIN(citizen.getPIN());
                 }
             }
@@ -193,15 +195,22 @@ public class Main {
                 platform.enterPassw(citizen.getPassword());
             }
 
-            default -> System.out.println("No hi ha més opcions de moment");
+            default -> {
+                System.out.println("[UI] No hi ha més opcions de moment");
+                manageAuth(answer);
+            }
         }
     }
 
     private static void manageFinalOptions() throws BadPathException, PrintingException {
-        System.out.println("Certificat generat, que desitja fer amb ell?");
-        System.out.println("Per a imprimir el certificat, premi 1");
-        System.out.println("Per a descarregar el certificat, premi 2");
+        System.out.println("[UI] Certificat generat, que desitja fer amb ell?");
+        System.out.println("[UI] Per a imprimir el certificat, premi 1");
+        System.out.println("[UI] Per a descarregar el certificat, premi 2");
         byte answer = scanner.nextByte();
+        if (answer != 1 && answer != 2) {
+            System.out.println("[UI] Nombre incorrecte");
+            manageFinalOptions();
+        }
         platform.managePrintSave(answer);
     }
 }

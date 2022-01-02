@@ -13,7 +13,7 @@ public class Decryptor {
             throws DecryptationException, WrongNifFormatException {
 
         if (encrypData == null || privKey == null)
-            throw new DecryptationException("Error en el desxifratge");
+            throw new DecryptationException("[P] Error en el desxifratge");
 
         byte[] data = encrypData.getEncryptedData();
         for (int i = 0; i < data.length; i++) {

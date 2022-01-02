@@ -1,4 +1,4 @@
-package services;
+package services.interfaces;
 
 import controller.exceptions.*;
 import data.*;

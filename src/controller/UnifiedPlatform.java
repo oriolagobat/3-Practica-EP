@@ -11,9 +11,9 @@ import dummies.ClavePINCertificationAuthority;
 import dummies.ClavePermanenteCertificationAuthority;
 import dummies.SS;
 import publicadministration.PDFDocument;
-import services.CertificationAuthorityInterface;
+import services.interfaces.CertificationAuthorityInterface;
 import services.Decryptor;
-import services.SSInterface;
+import services.interfaces.SSInterface;
 import services.exceptions.DecryptationException;
 
 import java.io.IOException;
@@ -133,38 +133,40 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
     // School tasks
 
     public void processSearcher() {
-        System.out.println("Es procedeix a usar el buscador de tràmits");
-        System.out.println("Es desplega el buscador");
+        System.out.println("[P] Es procedeix a usar el buscador de tràmits");
+        System.out.println("[P] Es desplega el buscador");
     }
 
     public void enterKeyWords(String keyWord) throws AnyKeyWordProcedureException {
         String result = searchKeyWords(keyWord);
         selectedAapp = result;
         switch (result) {
-            case "SS" -> System.out.println("S'envia a mostrar l'AAPP: " + result);
+            case "SS" -> System.out.println("[P] S'envia a mostrar l'AAPP: " + result);
 
             // In other cases
 
-            case "AEAT" -> System.out.println("Per ser implementat encara");
+            case "AEAT" -> System.out.println("[P] Per ser implementat encara");
 
-            case "MJ" -> System.out.println("Per ser implementat encara");
+            case "MJ" -> System.out.println("[P] Per ser implementat encara");
 
-            case "DGT" -> System.out.println("Per ser implementat encara");
+            case "DGT" -> System.out.println("[P] Per ser implementat encara");
 
             // OTHER AAPP'S WOULD ALSO BE ADDED HERE //
         }
     }
 
+    //TODO: Inject telephone
+
     public void selectSS() {
-        System.out.println("Se hace click en la sección SS del mosaico inicial");
+        System.out.println("[P] Es fa click en la secció SS del mosaïc inicial");
     }
 
     public void selectCitizens() {
-        System.out.println("Se hace click en el enlace Ciudadanos de la sección de la SS");
+        System.out.println("[P] Es fa click en l'enllaç \"Ciudadanos\" de la secció de la SS");
     }
 
     public void selectReports() {
-        System.out.println("Se hace click en el enlace Informes y certificados del apartado Ciudadanos de la SS");
+        System.out.println("[P] Es fa click en l'enllaç \"Informes y certificados\" de l'apartat \"Ciudadanos\" de la SS");
     }
 
     public void selectCertificationReport(byte opc) {
@@ -175,13 +177,13 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         // Since certifications are only available through SS, we asume citizen is using that AAPP
         ArrayList<String> ssServices = services.get("SS");
         this.selectedCertification = ssServices.get(opc - 1);
-        System.out.println("Se selecciona: " + selectedCertification);
+        System.out.println("[P] Es selecciona: " + selectedCertification);
     }
 
     public void selectAuthMethod(byte opc) {
         // ASSUMING THAT AUTH METHODS IN THE DICTIONARY WILL BE ON THE SAME ORDER AS IN THE WEB PAGE
         String selectedAuthMethod = possibleAuthMethods.get(opc - 1);
-        System.out.println("Se selecciona el método de autenticación " + selectedAuthMethod);
+        System.out.println("[P] Es selecciona el mètode d'autenticació " + selectedAuthMethod);
     }
 
     public void enterNIFandPINobt(Nif nif, Date valDate) throws NifNotRegisteredException, IncorrectValDateException, AnyMobileRegisteredException, ConnectException {
@@ -190,7 +192,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         citz.setValDate(valDate);  // We set the citizen validation date to the one we got through parameter
         boolean res = authMethod.sendPIN(nif, valDate);
         if (res) {
-            System.out.println("Se envia el PIN al usuario con DNI: " + nif.getNif());
+            System.out.println("[P] S'envia el PIN a l'usuari amb DNI: " + nif.getNif());
         } else {
             throw new ConnectException("Error en l'enviament del SMS");
         }
@@ -199,7 +201,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
     public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, IOException {
         boolean res = authMethod.checkPIN(citz.getNif(), pin);
         if (res) {
-            System.out.println("El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent");
+            System.out.println("[P] El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent");
 
             if (administration != null) {
                 switch (selectedCertification) {
@@ -208,19 +210,19 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
                         PDFDocument pdf = administration.getLaboralLife(citz.getNif());
                         citz.setPDFDocument(pdf);
                         pdf.openDoc(pdf.getPath());
-                        System.out.println("Mostrant informe de la vida laboral...");
+                        System.out.println("[P] Mostrant informe de la vida laboral...");
                     }
 
                     case "Obtener acreditación del número de afiliación a la Seguridad Social" -> {
                         PDFDocument pdf = administration.getMembAccred(citz.getNif());
                         citz.setPDFDocument(pdf);
                         pdf.openDoc(pdf.getPath());
-                        System.out.println("Mostrant nombre d'acreditació de la SS...");
+                        System.out.println("[P] Mostrant nombre d'acreditació de la SS...");
                     }
                 }
             }
         } else {
-            System.out.println("El PIN introduït no correspon al generat pel sistema per aquest ciutadà o ja no està vigent");
+            System.out.println("[P] El PIN introduït no correspon al generat pel sistema per aquest ciutadà o ja no està vigent");
         }
     }
 
@@ -231,10 +233,10 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         switch (res) {
             case 0 -> throw new NifNotRegisteredException("El ciutadà no està registrat en el sistema Cl@u");
             case 1 -> {
-                System.out.println("Les dades de l'usuari són correctes, no s'ha escollit el mètode reforçat");
+                System.out.println("[P] Les dades de l'usuari són correctes, no s'ha escollit el mètode reforçat");
             }
             case 2 -> {
-                System.out.println("Les dades de l'usuari són correctes, s'ha escollit el mètode reforçat");
+                System.out.println("[P] Les dades de l'usuari són correctes, s'ha escollit el mètode reforçat");
             }
         }
     }
@@ -252,7 +254,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
     }
 
     private void selectPath(DocPath path) throws BadPathException {
-        System.out.println("Se ha seleccionado el path: " + path + " para guardar el documento");
+        System.out.println("[P] S'ha seleccionat el path: " + path + " per a guardar el document");
     }
 
     // Other operations
@@ -271,11 +273,11 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
     }
 
     private void printDocument(DocPath path) throws BadPathException, PrintingException {
-        System.out.println("Se envia el documento para su impresión");
+        System.out.println("[P] S'envia el document per a la seva impresió");
     }
 
     private void downloadDocument(DocPath path) throws BadPathException {
-        System.out.println("Se descarga el documento");
+        System.out.println("[P] Es descarrega el document");
     }
 
     // More operations
@@ -288,11 +290,15 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         this.administration = administration;
     }
 
+    public void setTelephoneNumber(String phoneNumber) {
+        citz.setPhoneNumber(phoneNumber);
+    }
+
     public void getServiceFromString(String service) {
-        switch(service) {
+        switch (service) {
             case "SS" -> administration = new SS(citz);
 
-            default -> System.out.println("No hay más opciones de momento");
+            default -> System.out.println("[P] No hi ha més opcions de moment");
         }
     }
 
@@ -304,7 +310,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
 
             case 3 -> authMethod = new CertificadoDigitalCertificationAuthority(citz);
 
-            default -> System.out.println("No hay más opciones de momento");
+            default -> System.out.println("[P] No hi ha més opcions de moment");
         }
     }
 
@@ -319,14 +325,14 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
     // Optional - Digital Certificate
     public void selectCertificate(byte opc) {
         selectedCertification = possibleDigitalCertificates.get(opc - 1);
-        System.out.println("Se ha seleccionado el certificado digital: " + selectedCertification);
+        System.out.println("[P] S'ha seleccionat el certificat digital: " + selectedCertification);
     }
 
     public void enterPassw(Password pas) throws NotValidPasswordException, NotValidCertificateException, IOException, DecryptationException, WrongNifFormatException, NotAffiliatedException {
         if (pas == null) {
             throw new NotValidPasswordException("El password introduït no és valid, és null");
         }
-        // If this line is called, the enterPIN from Cl@ve Permanente won't be, they're mutually exclusive
+        // Si es crida aquesta línia, la de enterPIN de Cl@u Permanent no es cridarà, són mutuament excloents
         citz.setPassword(pas);
 
         EncryptedData encryptedData = authMethod.sendCertfAuth(this.publicKey);
@@ -338,20 +344,20 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
                 case "Solicitar el informe de vida laboral" -> {
                     PDFDocument pdf = administration.getLaboralLife(nif);
                     pdf.openDoc(pdf.getPath());
-                    System.out.println("Mostrant informe de la vida laboral...");
+                    System.out.println("[P] Mostrant informe de la vida laboral...");
                 }
 
                 case "Obtener acreditación del número de afiliación a la Seguridad Social" -> {
                     PDFDocument pdf = administration.getMembAccred(nif);
                     pdf.openDoc(pdf.getPath());
-                    System.out.println("Mostrant nombre d'acreditació de la SS...");
+                    System.out.println("[P] Mostrant nombre d'acreditació de la SS...");
                 }
             }
         }
     }
 
     private Nif decryptData(EncryptedData encrypdata) throws DecryptationException, WrongNifFormatException {
-        System.out.println("Se envían para su desencriptación los datos");
+        System.out.println("[P] S'envïen per a la seva desencriptació les dades");
         return Decryptor.decryptIDdata(encrypdata, this.privateKey);
     }
 }

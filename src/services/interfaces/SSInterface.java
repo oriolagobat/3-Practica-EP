@@ -1,4 +1,4 @@
-package services;
+package services.interfaces;
 
 import data.Nif;
 import controller.exceptions.NotAffiliatedException;

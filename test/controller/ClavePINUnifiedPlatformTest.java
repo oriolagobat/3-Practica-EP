@@ -52,7 +52,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
     @Override
     public void selectExistentAuthMethodTest() {
         byte method = 1;
-        String expectedResult = "Se selecciona el método de autenticación Cl@ve PIN";
+        String expectedResult = "[P] Es selecciona el mètode d'autenticació Cl@ve PIN";
         platform.selectAuthMethod(method);
         assertEquals(expectedResult.strip(), outContent.toString().strip());
     }
@@ -60,7 +60,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
     @Test
     public void correctPINObtTest() throws IncorrectValDateException, NifNotRegisteredException,
             AnyMobileRegisteredException, ConnectException {
-        String expectedResult = "Se envia el PIN al usuario con DNI: 11223344F";
+        String expectedResult = "[P] S'envia el PIN a l'usuari amb DNI: 11223344F";
         platform.enterNIFandPINobt(citizen.getNif(), citizen.getValDate());
         assertEquals(expectedResult.strip(), outContent.toString().strip());
     }
@@ -89,7 +89,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
     @Test
     public void correctEnterPINTest() throws NotValidPINException, NotAffiliatedException,
             IOException {
-        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n";
+        String expectedResult = "[P] El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n";
         platform.enterPIN(citizen.getPIN());
         assertEquals(expectedResult.strip().replaceAll("[^a-zA-Z0-9]", ""),
                 outContent.toString().strip().replaceAll("[^a-zA-Z0-9]", ""));
@@ -108,8 +108,8 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
             NotAffiliatedException {
 
         byte report = 1;
-        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
-                + "Mostrant informe de la vida laboral...";
+        String expectedResult = "[P] El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
+                + "[P] Mostrant informe de la vida laboral...";
 
         platform.enterNIFandPINobt(citizen.getNif(), citizen.getValDate());
         platform.injectSS(new SS(citizen));
@@ -127,8 +127,8 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
             AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException {
 
         byte report = 2;
-        String expectedResult = "El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
-                + "Mostrant nombre d'acreditació de la SS...";
+        String expectedResult = "[P] El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
+                + "[P] Mostrant nombre d'acreditació de la SS...";
 
         platform.enterNIFandPINobt(citizen.getNif(), citizen.getValDate());
         platform.injectSS(new SS(citizen));

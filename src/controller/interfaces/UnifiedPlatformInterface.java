@@ -1,12 +1,11 @@
 package controller.interfaces;
 
 import controller.exceptions.*;
-import data.DocPath;
 import data.Nif;
 import data.PINcode;
 import data.Password;
-import services.CertificationAuthorityInterface;
-import services.SSInterface;
+import services.interfaces.CertificationAuthorityInterface;
+import services.interfaces.SSInterface;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -42,6 +41,8 @@ public interface UnifiedPlatformInterface {
     void injectAuthenticationMethod(CertificationAuthorityInterface method);
 
     void injectSS(SSInterface administration);
+
+    void setTelephoneNumber(String phoneNumber);
 
     void getServiceFromString(String service);
 

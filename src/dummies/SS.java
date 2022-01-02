@@ -6,7 +6,7 @@ import data.Nif;
 import publicadministration.LaboralLifeDoc;
 import publicadministration.MemberAccreditationDoc;
 import publicadministration.QuotePeriodsColl;
-import services.SSInterface;
+import services.interfaces.SSInterface;
 
 import java.net.ConnectException;
 

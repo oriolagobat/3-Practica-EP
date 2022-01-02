@@ -4,9 +4,8 @@ import controller.Citizen;
 import controller.exceptions.*;
 import data.*;
 import data.exceptions.NotValidCertificateException;
-import services.CertificationAuthorityInterface;
+import services.interfaces.CertificationAuthorityInterface;
 
-import javax.xml.crypto.dsig.keyinfo.X509IssuerSerial;
 import java.net.ConnectException;
 import java.nio.charset.Charset;
 import java.util.Date;

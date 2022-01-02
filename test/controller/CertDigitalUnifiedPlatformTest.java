@@ -46,7 +46,7 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     @Override
     public void selectExistentAuthMethodTest() {
         byte method = 3;
-        String expectedResult = "Se selecciona el método de autenticación Certificado digital";
+        String expectedResult = "[P] Es selecciona el mètode d'autenticació Certificado digital";
         platform.selectAuthMethod(method);
         assertEquals(expectedResult.strip(), outContent.toString().strip());
     }
@@ -67,12 +67,18 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
 
 
     @Test
+    public void invalidPasswTest() {
+        assertThrows(NotValidPasswordException.class, () -> platform.enterPassw(null));
+    }
+
+
+    @Test
     @Override
     public void getLaboralLifeDoc() throws IOException, NotAffiliatedException,
             NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
         byte report = 1;
-        String expectedResult = "Se envían para su desencriptación los datos\n" +
-                "Mostrant informe de la vida laboral...";
+        String expectedResult = "[P] S'envïen per a la seva desencriptació les dades" +
+                "[P] Mostrant informe de la vida laboral...";
 
         platform.injectSS(new SS(citizen));
         platform.selectCertificationReport(report);
@@ -88,8 +94,8 @@ public class CertDigitalUnifiedPlatformTest implements UnifiedPlatformTestInterf
     public void getMemberAccredDoc() throws IOException, NotAffiliatedException,
             NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
         byte report = 2;
-        String expectedResult = "Se envían para su desencriptación los datos\n" +
-                "Mostrant nombre d'acreditació de la SS...";
+        String expectedResult = "[P] S'envïen per a la seva desencriptació les dades" +
+                "[P] Mostrant nombre d'acreditació de la SS...";
 
         platform.injectSS(new SS(citizen));
         platform.selectCertificationReport(report);

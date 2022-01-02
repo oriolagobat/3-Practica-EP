@@ -65,7 +65,7 @@ public interface UnifiedPlatformTestInterface {
     @Test
     default void searchForExistentAAPPTest() throws AnyKeyWordProcedureException {
         String emptySearch = "Solicitar el informe de vida laboral";
-        String expectedResult = "S'envia a mostrar l'AAPP: SS";
+        String expectedResult = "[P] S'envia a mostrar l'AAPP: SS";
         platform.processSearcher();
         restoreStreams();  // Per a eliminar l'output que genera la crida a processSearcher
         platform.enterKeyWords(emptySearch);
@@ -75,7 +75,7 @@ public interface UnifiedPlatformTestInterface {
     @Test
     default void selectExistentCertificationTest() {
         byte report = 1;
-        String expectedResult = "Se selecciona: Solicitar el informe de vida laboral";
+        String expectedResult = "[P] Es selecciona: Solicitar el informe de vida laboral";
         platform.selectSS();
         platform.selectCitizens();
         platform.selectReports();

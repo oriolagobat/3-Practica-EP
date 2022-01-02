@@ -4,7 +4,7 @@ import controller.Citizen;
 import controller.exceptions.*;
 import data.*;
 import data.exceptions.NotValidCertificateException;
-import services.CertificationAuthorityInterface;
+import services.interfaces.CertificationAuthorityInterface;
 
 import java.net.ConnectException;
 import java.util.Date;
