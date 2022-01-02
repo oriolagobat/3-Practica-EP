@@ -15,7 +15,6 @@ import services.exceptions.DecryptationException;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

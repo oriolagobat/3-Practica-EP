@@ -41,9 +41,9 @@ public class ClavePermanenteUnifiedPlatformTest implements UnifiedPlatformTestIn
 
         platform.injectAuthenticationMethod(new ClavePermanenteCertificationAuthority(citizen));
     }
-    
+
     @AfterEach
-    public void unSetAdministration(){
+    public void unSetAdministration() {
         platform.injectSS(null);
     }
 

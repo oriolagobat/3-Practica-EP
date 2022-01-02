@@ -44,7 +44,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
     }
 
     @AfterEach
-    public void unSetAdministration(){
+    public void unSetAdministration() {
         platform.injectSS(null);
     }
 
