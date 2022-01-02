@@ -12,6 +12,7 @@ import services.exceptions.DecryptationException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -21,12 +22,104 @@ public class Main {
     static Citizen citizen;
 
     public static void main(String[] args) throws WrongNifFormatException, WrongPINCodeFormatException, WrongPasswordFormatException, AnyKeyWordProcedureException, IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, BadPathException, PrintingException {
-        citizen = setUpCitizen();
+        System.out.println("[UI] Vols introduir tu les dades o utilitzar un ciutadà que té les dades correctes?");
+        System.out.println("[UI] Per a introduir-les vosté premi 1");
+        System.out.println("[UI] Per usar el ciutadà d'exemple premi 2");
+        int answer = scanner.nextInt();
+        scanner.nextLine(); // To get rid of \n
+        switch (answer) {
+            case 1 -> citizen = setUpPersonalCitizen();
+
+
+            case 2 -> citizen = setUpDefaultCitizen();
+
+            default -> {
+                System.out.println("Opció no reconeguda, si us plau torna a intentar-ho");
+                main(args);
+            }
+        }
 
         startSearch();
+        System.exit(0);
     }
 
-    private static Citizen setUpCitizen() throws WrongNifFormatException, WrongPINCodeFormatException, WrongPasswordFormatException {
+    private static Citizen setUpPersonalCitizen() throws WrongNifFormatException, WrongPINCodeFormatException, WrongPasswordFormatException {
+        System.out.println("A continuació, per a fer-ho més fàcil, et demanarem totes les dades que potser necessitem després");
+        Citizen citizen = new Citizen();
+        System.out.println("[UI] Introdueix el teu NIF");
+        citizen.setNif(new Nif(scanner.nextLine()));
+        citizen.setValDate(getPersonalCitizenDate());
+        System.out.println("[UI] Introdueix el teu PIN");
+        citizen.setPIN(new PINcode(scanner.nextLine()));
+        System.out.println("[UI] Introdueix la teva contrasenya");
+        citizen.setPassword(new Password(scanner.nextLine()));
+        System.out.println("[UI] Introdueix el teu número de telèfon");
+        citizen.setPhoneNumber(scanner.nextLine());
+        setReinforced(citizen);
+
+
+        return citizen;
+    }
+
+    private static Date getPersonalCitizenDate() {
+        System.out.println("[UI] Introdueix la data de caducitat d'aquest en el format mm/yy");
+        String dateString = scanner.nextLine();
+        char[] c = dateString.toCharArray();
+        if (!correctDateFormat(c)) {
+            System.out.println("[UI] Error, torna a intentar-ho");
+            getPersonalCitizenDate();
+        } else {
+            Calendar cal = Calendar.getInstance();
+
+            int firstYearUnit = c[3];
+            int secondYearUnit = c[4];
+            int year = 2000 + firstYearUnit * 10 + secondYearUnit;
+
+            int firstMonthUnit = c[3];
+            int secondMonthUnit = c[4];
+            int month = firstMonthUnit * 10 + secondMonthUnit;
+            cal.set(year, month, 31);
+            return cal.getTime();
+        }
+        return null;
+    }
+
+    private static boolean correctDateFormat(char[] date) {
+        // Bad format
+        if (date.length != 5) {
+            return false;
+        }
+        // If month > 12, '0' is to parse to integer
+        int firstMonthUnit = date[0] - '0';
+        int secondMonthUnit = date[1] - '0';
+        if ((firstMonthUnit * 10 + secondMonthUnit) > 12) {
+            return false;
+        }
+
+        // If year < current year, '0' is to parse to integer
+        int firstYearUnit = date[3] - '0';
+        int secondYearUnit = date[4] - '0';
+        int currentYear = 1900 + new Date().getYear();
+        int enteredYear = 2000 + (firstYearUnit * 10 + secondYearUnit);
+
+        return currentYear <= enteredYear;
+    }
+
+    private static void setReinforced(Citizen setUpCitz) {
+        System.out.println("[UI] En cas de que usis Cl@u Permanent, vols usar el mètode reforçat? [S/n]");
+        switch (scanner.nextLine()) {
+            case "S", "s" -> setUpCitz.setReinforcedPINActivated(true);
+
+            case "N", "n" -> setUpCitz.setReinforcedPINActivated(false);
+
+            default -> {
+                System.out.println("Error, torna a intentar-ho");
+                setReinforced(setUpCitz);
+            }
+        }
+    }
+
+    private static Citizen setUpDefaultCitizen() throws WrongNifFormatException, WrongPINCodeFormatException, WrongPasswordFormatException {
         Citizen citizen = new Citizen();
         citizen.setNif(new Nif("12345678A"));
         citizen.setValDate(new Date());
@@ -68,9 +161,8 @@ public class Main {
             showMosaic();
         }
         switch (platform.selectedAapp) {
-            case "SS" -> {
-                manageSS();
-            }
+            case "SS" -> manageSS();
+
 
             // In other cases
 
@@ -174,10 +266,9 @@ public class Main {
         manageFinalOptions();
     }
 
-    private static void manageAuth(byte answer) throws IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException {
+    private static void manageAuth(byte answer) throws IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, WrongNifFormatException, BadPathException {
         switch (answer) {
             case 1 -> {  // Cl@ve PIN
-                platform.setTelephoneNumber(citizen.getPhoneNumber());
                 platform.enterNIFandPINobt(citizen.getNif(), citizen.getValDate());
                 platform.enterPIN(citizen.getPIN());
             }
@@ -186,14 +277,12 @@ public class Main {
                 platform.enterCred(citizen.getNif(), citizen.getPassword());
                 // If citizen has reinforced the reinforced PIN activated, enter its PIN
                 if (citizen.hasReinforcedPINActivated()) {
-                    platform.setTelephoneNumber(citizen.getPhoneNumber());
                     platform.enterPIN(citizen.getPIN());
                 }
             }
 
-            case 3 -> {  // Certificado digital
-                platform.enterPassw(citizen.getPassword());
-            }
+            case 3 -> platform.enterPassw(citizen.getPassword());  // Certificado Digital
+
 
             default -> {
                 System.out.println("[UI] No hi ha més opcions de moment");

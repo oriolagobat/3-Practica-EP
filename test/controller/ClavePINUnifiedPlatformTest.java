@@ -44,7 +44,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
     }
 
     @AfterEach
-    public void unSetAdministration(){
+    public void unSetAdministration() {
         platform.injectSS(null);
     }
 
@@ -88,7 +88,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
 
     @Test
     public void correctEnterPINTest() throws NotValidPINException, NotAffiliatedException,
-            IOException {
+            IOException, BadPathException {
         String expectedResult = "[P] El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n";
         platform.enterPIN(citizen.getPIN());
         assertEquals(expectedResult.strip().replaceAll("[^a-zA-Z0-9]", ""),
@@ -105,7 +105,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
     @Override
     public void getLaboralLifeDoc() throws IncorrectValDateException, NifNotRegisteredException,
             AnyMobileRegisteredException, IOException, NotValidPINException,
-            NotAffiliatedException {
+            NotAffiliatedException, BadPathException {
 
         byte report = 1;
         String expectedResult = "[P] El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"
@@ -124,7 +124,7 @@ public class ClavePINUnifiedPlatformTest implements UnifiedPlatformTestInterface
     @Test
     @Override
     public void getMemberAccredDoc() throws IncorrectValDateException, NifNotRegisteredException,
-            AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException {
+            AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, BadPathException {
 
         byte report = 2;
         String expectedResult = "[P] El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent\n"

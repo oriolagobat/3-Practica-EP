@@ -2,13 +2,10 @@ package data;
 
 import java.util.Arrays;
 
-public class EncryptedData {
-    private final byte[] data;
-
-    public EncryptedData(byte[] data) {
+public record EncryptedData(byte[] data) {
+    public EncryptedData {
         checkEncryptedData(data);
 
-        this.data = data;
     }
 
     private void checkEncryptedData(byte[] data) {

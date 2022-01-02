@@ -28,6 +28,5 @@ public class SS implements SSInterface {
     public MemberAccreditationDoc getMembAccred(Nif nif) throws NotAffiliatedException, ConnectException {
         if (!nif.equals(citizen.getNif())) throw new NotAffiliatedException("El el ciutadà amb el NIF" + nif + " no està afiliat");
         return new MemberAccreditationDoc(citizen.getNif(), citizen.getAccredNumb());
-
     }
 }

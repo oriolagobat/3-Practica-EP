@@ -5,13 +5,10 @@ import java.math.BigInteger;
 /**
  * Essential data classes for the optional part of the task
  */
-public class EncryptingKey {
-    private final BigInteger key;
-
-    public EncryptingKey(BigInteger key) {
+public record EncryptingKey(BigInteger key) {
+    public EncryptingKey {
         checkEncryptingKey(key);
 
-        this.key = key;
     }
 
     private void checkEncryptingKey(BigInteger key) {

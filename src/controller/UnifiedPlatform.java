@@ -16,6 +16,7 @@ import services.Decryptor;
 import services.interfaces.SSInterface;
 import services.exceptions.DecryptationException;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.ConnectException;
@@ -155,8 +156,6 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         }
     }
 
-    //TODO: Inject telephone
-
     public void selectSS() {
         System.out.println("[P] Es fa click en la secció SS del mosaïc inicial");
     }
@@ -198,7 +197,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         }
     }
 
-    public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, IOException {
+    public void enterPIN(PINcode pin) throws NotValidPINException, NotAffiliatedException, IOException, BadPathException {
         boolean res = authMethod.checkPIN(citz.getNif(), pin);
         if (res) {
             System.out.println("[P] El PIN introduït correspon al generat pel sistema per aquest ciutadà i encara està vigent");
@@ -216,7 +215,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
                     case "Obtener acreditación del número de afiliación a la Seguridad Social" -> {
                         PDFDocument pdf = administration.getMembAccred(citz.getNif());
                         citz.setPDFDocument(pdf);
-                        pdf.openDoc(pdf.getPath());
+                        openDocument();
                         System.out.println("[P] Mostrant nombre d'acreditació de la SS...");
                     }
                 }
@@ -232,12 +231,10 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         int res = authMethod.ckeckCredent(nif, passwd);
         switch (res) {
             case 0 -> throw new NifNotRegisteredException("El ciutadà no està registrat en el sistema Cl@u");
-            case 1 -> {
-                System.out.println("[P] Les dades de l'usuari són correctes, no s'ha escollit el mètode reforçat");
-            }
-            case 2 -> {
-                System.out.println("[P] Les dades de l'usuari són correctes, s'ha escollit el mètode reforçat");
-            }
+            case 1 -> System.out.println("[P] Les dades de l'usuari són correctes, no s'ha escollit el mètode reforçat");
+
+            case 2 -> System.out.println("[P] Les dades de l'usuari són correctes, s'ha escollit el mètode reforçat");
+
         }
     }
 
@@ -254,6 +251,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
     }
 
     private void selectPath(DocPath path) throws BadPathException {
+        if (!new File(path.getDocPath()).exists()) throw new BadPathException("El path especificat no existeix.");
         System.out.println("[P] S'ha seleccionat el path: " + path + " per a guardar el document");
     }
 
@@ -273,10 +271,12 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
     }
 
     private void printDocument(DocPath path) throws BadPathException, PrintingException {
+        if (!new File(path.getDocPath()).exists()) throw new BadPathException("El path especificat no existeix.");
         System.out.println("[P] S'envia el document per a la seva impresió");
     }
 
     private void downloadDocument(DocPath path) throws BadPathException {
+        if (!new File(path.getDocPath()).exists()) throw new BadPathException("El path especificat no existeix.");
         System.out.println("[P] Es descarrega el document");
     }
 
@@ -288,10 +288,6 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
 
     public void injectSS(SSInterface administration) {
         this.administration = administration;
-    }
-
-    public void setTelephoneNumber(String phoneNumber) {
-        citz.setPhoneNumber(phoneNumber);
     }
 
     public void getServiceFromString(String service) {
@@ -328,7 +324,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
         System.out.println("[P] S'ha seleccionat el certificat digital: " + selectedCertification);
     }
 
-    public void enterPassw(Password pas) throws NotValidPasswordException, NotValidCertificateException, IOException, DecryptationException, WrongNifFormatException, NotAffiliatedException {
+    public void enterPassw(Password pas) throws NotValidPasswordException, NotValidCertificateException, IOException, DecryptationException, WrongNifFormatException, NotAffiliatedException, BadPathException {
         if (pas == null) {
             throw new NotValidPasswordException("El password introduït no és valid, és null");
         }
@@ -343,13 +339,15 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
 
                 case "Solicitar el informe de vida laboral" -> {
                     PDFDocument pdf = administration.getLaboralLife(nif);
-                    pdf.openDoc(pdf.getPath());
+                    citz.setPDFDocument(pdf);
+                    openDocument();
                     System.out.println("[P] Mostrant informe de la vida laboral...");
                 }
 
                 case "Obtener acreditación del número de afiliación a la Seguridad Social" -> {
                     PDFDocument pdf = administration.getMembAccred(nif);
-                    pdf.openDoc(pdf.getPath());
+                    citz.setPDFDocument(pdf);
+                    openDocument();
                     System.out.println("[P] Mostrant nombre d'acreditació de la SS...");
                 }
             }
