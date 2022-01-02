@@ -11,7 +11,6 @@ import data.exceptions.WrongPasswordFormatException;
 import services.exceptions.DecryptationException;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -71,9 +70,11 @@ public class Main {
             getPersonalCitizenDate();
         } else {
             Calendar cal = Calendar.getInstance();
+
             int firstYearUnit = c[3];
             int secondYearUnit = c[4];
             int year = 2000 + firstYearUnit * 10 + secondYearUnit;
+
             int firstMonthUnit = c[3];
             int secondMonthUnit = c[4];
             int month = firstMonthUnit * 10 + secondMonthUnit;
@@ -100,10 +101,8 @@ public class Main {
         int secondYearUnit = date[4] - '0';
         int currentYear = 1900 + new Date().getYear();
         int enteredYear = 2000 + (firstYearUnit * 10 + secondYearUnit);
-        if (currentYear > enteredYear) {
-            return false;
-        }
-        return true;
+
+        return currentYear <= enteredYear;
     }
 
     private static void setReinforced(Citizen setUpCitz) {
@@ -162,9 +161,8 @@ public class Main {
             showMosaic();
         }
         switch (platform.selectedAapp) {
-            case "SS" -> {
-                manageSS();
-            }
+            case "SS" -> manageSS();
+
 
             // In other cases
 
@@ -283,9 +281,8 @@ public class Main {
                 }
             }
 
-            case 3 -> {  // Certificado digital
-                platform.enterPassw(citizen.getPassword());
-            }
+            case 3 -> platform.enterPassw(citizen.getPassword());  // Certificado Digital
+
 
             default -> {
                 System.out.println("[UI] No hi ha més opcions de moment");
