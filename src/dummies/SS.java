@@ -20,11 +20,13 @@ public class SS implements SSInterface {
 
     @Override
     public LaboralLifeDoc getLaboralLife(Nif nif) throws NotAffiliatedException, ConnectException {
+        if (!nif.equals(citizen.getNif())) throw new NotAffiliatedException("El el ciutadà amb el NIF" + nif + " no està afiliat");
         return new LaboralLifeDoc(citizen.getNif(), new QuotePeriodsColl());
     }
 
     @Override
     public MemberAccreditationDoc getMembAccred(Nif nif) throws NotAffiliatedException, ConnectException {
+        if (!nif.equals(citizen.getNif())) throw new NotAffiliatedException("El el ciutadà amb el NIF" + nif + " no està afiliat");
         return new MemberAccreditationDoc(citizen.getNif(), citizen.getAccredNumb());
 
     }

@@ -1,12 +1,15 @@
 package controller.interfaces;
 
+import controller.Citizen;
 import controller.UnifiedPlatform;
 import controller.exceptions.*;
 
 import data.EncryptedData;
 import data.EncryptingKey;
+import data.Nif;
 import data.exceptions.NotValidCertificateException;
 import data.exceptions.WrongNifFormatException;
+import dummies.SS;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +22,7 @@ import java.io.PrintStream;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public interface UnifiedPlatformTestInterface {
 
@@ -82,6 +84,18 @@ public interface UnifiedPlatformTestInterface {
         restoreStreams();  // Per a eliminar l'output que genera la crida a processSearcher
         platform.selectCertificationReport(report);
         assertEquals(expectedResult.strip(), outContent.toString().strip());
+    }
+
+    @Test
+    default void notAffiliatedLaboralLifeDoc () {
+        assertThrows(NotAffiliatedException.class,
+                () -> new SS(new Citizen()).getLaboralLife(new Nif("00000000A")));
+    }
+
+    @Test
+    default void notAffiliatedMemberAccred () {
+        assertThrows(NotAffiliatedException.class,
+                () -> new SS(new Citizen()).getMembAccred(new Nif("00000000A")));
     }
 
     @Test
