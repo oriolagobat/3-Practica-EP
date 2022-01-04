@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 public class UnifiedPlatform implements UnifiedPlatformInterface {
     Citizen citz;
-    SSInterface administration;
+    public SSInterface administration;
     CertificationAuthorityInterface authMethod;
 
     HashMap<String, String> aapp;
@@ -333,6 +333,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
 
         EncryptedData encryptedData = authMethod.sendCertfAuth(this.publicKey);
         Nif nif = decryptData(encryptedData);
+        citz.setNif(nif);
 
         if (this.administration != null) {
             switch (this.selectedCertification) {

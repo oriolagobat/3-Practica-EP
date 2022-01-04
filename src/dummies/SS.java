@@ -2,6 +2,7 @@ package dummies;
 
 import controller.Citizen;
 import controller.exceptions.NotAffiliatedException;
+import data.AccredNumb;
 import data.Nif;
 import publicadministration.LaboralLifeDoc;
 import publicadministration.MemberAccreditationDoc;
@@ -28,5 +29,10 @@ public class SS implements SSInterface {
     public MemberAccreditationDoc getMembAccred(Nif nif) throws NotAffiliatedException, ConnectException {
         if (!nif.equals(citizen.getNif())) throw new NotAffiliatedException("El el ciutadà amb el NIF" + nif + " no està afiliat");
         return new MemberAccreditationDoc(citizen.getNif(), citizen.getAccredNumb());
+    }
+
+    // Set accredNumb from Main, for UI purposes
+    public void setAccredNumb(AccredNumb accredNumb) {
+        this.citizen.setAccredNumb(accredNumb);
     }
 }
