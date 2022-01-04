@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 public class UnifiedPlatform implements UnifiedPlatformInterface {
     Citizen citz;
-    SSInterface administration;
+    public SSInterface administration;
     CertificationAuthorityInterface authMethod;
 
     HashMap<String, String> aapp;

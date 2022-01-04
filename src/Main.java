@@ -1,14 +1,14 @@
 import controller.Citizen;
 import controller.UnifiedPlatform;
 import controller.exceptions.*;
+import data.AccredNumb;
 import data.Nif;
 import data.PINcode;
 import data.Password;
-import data.exceptions.NotValidCertificateException;
-import data.exceptions.WrongNifFormatException;
-import data.exceptions.WrongPINCodeFormatException;
-import data.exceptions.WrongPasswordFormatException;
+import data.exceptions.*;
+import dummies.SS;
 import services.exceptions.DecryptationException;
+import services.interfaces.SSInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class Main {
     static UnifiedPlatform platform = new UnifiedPlatform();
     static Citizen citizen;
 
-    public static void main(String[] args) throws WrongNifFormatException, WrongPINCodeFormatException, WrongPasswordFormatException, AnyKeyWordProcedureException, IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, BadPathException, PrintingException {
+    public static void main(String[] args) throws WrongNifFormatException, WrongPINCodeFormatException, WrongPasswordFormatException, AnyKeyWordProcedureException, IncorrectValDateException, NifNotRegisteredException, AnyMobileRegisteredException, IOException, NotValidPINException, NotAffiliatedException, NotValidCredException, NotValidPasswordException, NotValidCertificateException, DecryptationException, BadPathException, PrintingException, WrongAccredNumbFormatException {
         System.out.println("[UI] Vols introduir tu les dades o utilitzar un ciutadà que té les dades correctes?");
         System.out.println("[UI] Per a introduir-les vosté premi 1");
         System.out.println("[UI] Per usar el ciutadà d'exemple premi 2");
@@ -43,7 +43,7 @@ public class Main {
         System.exit(0);
     }
 
-    private static Citizen setUpPersonalCitizen() throws WrongNifFormatException, WrongPINCodeFormatException, WrongPasswordFormatException {
+    private static Citizen setUpPersonalCitizen() throws WrongNifFormatException, WrongPINCodeFormatException, WrongPasswordFormatException, WrongAccredNumbFormatException {
         System.out.println("A continuació, per a fer-ho més fàcil, et demanarem totes les dades que potser necessitem després");
         Citizen citizen = new Citizen();
         System.out.println("[UI] Introdueix el teu NIF");
@@ -55,6 +55,8 @@ public class Main {
         citizen.setPassword(new Password(scanner.nextLine()));
         System.out.println("[UI] Introdueix el teu número de telèfon");
         citizen.setPhoneNumber(scanner.nextLine());
+        System.out.println("[UI] Introdueix el teu número de acreditació de la SS");
+        citizen.setAccredNumb(new AccredNumb(scanner.nextLine()));
         setReinforced(citizen);
 
 
@@ -119,13 +121,14 @@ public class Main {
         }
     }
 
-    private static Citizen setUpDefaultCitizen() throws WrongNifFormatException, WrongPINCodeFormatException, WrongPasswordFormatException {
+    private static Citizen setUpDefaultCitizen() throws WrongNifFormatException, WrongPINCodeFormatException, WrongPasswordFormatException, WrongAccredNumbFormatException {
         Citizen citizen = new Citizen();
         citizen.setNif(new Nif("12345678A"));
         citizen.setValDate(new Date());
         citizen.setPIN(new PINcode("123"));
         citizen.setPassword(new Password("contrasenya123$"));
         citizen.setPhoneNumber("123456789");
+        citizen.setAccredNumb(new AccredNumb("123456789"));
         // Suposarem que té el mètode reforçat activat
         citizen.setReinforcedPINActivated(true);
 
@@ -251,6 +254,15 @@ public class Main {
             System.out.println("[UI] Per a seleccionar " + possibleReports.get(i) + " premi " + (i + 1));
         }
         byte answer = scanner.nextByte();
+
+        // Just for visual purposes, we must set the accreditation number to get it due to double classes
+        // When chosen accreditation document, we set the accreditation number to the one granted by the user
+        System.out.println("DEBUG " + possibleReports.get(1));
+        if (answer == (byte) 2) {
+            SS admin = (SS) platform.administration;
+            admin.setAccredNumb(citizen.getAccredNumb());
+        }
+
         platform.selectCertificationReport(answer);
         selectAuthMethod();
     }
