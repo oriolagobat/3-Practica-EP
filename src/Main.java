@@ -283,7 +283,6 @@ public class Main {
 
             case 3 -> platform.enterPassw(citizen.getPassword());  // Certificado Digital
 
-
             default -> {
                 System.out.println("[UI] No hi ha més opcions de moment");
                 manageAuth(answer);

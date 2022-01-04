@@ -333,6 +333,7 @@ public class UnifiedPlatform implements UnifiedPlatformInterface {
 
         EncryptedData encryptedData = authMethod.sendCertfAuth(this.publicKey);
         Nif nif = decryptData(encryptedData);
+        citz.setNif(nif);
 
         if (this.administration != null) {
             switch (this.selectedCertification) {
